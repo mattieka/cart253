@@ -1,3 +1,5 @@
+//------------------------ I N T R O ----------------------------------------//
+
 // Exercise 1 - Moving pictures
 // Pippin Barr
 //
@@ -7,11 +9,15 @@
 // One moves toward the mouse cursor.
 
 
+//------------------------ C L O W N     F A C E ----------------------------//
+
 // The image of a clown face
 var clownImage;
 // The current position of the clown face
 var clownImageX;
 var clownImageY;
+
+//------------------------ F E L T     T E X T U R E ------------------------//
 
 // The transparent image of "felt" that wipes down the canvas
 var feltTextureImage;
@@ -19,16 +25,27 @@ var feltTextureImage;
 var feltTextureImageX;
 var feltTextureImageY;
 
+//----------------------- C L O W N     B O X -------------------------------//
+
+// the clown box
+var clownBox;
+//the current position of the clown clown box
+var clownBoxX;
+var clownBoxY;
+
+//------------------------- P R E L O A D -----------------------------------//
 
 // preload()
 //
-// Load the two images we're using before the program starts
+// Load the images we're using before the program starts
 
 function preload() {
   clownImage = loadImage("assets/images/clown.png");
   feltTextureImage = loadImage("assets/images/black-felt-texture.png");
+  clownBox = loadImage("assets/images/clownbox.png");
 }
 
+//------------------------- S E T U P ---------------------------------------//
 
 // setup()
 //
@@ -46,6 +63,10 @@ function setup() {
   feltTextureImageX = width/2;
   feltTextureImageY = 0 - feltTextureImage.height/2;
 
+  // start the clown box off the screen to the left of the canvas
+  clownBoxY = height/2;
+  clownBoxX = 0 - clownBox.width/2;
+
   // We'll use imageMode CENTER for this script
   imageMode(CENTER);
 }
@@ -54,6 +75,7 @@ function setup() {
 // draw()
 //
 // Moves the felt image linearly
+// moves the clown box from left to right linearly
 // Moves the clown face toward the current mouse location
 
 function draw() {
@@ -63,6 +85,12 @@ function draw() {
 
   // Display the felt image
   image(feltTextureImage,feltTextureImageX,feltTextureImageY);
+
+  // move the clown box right by increasing its x position
+  clownBoxX = clownBoxX + 1;
+
+  // display the clown box
+  image(clownBox,clownBoxX,clownBoxY);
 
   // Move the clown by moving it 1/10th of its current distance from the mouse
 
