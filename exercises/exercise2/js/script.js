@@ -1,11 +1,11 @@
-/*********************************************************
+//---------------------------- I N T R O ----------------------------------//
 
-Exercise 2 - The Artful Dodger
-Pippin Barr
+//Exercise 2 - The Artful Dodger
+//Pippin Barr
 
-Starter code for exercise 2.
+//Starter code for exercise 2.
 
-*********************************************************/
+// --------------------------- V A R I A B L E S ---------------------------//
 
 // The position and size of our avatar circle
 var avatarX;
@@ -33,8 +33,8 @@ var enemySpeedIncrease = 0.5;
 // How many dodges the player has made
 var dodges = 0;
 
-// setup()
-//
+// --------------------------- S E T U P -----------------------------------//
+
 // Make the canvas, position the avatar and anemy
 function setup() {
   // Create our playing area
@@ -52,22 +52,19 @@ function setup() {
   noStroke();
 }
 
-// draw()
-//
-// Handle moving the avatar and enemy and checking for dodges and
-// game over situations.
+// ---------------------------- D R A W -------------------------------------//
+
 function draw() {
-  // A pink background
+
+// B A C K G R O U N D //
   background(255,220,220);
 
-  // Default the avatar's velocity to 0 in case no key is pressed this frame
+// D E F A U L T      V E L O C I T Y //
   avatarVX = 0;
   avatarVY = 0;
 
-  // Check which keys are down and set the avatar's velocity based on its
-  // speed appropriately
-
-  // Left and right
+// M O V E M E N T :   L E F T     A N D    R I G H T //
+      // checks which arrow is pressed and determines/sets velocity //
   if (keyIsDown(LEFT_ARROW)) {
     avatarVX = -avatarSpeed;
   }
@@ -75,72 +72,103 @@ function draw() {
     avatarVX = avatarSpeed;
   }
 
-  // Up and down (separate if-statements so you can move vertically and
-  // horizontally at the same time)
+// M O V E M E N T :    U P   A N D    D O W N //
+      //separate if-statements//
+      //so you can move vertically and horizontally at once//
   if (keyIsDown(UP_ARROW)) {
     avatarVY = -avatarSpeed;
   }
   else if (keyIsDown(DOWN_ARROW)) {
     avatarVY = avatarSpeed;
   }
-
-  // Move the avatar according to its calculated velocity
+// M O V E M E N T :   P O S I T I O N    B A S E D    O N    V E L O C I T Y
   avatarX = avatarX + avatarVX;
   avatarY = avatarY + avatarVY;
 
-  // The enemy always moves at enemySpeed (which increases)
+// E N E M Y     S P E E D    A N D    P O S I T I O N //
+    // The enemy always moves at enemySpeed (which increases)
   enemyVX = enemySpeed;
-  // Update the enemy's position based on its velocity
+
+    // Update the enemy's position based on its velocity
   enemyX = enemyX + enemyVX;
 
-  // Check if the enemy and avatar overlap - if they do the player loses
-  // We do this by checking if the distance between the centre of the enemy
-  // and the centre of the avatar is less that their combined radii
+// C O L L I S I O N   C H E C K //
+      // Check if the enemy and avatar overlap - if they do the player loses
+      // We do this by checking if the distance between the centre of the enemy
+      // and the centre of the avatar is less that their combined radii
   if (dist(enemyX,enemyY,avatarX,avatarY) < enemySize/2 + avatarSize/2) {
-    // Tell the player they lost
-    console.log("YOU LOSE!");
-    // Reset the enemy's position
-    enemyX = 0;
-    enemyY = random(0,height);
-    // Reset the enemy's size and speed
-    enemySize = 50;
-    enemySpeed = 5;
-    // Reset the avatar's position
-    avatarX = width/2;
-    avatarY = height/2;
-    // Reset the dodge counter
-    dodges = 0;
+
+// i made a reset function. see 'other functions' section .
+    reset ();
   }
 
-  // Check if the avatar has gone off the screen (cheating!)
-  if (avatarX < 0 || avatarX > width || avatarY < 0 || avatarY > height) {
-    // If they went off the screen they lose in the same way as above.
+//--------------------- O T H E R    F U N C T I O N S ----------------------//
+
+              // ** ----- R E S E T    F U N C T I O N ------- ** //
+
+  function reset() {
+// Tell the player they lost
     console.log("YOU LOSE!");
-    enemyX = 0;
-    enemyY = random(0,height);
-    enemySize = 50;
-    enemySpeed = 5;
-    avatarX = width/2;
-    avatarY = height/2;
-    dodges = 0;
+
+// P O S I T I O N      R E S E T
+      // enemy position
+  enemyX = 0;
+  enemyY = random(0,height);
+
+      // enemy size and speed
+  enemySize = 50;
+  enemySpeed = 5;
+
+    // avatar position
+  avatarX = width/2;
+  avatarY = height/2;
+
+// S C O R E    R E S E T //
+    // Reset the dodge counter
+  dodges = 0;
   }
+
+              // ** ----- O F F S C R E E N     C H E C K ----- ** //
+
+  // Check if the avatar has gone off the screen
+if (avatarX < 0 || avatarX > width || avatarY < 0 || avatarY > height) {
+    reset();
+  }
+
+// ?? code explanation in english sentences ?? //
+  // if avatar's X-coord is less than zero
+      // OR X-coord is more than canvas width
+      // OR Y-coord is less than zero
+      // OR Y-coord is more than canvas height
+  // THEN reset everything as though collision occured with reset function //
+
+
+            // ** ----- S U C C E S S F U L    D O D G E ----- ** //
 
   // Check if the enemy has moved all the way across the screen
   if (enemyX > width) {
-    // This means the player dodged so update its dodge statistic
+
+    // This means the player dodged so add 1 to the dodge variable
     dodges = dodges + 1;
+
     // Tell them how many dodges they have made
     console.log(dodges + " DODGES!");
+
     // Reset the enemy's position to the left at a random height
     enemyX = 0;
     enemyY = random(0,height);
+
     // Increase the enemy's speed and size to make the game harder
     enemySpeed = enemySpeed + enemySpeedIncrease;
     enemySize = enemySize + enemySizeIncrease;
   }
 
+            // ** ----- C O N S O L E     D I S P L A Y ----- ** //
+
   // Display the current number of successful in the console
   console.log(dodges);
+
+          // ** ----- P L A Y E R     A P P E A R A N C E ----- ** //
 
   // The player is black
   fill(0);
@@ -153,3 +181,5 @@ function draw() {
   ellipse(enemyX,enemyY,enemySize,enemySize);
 
 }
+
+// ------------------------- T H E    E N D ----------------------------------//
