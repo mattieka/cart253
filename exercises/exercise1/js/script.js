@@ -8,6 +8,14 @@
 // One moves linearly down the screen.
 // One moves toward the mouse cursor.
 
+//------------------------ A N N O Y I N G     D O G ------------------------//
+
+// dog image variable
+var annoyingDog;
+
+// the current position of annoying dog
+var annoyingDogX;
+var annoyingDogY;
 
 //------------------------ C L O W N     F A C E ----------------------------//
 
@@ -43,6 +51,7 @@ function preload() {
   clownImage = loadImage("assets/images/clown.png");
   feltTextureImage = loadImage("assets/images/black-felt-texture.png");
   clownBox = loadImage("assets/images/clownbox.png");
+  annoyingDog = loadImage ("assets/images/annoyingdog.png");
 }
 
 //------------------------- S E T U P ---------------------------------------//
@@ -58,6 +67,10 @@ function setup() {
   // Start the clown image at the centre of the canvas
   clownImageX = width/2;
   clownImageY = height/2;
+
+  // place annoying dog right under the mouse
+  annoyingDogX = mouseX;
+  annoyingDogY = mouseY;
 
   // Start the felt image perfectly off screen above the canvas
   feltTextureImageX = width/2;
@@ -104,4 +117,11 @@ function draw() {
 
   // Display the clown image
   image(clownImage,clownImageX,clownImageY);
+
+  // make annoying dog follow the mouse
+  annoyingDogX = mouseX;
+  annoyingDogY = mouseY;
+
+  // display annoying dog
+  image(annoyingDog,annoyingDogX,annoyingDogY);
 }
