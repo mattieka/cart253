@@ -33,7 +33,15 @@ var enemySpeedIncrease = 0.5;
 // How many dodges the player has made
 var dodges = 0;
 
-// --------------------------- S E T U P -----------------------------------//
+// Variable for background image
+var starbg;
+// --------------------------- P R E L O A D ------------------------------- //
+
+function preload(){
+starbg = loadImage('assets/stars.jpg');
+}
+
+// --------------------------- S E T U P ----------------------------------- //
 
 // Make the canvas, position the avatar and anemy
 function setup() {
@@ -50,6 +58,7 @@ function setup() {
 
   // No stroke so it looks cleaner
   noStroke();
+
 }
 
 // ---------------------------- D R A W -------------------------------------//
@@ -57,7 +66,7 @@ function setup() {
 function draw() {
 
 // B A C K G R O U N D //
-  background(255,220,220);
+image (starbg, 0, 0, starbg.width * .25,starbg.height *.25);
 
 // D E F A U L T      V E L O C I T Y //
   avatarVX = 0;
@@ -168,6 +177,13 @@ if (avatarX < 0 || avatarX > width || avatarY < 0 || avatarY > height) {
   // Display the current number of successful in the console
   console.log(dodges);
 
+          // ** ----- O N S C R E E N      T E X T ----- ** //
+
+  fill("#8a59d7");
+  text(dodges + " dodges!", 2.5 * width/4,height/8);
+  textSize(32);
+
+
           // ** ----- P L A Y E R     A P P E A R A N C E ----- ** //
 
   // The player is black
@@ -181,5 +197,12 @@ if (avatarX < 0 || avatarX > width || avatarY < 0 || avatarY > height) {
   ellipse(enemyX,enemyY,enemySize,enemySize);
 
 }
+
+
+// --------------------- I M A G E     C R E D I T ------------------------- //
+
+//background image: https://unsplash.com/photos/Knwea-mLGAg
+
+
 
 // ------------------------- T H E    E N D ----------------------------------//
