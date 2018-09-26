@@ -33,7 +33,7 @@ var enemySpeedIncrease = 0.5;
 var dodges = 0;
 
 // How many lives the player has
-var lives = 3
+var lives = 3;
 
 // Variables for images
 var starbg; //background
@@ -58,7 +58,7 @@ function preload() {
 }
 // --------------------------- S E T U P ----------------------------------- //
 
-// Make the canvas, position the avatar and anemy
+// Make the canvas, position the avatar and enemy. set heart size/position
 function setup() {
   // Create our playing area
   createCanvas(500, 500);
@@ -78,6 +78,7 @@ function setup() {
   heartHeight = heart.height/20;
 }
 
+
 // ---------------------------- D R A W -------------------------------------//
 
 function draw() {
@@ -89,7 +90,10 @@ function draw() {
   image(asteroid, enemyX, enemyY, enemySize, enemySize);
 
   // P L A Y E R //
-  image(ufo, avatarX, avatarY);
+  image(ufo, avatarX, avatarY,ufo.width/2,ufo.height/2);
+
+  // H E A R T //
+  image(heart,heartX,heartY,heartWidth,heartHeight);
 
   // D E F A U L T      V E L O C I T Y //
   avatarVX = 0;
@@ -124,9 +128,9 @@ function draw() {
   enemyX = enemyX + enemyVX;
 
   // C O L L I S I O N   C H E C K //
-  // Check if the enemy and avatar overlap - if they do the player loses
+  // Check if the enemy and avatar overlap - if they do the player loses 1 life
   // We do this by checking if the distance between the centre of the enemy
-  // and the centre of the avatar is less that their combined radii
+  // and 1/4.5 of the width of the player is less than those things combined
   if (dist(enemyX, enemyY, avatarX, avatarY) < enemySize / 2 + ufo.width / 4.5) {
     // reduce life count by 1
     lives = lives-1;
@@ -136,27 +140,10 @@ function draw() {
     enemyY = random(0, height);
   }
 
-  // D E A T H     C H E C K // i made a reset function: see other functions
-  if (lives <= 0) {
-    reset();
-  }
-
-    // L I V E S
-    if (lives =3) {
-      image(heart,heartX,heartY,heartWidth,heartHeight);
-      image(heart,heartX + (heartWidth*1.5),heartY,heartWidth,heartHeight);
-      image(heart,heartX + (heartWidth*1.5) + (heartWidth*1.5),heartY,heartWidth,heartHeight);
-    } else if (lives =2) {
-      image(heart,heartX,heartY,heartWidth,heartHeight);
-      image(heart,heartX + (heartWidth*1.5),heartY,heartWidth,heartHeight);
-        alpha(0);
-      image(heart,heartX + (heartWidth*1.5) + (heartWidth*1.5),heartY,heartWidth,heartHeight);
-    } else if (lives = 1){
-      image(heart,heartX,heartY,heartWidth,heartHeight);
-    } else if (lives <=0){
-  }
-
-
+    // D E A T H     C H E C K // i made a reset function: see other functions
+    if (lives <= 0) {
+      reset();
+    }
 
   //--------------------- O T H E R    F U N C T I O N S ----------------------//
 
@@ -191,7 +178,6 @@ function draw() {
   if (avatarX < 0 || avatarX > width || avatarY < 0 || avatarY > height) {
     reset();
   }
-
   // ?? code explanation in english sentences ?? //
   // if avatar's X-coord is less than zero
   // OR X-coord is more than canvas width
@@ -218,13 +204,29 @@ function draw() {
     // Increase the enemy's speed and size to make the game harder
     enemySpeed = enemySpeed + enemySpeedIncrease;
     enemySize = enemySize + enemySizeIncrease;
+
+    // Randomly increase avatar's speed and size after a dodge
+    avatarSpeed = random(1,25);
+    ufo.width = random(ufo.width/2,100);
   }
 
   // ** ----- O N S C R E E N      T E X T ----- ** //
 
+// score
   fill("#8a59d7");
   text(dodges + " dodges!", 2.5 * width / 4, height / 8);
-  textSize(32);
+  textSize(20);
+
+// number of lives //
+if (lives > 1) {
+  text(lives + " lives remaining.", heartX+(heartWidth*1.1),height / 8);
+}
+else if (lives = 1) {
+  text(lives + " life remaining.",heartX+(heartWidth*1.1),height / 8);
+}
+else if (lives <= 0) {
+  text("Game Over!", heartX+(heartWidth*1.1),height / 8)
+}
 }
 
 // --------------------- I M A G E     C R E D I T ------------------------- //
