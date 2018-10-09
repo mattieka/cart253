@@ -1,10 +1,9 @@
 /******************************************************
 
-Game - Face your Fears
+Game - Chaser
 Mattie KA
 
-Collect crystals to drive back the dark and regain your courage.
-Avoid the fear.
+A simple game of cat and mouse.
 
 Physics-based movement, keyboard controls, health/stamina,
 sprinting, random movement, screen wrap.
@@ -28,119 +27,10 @@ var playerMaxSpeed = 2;
 // Player health
 var playerHealth;
 var playerMaxHealth = 255;
-
-//Light crystal variables
-var crystalX;
-var crystalY;
-
-// Fear Variables
-// fear position, size, velocity, colour
-var fearX;
-var fearY;
-var fearW;
-var fearH;
-var fearVX;
-var fearVY;
-var fearMaxSpeed = 4;
-var fearFill = 255;
-
-// ----------------------------- S E T    U P ------------------------------ //
-
-function setup() {
-  createCanvas(500,500);
-  setupPlayer();
-
-}
-
-// ----------------------------- D R A W ----------------------------------- //
-
-function draw() {
-  background("#00FFFF");
-  handleInput();
-  movePlayer();
-  drawPlayer();
-}
+// Player fill color
+var playerFill = 50;
 
 
-// --------------------------- F U N C T I O N S ---------------------------- //
-
-// SETUP PLAYER : initializes position and health
-function setupPlayer() {
-  playerX = 4*width/5;
-  playerY = height/2;
-  playerHealth = playerMaxHealth;
-}
-//-----------
-
-
-// HANDLE INPUT : checks arrow keys and adjusts player velocity accordingly
-function handleInput() {
-  // Check for horizontal movement
-  if (keyIsDown(LEFT_ARROW)) {
-    playerVX = -playerMaxSpeed;
-  }
-  else if (keyIsDown(RIGHT_ARROW)) {
-    playerVX = playerMaxSpeed;
-  }
-  else {
-    playerVX = 0;
-  }
-
-  // Check for vertical movement
-  if (keyIsDown(UP_ARROW)) {
-    playerVY = -playerMaxSpeed;
-  }
-  else if (keyIsDown(DOWN_ARROW)) {
-    playerVY = playerMaxSpeed;
-  }
-  else {
-    playerVY = 0;
-  }
-}
-//-----------
-
-
-// MOVE PLAYER : updates player's position based on velocity. stops player at the edge of the canvas.
-function movePlayer() {
-  // Player stops at the sides of the screen.
-  if (playerX <= playerRadius) {
-    playerVX = -playerVX;
-    playerVY = -playerVY;
-    playerX = playerRadius + 1;
-  }
-  else if (playerX >= width - playerRadius) {
-    playerVX = -playerVX;
-    playerVY = -playerVY;
-    playerX = width - playerRadius - 1;
-  }
-
-// Player stops at the top and bottom of the screen.
-  if (playerY < playerRadius) {
-    playerVX = -playerVX;
-    playerVY = -playerVY;
-    playerY = playerRadius + 1;
-  }
-  else if (playerY > height - playerRadius) {
-    playerVX = -playerVX;
-    playerVY = -playerVY;
-    playerY = height - playerRadius - 1;
-  }
-// Update player position (note: i know it's easier/faster with += but i am easily confused so i do it the long way.)
-  playerX = playerX + playerVX;
-  playerY = playerY + playerVY;
-}
-//-----------
-
-// DRAW PLAYER: draws the player as an ellipse
-function drawPlayer() {
-  fill("#000000");
-  ellipse(playerX,playerY,playerRadius*2);
-}
-//-----------
-
-
-
-/****
 // Prey variables
 // Prey position, size, velocity
 var preyX;
@@ -155,7 +45,7 @@ var preyMaxHealth = 100;
 // Prey fill color
 var preyFill = 200;
 
-// score variables
+// score variables 
 // Amount of health obtained per frame of "eating" the prey
 var eatHealth = 10;
 // Number of prey eaten during the game
@@ -380,4 +270,3 @@ function showGameOver() {
   gameOverText += "before you died."
   text(gameOverText,width/2,height/2);
 }
-**/
