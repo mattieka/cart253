@@ -26,8 +26,8 @@ var playerVX = 0;
 var playerVY = 0;
 var playerMaxSpeed = 2;
 // Player health
-var playerHealth;
-var playerMaxHealth = 255;
+var playerCourage;
+var playerMaxCourage = 100;
 
 //Light crystal variables
 var crystalX;
@@ -37,18 +37,24 @@ var crystalY;
 // fear position, size, velocity, colour
 var fearX;
 var fearY;
-var fearW;
-var fearH;
+var fearW = 30;
+var fearH = 30;
 var fearVX;
 var fearVY;
-var fearMaxSpeed = 4;
-var fearFill = 255;
+var fearMaxSpeed;
+var fearFill;
+
+// noise value that changes width and height with perlin noise
+var tWidth = 0;
+var tHeight = 0;
 
 // ----------------------------- S E T    U P ------------------------------ //
 
 function setup() {
   createCanvas(500,500);
   setupPlayer();
+  setupFear();
+  setupCrystal();
 
 }
 
@@ -58,9 +64,13 @@ function draw() {
   background("#00FFFF");
   handleInput();
   movePlayer();
+  drawCrystal();
+  moveFear();
   drawPlayer();
 }
 
+// NEXT HANDLE THE PLAYER AND CRYSTAL AND FEAR COLLISIONS, SET CRYSTAL
+//TO REGEN COURAGE BASED ON ITS SIZE, OR SOMETHING
 
 // --------------------------- F U N C T I O N S ---------------------------- //
 
@@ -68,8 +78,50 @@ function draw() {
 function setupPlayer() {
   playerX = 4*width/5;
   playerY = height/2;
-  playerHealth = playerMaxHealth;
+  playerCourage = 33;
 }
+//-----------
+
+// SETUP FEAR : intializes first enemy location and colour
+function setupFear() {
+  fearX = 100;
+  fearY = 100;
+  fearFill = ("#000000");
+}
+//-----------
+
+// SETUP CRYSTAL : initializes random locations for a crystal to appear.
+function setupCrystal() {
+  crystalX = random(width/10,(width/10)*9);
+  crystalY = random(height/10,(height/10)*9);
+}
+//-----------
+
+// DRAW CRYSTAL : draws crystal
+function drawCrystal(){
+  fill("#8A2BE2");
+  noStroke();
+  ellipse(crystalX,crystalY,30,30);
+}
+//-----------
+
+// MOVE FEAR : updates fear location, size, and colour
+
+function moveFear() {
+  /* fearW and fearH are initial enemy widths and heights and are used to
+     generate a constantly-changing new width and height that depends on
+     the player's courage level */
+  fearW = map(playerCourage,0,100,200,10);
+  fearH = map(playerCourage,0,100,200,10);
+
+  var updateFearW = fearW + map(noise(tWidth),0,1,-100,100);
+  var updateFearH = fearH + map(noise(tHeight),0,1,-100,100);
+  tWidth = tWidth + 0.1;
+  tHeight = tHeight + 0.2;
+  fill (fearFill);
+  ellipse(100,100,updateFearW,updateFearH);
+}
+
 //-----------
 
 
