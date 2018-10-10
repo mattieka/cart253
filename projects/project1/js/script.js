@@ -29,9 +29,11 @@ var playerMaxSpeed = 2;
 var playerCourage;
 var playerMaxCourage = 100;
 
-//Light crystal variables
+//Crystal variables (position and size)
 var crystalX;
 var crystalY;
+var crystalW;
+var crystalH;
 
 // Fear Variables
 // fear position, size, velocity, colour
@@ -62,11 +64,12 @@ function setup() {
 
 function draw() {
   background("#00FFFF");
-  handleInput();
-  movePlayer();
-  drawCrystal();
-  moveFear();
-  drawPlayer();
+  handleInput();                     //detects player input and wall collisions
+  movePlayer();                      //updates player position
+  drawCrystal();                     //draws crystal
+  moveFear();                        //updates enemy position/size
+  drawPlayer();                       //draws player
+  courageDecline();
 }
 
 // NEXT HANDLE THE PLAYER AND CRYSTAL AND FEAR COLLISIONS, SET CRYSTAL
@@ -78,14 +81,14 @@ function draw() {
 function setupPlayer() {
   playerX = 4*width/5;
   playerY = height/2;
-  playerCourage = 33;
+  playerCourage = 50;
+  playerRadius = 25;
 }
 //-----------
 
 // SETUP FEAR : intializes first enemy location and colour
 function setupFear() {
-  fearX = 100;
-  fearY = 100;
+  fearLocation();
   fearFill = ("#000000");
 }
 //-----------
@@ -94,6 +97,8 @@ function setupFear() {
 function setupCrystal() {
   crystalX = random(width/10,(width/10)*9);
   crystalY = random(height/10,(height/10)*9);
+  crystalW = random(10,30);
+  crystalH = random(20,40);
 }
 //-----------
 
@@ -101,12 +106,11 @@ function setupCrystal() {
 function drawCrystal(){
   fill("#8A2BE2");
   noStroke();
-  ellipse(crystalX,crystalY,30,30);
+  ellipse(crystalX,crystalY,crystalW,crystalH);
 }
 //-----------
 
 // MOVE FEAR : updates fear location, size, and colour
-
 function moveFear() {
   /* fearW and fearH are initial enemy widths and heights and are used to
      generate a constantly-changing new width and height that depends on
@@ -119,7 +123,23 @@ function moveFear() {
   tWidth = tWidth + 0.1;
   tHeight = tHeight + 0.2;
   fill (fearFill);
-  ellipse(100,100,updateFearW,updateFearH);
+  ellipse(fearX,fearY,updateFearW,updateFearH);
+}
+
+//-----------
+
+// FEAR LOCATION : sets a random location for the enemy that isnt overlapping with the player
+// im not actually sure that this is working. ive tried to console.log to see if
+// it ever has to reset the location but it crashes my laptop's browser every time
+function fearLocation() {
+  fearX = random(0,width);
+  fearY = random(0,height);
+  var d = dist(fearX,fearY,playerX,playerY);
+  console.log (d);
+  while (d < fearW + playerRadius*2 && d < fearH + playerRadius*2) {
+    fearX = random(0,width);
+    fearY = random(0,height);
+  }
 }
 
 //-----------
@@ -181,8 +201,50 @@ function movePlayer() {
   playerX = playerX + playerVX;
   playerY = playerY + playerVY;
 }
-//-----------
 
+//-----------
+//CRYSTAL COLLISION CHECK
+// checkEating()
+//
+// Check if the player overlaps the prey and updates health of both
+function checkEating() {
+  // Get distance of player to prey
+  var d = dist(playerX,playerY,preyX,preyY);
+  // Check if it's an overlap
+  if (d < playerRadius + preyRadius) {
+    // Increase the player health
+    playerHealth = constrain(playerHealth + eatHealth,0,playerMaxHealth);
+    // Reduce the prey health
+    preyHealth = constrain(preyHealth - eatHealth,0,preyMaxHealth);
+
+    // Check if the prey died
+    if (preyHealth === 0) {
+      // Move the "new" prey to a random position
+      preyX = random(0,width);
+      preyY = random(0,height);
+      // Give it full health
+      preyHealth = preyMaxHealth;
+      // Track how many prey were eaten
+      preyEaten++;
+    }
+  }
+}
+
+
+//-----------
+//COURAGE DECLINE
+function courageDecline () {
+    // Reduce player health, constrain to reasonable range
+    playerCourage = constrain(playerCourage - 0.05,0,playerMaxCourage);
+    console.log(playerCourage);
+    // Check if the player is dead
+    if (playerCourage === 0) {
+      // If so, the game is over
+      gameOver = true;
+    }
+}
+
+//-----------
 // DRAW PLAYER: draws the player as an ellipse
 function drawPlayer() {
   fill("#000000");
@@ -275,58 +337,6 @@ function draw() {
 }
 
 // --------------------------- F U N C T I O N S ---------------------------- //
-
-// handleInput()
-//
-// Checks arrow keys and adjusts player velocity accordingly
-function handleInput() {
-  // Check for horizontal movement
-  if (keyIsDown(LEFT_ARROW)) {
-    playerVX = -playerMaxSpeed;
-  }
-  else if (keyIsDown(RIGHT_ARROW)) {
-    playerVX = playerMaxSpeed;
-  }
-  else {
-    playerVX = 0;
-  }
-
-  // Check for vertical movement
-  if (keyIsDown(UP_ARROW)) {
-    playerVY = -playerMaxSpeed;
-  }
-  else if (keyIsDown(DOWN_ARROW)) {
-    playerVY = playerMaxSpeed;
-  }
-  else {
-    playerVY = 0;
-  }
-}
-
-// movePlayer()
-//
-// Updates player position based on velocity,
-// wraps around the edges.
-function movePlayer() {
-  // Update position
-  playerX += playerVX;
-  playerY += playerVY;
-
-  // Wrap when player goes off the canvas
-  if (playerX < 0) {
-    playerX += width;
-  }
-  else if (playerX > width) {
-    playerX -= width;
-  }
-
-  if (playerY < 0) {
-    playerY += height;
-  }
-  else if (playerY > height) {
-    playerY -= height;
-  }
-}
 
 // updateHealth()
 //
