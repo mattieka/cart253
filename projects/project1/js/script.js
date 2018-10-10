@@ -41,9 +41,9 @@ var fearX;
 var fearY;
 var fearW = 30;
 var fearH = 30;
-var fearVX;
-var fearVY;
-var fearMaxSpeed;
+var fearVX = 0;
+var fearVY = 0;
+var fearMaxSpeed = 10;
 var fearFill;
 
 // noise value that changes width and height with perlin noise
@@ -81,16 +81,26 @@ function draw() {
 function setupPlayer() {
   playerX = 4*width/5;
   playerY = height/2;
-  playerCourage = 50;
+  playerCourage = 100;
   playerRadius = 25;
 }
 //-----------
 
 // SETUP FEAR : intializes first enemy location and colour
 function setupFear() {
-  fearLocation();
-  fearFill = ("#000000");
-}
+  // FEAR LOCATION : sets a random location for the enemy that isnt overlapping with the player
+  fearX = random(0,width);
+  fearY = random(0,height);
+    var d = dist(fearX,fearY,playerX,playerY);
+    console.log (d);
+    if (d < fearW + playerRadius*2 && d < fearH + playerRadius*2) {
+      fearX = random(0,width);
+      fearY = random(0,height);
+      console.log("overlap occurred");
+    }
+    fearFill = ("#000000");
+  }
+
 //-----------
 
 // SETUP CRYSTAL : initializes random locations for a crystal to appear.
@@ -110,37 +120,60 @@ function drawCrystal(){
 }
 //-----------
 
-// MOVE FEAR : updates fear location, size, and colour
+// MOVE FEAR : updates fear size, location, and colour
 function moveFear() {
-  /* fearW and fearH are initial enemy widths and heights and are used to
+  /* SIZE: fearW and fearH are initial enemy widths and heights and are used to
      generate a constantly-changing new width and height that depends on
      the player's courage level */
   fearW = map(playerCourage,0,100,200,10);
   fearH = map(playerCourage,0,100,200,10);
-
-  var updateFearW = fearW + map(noise(tWidth),0,1,-100,100);
-  var updateFearH = fearH + map(noise(tHeight),0,1,-100,100);
-  tWidth = tWidth + 0.1;
-  tHeight = tHeight + 0.2;
+  if (playerCourage > 66){
+    var updateFearW = fearW + map(noise(tWidth),0,1,-33,33);
+    var updateFearH = fearH + map(noise(tHeight),0,1,-33,33);
+    tWidth = tWidth + 0.01;
+    tHeight = tHeight + 0.02;
+    fearVX = fearVX + map(noise(tWidth),0,1,-0.01,0.01);
+    fearVY = fearVY + map(noise(tHeight),0,1,-0.01,0.01);
+  } else if (playerCourage >= 33) {
+      var updateFearW = fearW + map(noise(tWidth),0,1,-66,66);
+      var updateFearH = fearH + map(noise(tHeight),0,1,-66,66);
+      tWidth = tWidth + 0.07;
+      tHeight = tHeight + 0.06;
+      fearVX = fearVX + map(noise(tWidth),0,1,-0.03,0.03);
+      fearVY = fearVY + map(noise(tHeight),0,1,-0.03,0.03);
+  } else if(playerCourage < 33) {
+      var updateFearW = fearW + map(noise(tWidth),0,1,-100,100);
+      var updateFearH = fearH + map(noise(tHeight),0,1,-100,100);
+      tWidth = tWidth + 0.2;
+      tHeight = tHeight + 0.4;
+      fearVX = fearVX + map(noise(tWidth),0,1,-0.07,0.07);
+      fearVY = fearVY + map(noise(tHeight),0,1,-0.07,0.07);
+  }
   fill (fearFill);
+  // Update prey position based on velocity
+  fearX = fearX + fearVX; //MAKE MOVEMENT MORE IRREGULAR???
+  fearY = fearY + fearVY;
+  console.log(fearX,fearY);
+  // SCREEN WRAPPING : yes, the enemies can screen wrap and the players can't (:
+  if (fearX < 0) {
+    fearX += width;
+  }
+  else if (fearX > width) {
+    fearX -= width;
+  }
+
+  if (fearY < 0) {
+    fearY += height;
+  }
+  else if (fearY > height) {
+    fearY -= height;
+  }
   ellipse(fearX,fearY,updateFearW,updateFearH);
 }
 
 //-----------
 
-// FEAR LOCATION : sets a random location for the enemy that isnt overlapping with the player
-// im not actually sure that this is working. ive tried to console.log to see if
-// it ever has to reset the location but it crashes my laptop's browser every time
-function fearLocation() {
-  fearX = random(0,width);
-  fearY = random(0,height);
-  var d = dist(fearX,fearY,playerX,playerY);
-  console.log (d);
-  while (d < fearW + playerRadius*2 && d < fearH + playerRadius*2) {
-    fearX = random(0,width);
-    fearY = random(0,height);
-  }
-}
+
 
 //-----------
 
@@ -236,7 +269,7 @@ function checkEating() {
 function courageDecline () {
     // Reduce player health, constrain to reasonable range
     playerCourage = constrain(playerCourage - 0.05,0,playerMaxCourage);
-    console.log(playerCourage);
+    //console.log(playerCourage);
     // Check if the player is dead
     if (playerCourage === 0) {
       // If so, the game is over
