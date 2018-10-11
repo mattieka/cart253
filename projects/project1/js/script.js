@@ -81,6 +81,7 @@ function draw() {
 function setupPlayer() {
   playerX = 4*width/5;
   playerY = height/2;
+  constrain(playerCourage,0,100);
   playerCourage = 100;
   playerRadius = 25;
 }
@@ -125,36 +126,34 @@ function moveFear() {
   /* SIZE: fearW and fearH are initial enemy widths and heights and are used to
      generate a constantly-changing new width and height that depends on
      the player's courage level */
-  fearW = map(playerCourage,0,100,200,10);
-  fearH = map(playerCourage,0,100,200,10);
+  constrain(fearVX,-fearMaxSpeed,fearMaxSpeed);
+  constrain(fearVY,-fearMaxSpeed,fearMaxSpeed);
+  fearW = map(playerCourage,1,100,200,10);
+  fearH = map(playerCourage,1,100,200,10);
+  console.log("courage level: " + playerCourage);
   if (playerCourage > 66){
-    var updateFearW = fearW + map(noise(tWidth),0,1,-33,33);
-    var updateFearH = fearH + map(noise(tHeight),0,1,-33,33);
-    tWidth = tWidth + 0.01;
-    tHeight = tHeight + 0.02;
-    fearVX = fearVX + map(noise(tWidth),0,1,-0.01,0.01);
-    fearVY = fearVY + map(noise(tHeight),0,1,-0.01,0.01);
+    var updateFearW = fearW + map(noise(tWidth),0,1,-20,20);
+    var updateFearH = fearH + map(noise(tHeight),0,1,-20,20);
+    tWidth = tWidth + 0.001;
+    tHeight = tHeight + 0.002;
   } else if (playerCourage >= 33) {
       var updateFearW = fearW + map(noise(tWidth),0,1,-66,66);
       var updateFearH = fearH + map(noise(tHeight),0,1,-66,66);
-      tWidth = tWidth + 0.07;
-      tHeight = tHeight + 0.06;
-      fearVX = fearVX + map(noise(tWidth),0,1,-0.03,0.03);
-      fearVY = fearVY + map(noise(tHeight),0,1,-0.03,0.03);
+      tWidth = tWidth + 0.009;
+      tHeight = tHeight + 0.008;
   } else if(playerCourage < 33) {
-      var updateFearW = fearW + map(noise(tWidth),0,1,-100,100);
-      var updateFearH = fearH + map(noise(tHeight),0,1,-100,100);
-      tWidth = tWidth + 0.2;
-      tHeight = tHeight + 0.4;
-      fearVX = fearVX + map(noise(tWidth),0,1,-0.07,0.07);
-      fearVY = fearVY + map(noise(tHeight),0,1,-0.07,0.07);
+      var updateFearW = fearW + map(noise(tWidth),0,1,-200,200);
+      var updateFearH = fearH + map(noise(tHeight),0,1,-200,200);
+      tWidth = tWidth + 0.02;
+      tHeight = tHeight + 0.03;
   }
   fill (fearFill);
-  // Update prey position based on velocity
-  fearX = fearX + fearVX; //MAKE MOVEMENT MORE IRREGULAR???
-  fearY = fearY + fearVY;
+  // Update prey position based on perlin noise; not sure if this is working properly
+  // doesn't usually leave the canvas
+  fearX = width * noise(tWidth);
+  fearY = height * noise(tHeight);
   console.log(fearX,fearY);
-  // SCREEN WRAPPING : yes, the enemies can screen wrap and the players can't (:
+  // SCREEN WRAPPING : yes, the enemies can screen wrap and the players can't 
   if (fearX < 0) {
     fearX += width;
   }
