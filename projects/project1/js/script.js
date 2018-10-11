@@ -9,6 +9,13 @@ Avoid the fear.
 Physics-based movement, keyboard controls, health/stamina,
 sprinting, random movement, screen wrap.
 
+STUFF LEFT TO DO:
+1) change visuals
+2) let player sprint
+3) make crystals edible
+4) show courage on screen
+5) set game over conditions 
+
 ******************************************************/
 
 // -------------------------- V A R I A B L E S ---------------------------- //
@@ -25,6 +32,7 @@ var playerRadius = 25;
 var playerVX = 0;
 var playerVY = 0;
 var playerMaxSpeed = 2;
+var playerMaxSprint = 5;
 // Player health
 var playerCourage;
 var playerMaxCourage = 100;
@@ -36,19 +44,13 @@ var crystalW;
 var crystalH;
 
 // Fear Variables
-// fear position, size, velocity, colour
-var fearX;
+var fearX;                     // fear position, size, velocity, colour
 var fearY;
 var fearW = 30;
 var fearH = 30;
-var fearVX = 0;
-var fearVY = 0;
-var fearMaxSpeed = 10;
 var fearFill;
-
-// noise value that changes width and height with perlin noise
-var tWidth = 0;
-var tHeight = 0;
+var tWidth = 0;                // time value that changes width, height, and
+var tHeight = 0;               // xy positions with perlin noise
 
 // ----------------------------- S E T    U P ------------------------------ //
 
@@ -126,8 +128,6 @@ function moveFear() {
   /* SIZE: fearW and fearH are initial enemy widths and heights and are used to
      generate a constantly-changing new width and height that depends on
      the player's courage level */
-  constrain(fearVX,-fearMaxSpeed,fearMaxSpeed);
-  constrain(fearVY,-fearMaxSpeed,fearMaxSpeed);
   fearW = map(playerCourage,1,100,200,10);
   fearH = map(playerCourage,1,100,200,10);
   console.log("courage level: " + playerCourage);
@@ -136,24 +136,26 @@ function moveFear() {
     var updateFearH = fearH + map(noise(tHeight),0,1,-20,20);
     tWidth = tWidth + 0.001;
     tHeight = tHeight + 0.002;
+    var fillEase = 0.05;
+    fearFill = 120;
   } else if (playerCourage >= 33) {
       var updateFearW = fearW + map(noise(tWidth),0,1,-66,66);
       var updateFearH = fearH + map(noise(tHeight),0,1,-66,66);
-      tWidth = tWidth + 0.009;
-      tHeight = tHeight + 0.008;
+      tWidth = tWidth + 0.005;
+      tHeight = tHeight + 0.006;
+      fearFill = 170;
   } else if(playerCourage < 33) {
       var updateFearW = fearW + map(noise(tWidth),0,1,-200,200);
       var updateFearH = fearH + map(noise(tHeight),0,1,-200,200);
       tWidth = tWidth + 0.02;
       tHeight = tHeight + 0.03;
+      fearFill = 255;
   }
-  fill (fearFill);
-  // Update prey position based on perlin noise; not sure if this is working properly
-  // doesn't usually leave the canvas
+  // width and height are multiplied by two first to allow the enemy to leave the canvas
   fearX = width * noise(tWidth);
   fearY = height * noise(tHeight);
-  console.log(fearX,fearY);
-  // SCREEN WRAPPING : yes, the enemies can screen wrap and the players can't 
+  //console.log(fearX,fearY);
+  // SCREEN WRAPPING : yes, the enemies can screen wrap and the players can't
   if (fearX < 0) {
     fearX += width;
   }
@@ -167,6 +169,7 @@ function moveFear() {
   else if (fearY > height) {
     fearY -= height;
   }
+  fill(0,0,0,fearFill);
   ellipse(fearX,fearY,updateFearW,updateFearH);
 }
 
@@ -266,8 +269,14 @@ function checkEating() {
 //-----------
 //COURAGE DECLINE
 function courageDecline () {
-    // Reduce player health, constrain to reasonable range
-    playerCourage = constrain(playerCourage - 0.05,0,playerMaxCourage);
+    // Reduce player courage/health, constrain to reasonable range
+    // Spriting causes courage to drop more quickly
+    if (keyIsDown(SHIFT)) {
+      playerCourage = playerCourage - 0.5;
+      constrain(playerCourage - 0.5,0,playerMaxCourage);
+    } else {
+      playerCourage = constrain(playerCourage - 0.05,0,playerMaxCourage);
+      }
     //console.log(playerCourage);
     // Check if the player is dead
     if (playerCourage === 0) {

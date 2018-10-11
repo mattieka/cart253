@@ -1,10 +1,9 @@
 project instructions
 
-Modify the way the prey moves to use Perlin noise and the noise() function
+DONE - Modify the way the prey moves to use Perlin noise and the noise() function
 instead of the random() function it uses now.
 (You'll need to get rid of the conditional that chooses when the prey changes
 direction, it should only use noise()).
-
 
 Add the ability to "sprint" for the player when they hold down the shift key
 (using keyDown() in the handleInput() function for this is probably a good
@@ -12,14 +11,14 @@ idea). Make them lose health faster when they are sprinting. Don't forget to
 reset to the player's normal speed when they stop sprinting.
 
 
-Add variables and conditionals as needed to make the game more interesting to
+DONE - Add variables and conditionals as needed to make the game more interesting to
 play by varying the player and prey's size, speed, visibility, and/or anything
 else you can think of during play (maybe the prey get harder to see as the
 player gets more successful, maybe the player gets bigger the more it eats, etc.)
 - try to have a reason why each thing happens.
 
 
-Tune the values of the game's variables to make the gameplay more interesting
+DONE - Tune the values of the game's variables to make the gameplay more interesting
 to play (is the prey too slow? Should it move more erratically?
 Should the player be faster? Slower? Etc.)
 
