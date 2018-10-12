@@ -5,7 +5,7 @@ instead of the random() function it uses now.
 (You'll need to get rid of the conditional that chooses when the prey changes
 direction, it should only use noise()).
 
-Add the ability to "sprint" for the player when they hold down the shift key
+DONE - Add the ability to "sprint" for the player when they hold down the shift key
 (using keyDown() in the handleInput() function for this is probably a good
 idea). Make them lose health faster when they are sprinting. Don't forget to
 reset to the player's normal speed when they stop sprinting.
