@@ -9,9 +9,6 @@ Avoid the fear.
 Physics-based movement, keyboard controls, health/stamina,
 sprinting, random movement, screen wrap.
 
-STUFF LEFT TO DO:
-1) change visuals and sounds
-
 ******************************************************/
 
 // -------------------------- V A R I A B L E S ---------------------------- //
@@ -27,13 +24,14 @@ var playerY;
 var playerRadius = 25;
 var playerVX = 0;
 var playerVY = 0;
-var playerMaxSpeed = 2;
+var playerMaxSpeed = 1;
 var playerMaxSprint = 5;
 // Player health
 var playerCourage;
 var playerMaxCourage = 100;
 
 //Crystal variables (position, size, and amount collected)
+var crystalImage;
 var crystalX;
 var crystalY;
 var crystalW;
@@ -41,6 +39,7 @@ var crystalH;
 var crystalsCollected = 0;
 
 // Fear Variables
+var fearImage;
 var fearX;                     // fear position, size, velocity, colour
 var fearY;
 var fearW = 30;
@@ -51,6 +50,18 @@ var fearFill;
 var tWidth = 0;                // time value that changes width, height, and
 var tHeight = 0;               // xy positions with perlin noise
 
+// Sound variables
+var courageZero;
+var crystalPickup;
+
+// --------------------------- P R E L O A D ------------------------------- //
+
+function preload() {
+  loadImages();
+  courageZero = new Audio("assets/sounds/couragezero.wav");
+  crystalPickup = new Audio("assets/sounds/crystalpickup.wav");
+}
+
 // ----------------------------- S E T    U P ------------------------------ //
 
 function setup() {
@@ -59,24 +70,23 @@ function setup() {
   setupFear();
   setupCrystal();
   gameOver = false;
+  crystalsCollected = 0;
 }
 
 // ----------------------------- D R A W ----------------------------------- //
 
 function draw() {
-  background("#00FFFF");
+  image(floorImage,0,0,width,height); //draw background image
   handleInput();                     //detects player input and wall collisions
   displayCourage ();
   movePlayer();                      //updates player position
   drawCrystal();                     //draws crystal
-  moveFear();                        //updates enemy position/size
   drawPlayer();                       //draws player
+  moveFear();                        //updates enemy position/size
   courageDecline();                 // lowers courage (health) as time goes on
   checkEating();                     // detects collision with crytals and restores health
   fearCollide();                     // detects collision with fear
 }
-
-// NEXT HANDLE THE PLAYER AND CRYSTAL AND FEAR COLLISIONS, S
 
 // --------------------------- F U N C T I O N S ---------------------------- //
 
@@ -85,24 +95,34 @@ function setupPlayer() {
   playerX = 4*width/5;
   playerY = height/2;
   constrain(playerCourage,0,100);
-  playerCourage = 100;
+  //player courage starts at 40% so that the game isnt too easy
+  playerCourage = 50;
   playerRadius = 25;
 }
 //-----------
 
+function loadImages() {
+  crystalImage = loadImage("assets/images/crystal.png");
+  floorImage = loadImage("assets/images/floor.png");
+  fearImage = loadImage("assets/images/fear.png");
+}
+
+//-----------
+
 // SETUP FEAR : intializes first enemy location and colour
 function setupFear() {
-  // FEAR LOCATION : sets a random location for the enemy that isnt overlapping with the player
-  fearX = random(0,width);
-  fearY = random(0,height);
-    var d = dist(fearX,fearY,playerX,playerY);
+  // FEAR LOCATION : sets a random location for the enemy between 0,0 and the player
+  tWidth = 0;
+  tHeight = 0;
+  fearX = random(0,playerX-50); //random(0,width);
+  fearY = random(0,playerY-50); //random(0,height);
+  /*  var d = dist(fearX,fearY,playerX,playerY);
     console.log (d);
-    if (d < fearW + playerRadius*2 && d < fearH + playerRadius*2) {
+    if (d < fearW + playerRadius && d < fearH + playerRadius) {
       fearX = random(0,width);
       fearY = random(0,height);
       console.log("overlap occurred");
-    }
-    fearFill = ("#000000");
+    } */
   }
 
 //-----------
@@ -118,43 +138,50 @@ function setupCrystal() {
 
 // DRAW CRYSTAL : draws crystal
 function drawCrystal(){
-  fill("#8A2BE2");
-  noStroke();
-  ellipse(crystalX,crystalY,crystalW,crystalH);
+  image(crystalImage,crystalX,crystalY,crystalW,crystalH);
+//  fill("#8A2BE2");
+//  noStroke();
+//  ellipse(crystalX,crystalY,crystalW,crystalH);
 }
 //-----------
 
-// MOVE FEAR : updates fear size, location, and colour
+// MOVE FEAR : updates fear size, location, and colour (didnt get the tint to work like i wanted)
 function moveFear() {
   /* SIZE: fearW and fearH are initial enemy widths and heights and are used to
      generate a constantly-changing new width and height that depends on
      the player's courage level */
-  fearW = map(playerCourage,1,100,200,10);
-  fearH = map(playerCourage,1,100,200,10);
+  fearW = map(playerCourage,1,100,100,10);
+  fearH = map(playerCourage,1,100,100,10);
   //console.log("courage level: " + playerCourage);
   if (playerCourage > 66){
     updateFearW = fearW + map(noise(tWidth),0,1,-20,20);
     updateFearH = fearH + map(noise(tHeight),0,1,-20,20);
-    tWidth = tWidth + 0.001;
-    tHeight = tHeight + 0.002;
-    fearFill = 120;
+    tWidth = tWidth + 0.01;
+    tHeight = tHeight + 0.02;
+//    fearFill = 120;
+//    tint(255,fearFill);
+
   } else if (playerCourage >= 33) {
-      updateFearW = fearW + map(noise(tWidth),0,1,-66,66);
-      updateFearH = fearH + map(noise(tHeight),0,1,-66,66);
-      tWidth = tWidth + 0.005;
-      tHeight = tHeight + 0.006;
-      fearFill = 170;
+      updateFearW = fearW + map(noise(tWidth),0,1,-86,86);
+      updateFearH = fearH + map(noise(tHeight),0,1,-86,86);
+      tWidth = tWidth + 0.03;
+      tHeight = tHeight + 0.04;
+//      fearFill = 170;
+//      tint(255,fearFill);
+
   } else if(playerCourage < 33) {
       updateFearW = fearW + map(noise(tWidth),0,1,-200,200);
       updateFearH = fearH + map(noise(tHeight),0,1,-200,200);
-      tWidth = tWidth + 0.02;
-      tHeight = tHeight + 0.03;
-      fearFill = 255;
+      tWidth = tWidth + 0.05;
+      tHeight = tHeight + 0.06;
+  //    fearFill = 255;
+  //    tint(255,fearFill);
+
   }
 
   // change fear position based on noise
-  fearX = width * noise(tWidth);
-  fearY = height * noise(tHeight);
+  fearX = fearX + map(noise(tWidth),0,1,-tWidth,tWidth);
+  fearY = fearY + map(noise(tHeight),0,1,-tHeight,tHeight);
   //console.log(fearX,fearY);
   // SCREEN WRAPPING : yes, the enemies can screen wrap and the players can't
   if (fearX < 0) {
@@ -170,8 +197,8 @@ function moveFear() {
   else if (fearY > height) {
     fearY -= height;
   }
-  fill(0,0,0,fearFill);
-  ellipse(fearX,fearY,updateFearW,updateFearH);
+  image(fearImage,fearX,fearY,updateFearW,updateFearH);
+//  ellipse(fearX,fearY,updateFearW,updateFearH);
 }
 
 //-----------
@@ -273,7 +300,11 @@ function checkEating() {
       playerCourage = playerCourage + courageRestore;
     }
     //track how many crystals are collected
+    crystalPickup.play();
     crystalsCollected = crystalsCollected + 1;
+    //slow fear down so it doesnt accumulate speed even if courage is high
+    tWidth = tWidth - tWidth/3;
+    tHeight = tHeight - tHeight/3;
     console.log("crystals collected " + crystalsCollected);
     // reset new crystal to a different location
     setupCrystal();
@@ -285,7 +316,8 @@ function checkEating() {
 function fearCollide() {
   //calculate distance between player and fear, game over if they overlap.
   var d = dist(playerX,playerY,fearX,fearY);
-  if (d < playerRadius + updateFearW/2 && d < playerRadius + updateFearH/2) {
+  if (d < playerRadius/2 + updateFearW && d < playerRadius/2 + updateFearH) {
+    courageZero.play();
     playerCourage = 0;
     gameOver = true;
     console.log ("game is over: " + gameOver);
@@ -306,9 +338,13 @@ function courageDecline () {
       playerCourage = constrain(playerCourage - 0.05,0,playerMaxCourage);
       }
     //console.log(playerCourage);
-    // Check if the player is dead
+    // Check if courage is at zero
+    if (playerCourage > 0 && playerCourage < 1) {
+      courageZero.play();
+    }
     if (playerCourage === 0) {
       // If so, the game is over
+      playerCourage = playerCourage;
       gameOver = true;
       showGameOver();
     }
@@ -321,6 +357,7 @@ function displayCourage() {
   textAlign("RIGHT");
   textFont("Helvetica");
   textSize(20);
+  fill("#54CDFA");
   text("courage: " + floor(playerCourage) + "%", width - 140,height-20);
 }
 
@@ -328,18 +365,20 @@ function displayCourage() {
 //-----------
 // DRAW PLAYER: draws the player as an ellipse
 function drawPlayer() {
-  fill("#000000");
-  ellipse(playerX,playerY,playerRadius*2);
+  fill("#54CDFA");
+  strokeWeight(5);
+  ellipse(playerX,playerY,playerRadius);
 }
 //-----------
 // GAME OVER : shows game over screen
 // Display text about the game being over. gives option to try again
 function showGameOver() {
-    playerMaxSpeed = 0;
-    fill("#000000");
-    rect(0,0,width,height);
-    textSize(32);
-    textAlign(CENTER,CENTER);
+  fill("#000000");
+  fearX = 0;
+  fearY = 0;
+  rect(0,0,width,height);
+  textSize(32);
+  textAlign(CENTER,CENTER);
   var gameOverText = "fear won out in the end.\n";
   gameOverText += "you collected " + crystalsCollected + " crystals\n";
   gameOverText += "before your courage died."
@@ -351,194 +390,11 @@ function showGameOver() {
   }
 }
 
-
-
-/****
-// Prey variables
-// Prey position, size, velocity
-var preyX;
-var preyY;
-var preyRadius = 25;
-var preyVX;
-var preyVY;
-var preyMaxSpeed = 4;
-// Prey health
-var preyHealth;
-var preyMaxHealth = 100;
-// Prey fill color
-var preyFill = 200;
-
-// score variables
-// Amount of health obtained per frame of "eating" the prey
-var eatHealth = 10;
-// Number of prey eaten during the game
-var preyEaten = 0;
-
-// ----------------------------- S E T    U P ------------------------------ //
-
-// Sets up the basic elements of the game
-function setup() {
-  createCanvas(500,500);
-
-  noStroke();
-
-  setupPrey();
-  setupPlayer();
-}
-
-// setupPrey()
-//
-// Initialises prey's position, velocity, and health
-function setupPrey() {
-  preyX = width/5;
-  preyY = height/2;
-  preyVX = -preyMaxSpeed;
-  preyVY = preyMaxSpeed;
-  preyHealth = preyMaxHealth;
-}
-
-// setupPlayer()
-//
-// Initialises player position and health
-function setupPlayer() {
-  playerX = 4*width/5;
-  playerY = height/2;
-  playerHealth = playerMaxHealth;
-}
-
-// ----------------------------- D R A W ----------------------------------- //
-
-// draw()
-//
-// While the game is active, checks input
-// updates positions of prey and player,
-// checks health (dying), checks eating (overlaps)
-// displays the two agents.
-// When the game is over, shows the game over screen.
-function draw() {
-  background(100,100,200);
-
-  if (!gameOver) {
-    handleInput();
-
-    movePlayer();
-    movePrey();
-
-    updateHealth();
-    checkEating();
-
-    drawPrey();
-    drawPlayer();
-  }
-  else {
-    showGameOver();
-  }
-}
-
-// --------------------------- F U N C T I O N S ---------------------------- //
-
-// updateHealth()
-//
-// Reduce the player's health (every frame)
-// Check if the player is dead
-function updateHealth() {
-  // Reduce player health, constrain to reasonable range
-  playerHealth = constrain(playerHealth - 0.5,0,playerMaxHealth);
-  // Check if the player is dead
-  if (playerHealth === 0) {
-    // If so, the game is over
-    gameOver = true;
-  }
-}
-
-// checkEating()
-//
-// Check if the player overlaps the prey and updates health of both
-function checkEating() {
-  // Get distance of player to prey
-  var d = dist(playerX,playerY,preyX,preyY);
-  // Check if it's an overlap
-  if (d < playerRadius + preyRadius) {
-    // Increase the player health
-    playerHealth = constrain(playerHealth + eatHealth,0,playerMaxHealth);
-    // Reduce the prey health
-    preyHealth = constrain(preyHealth - eatHealth,0,preyMaxHealth);
-
-    // Check if the prey died
-    if (preyHealth === 0) {
-      // Move the "new" prey to a random position
-      preyX = random(0,width);
-      preyY = random(0,height);
-      // Give it full health
-      preyHealth = preyMaxHealth;
-      // Track how many prey were eaten
-      preyEaten++;
-    }
-  }
-}
-
-// movePrey()
-//
-// Moves the prey based on random velocity changes
-function movePrey() {
-  // Change the prey's velocity at random intervals
-  // random() will be < 0.05 5% of the time, so the prey
-  // will change direction on 5% of frames
-  if (random() < 0.05) {
-    // Set velocity based on random values to get a new direction
-    // and speed of movement
-    // Use map() to convert from the 0-1 range of the random() function
-    // to the appropriate range of velocities for the prey
-    preyVX = map(random(),0,1,-preyMaxSpeed,preyMaxSpeed);
-    preyVY = map(random(),0,1,-preyMaxSpeed,preyMaxSpeed);
-  }
-
-  // Update prey position based on velocity
-  preyX += preyVX;
-  preyY += preyVY;
-
-  // Screen wrapping
-  if (preyX < 0) {
-    preyX += width;
-  }
-  else if (preyX > width) {
-    preyX -= width;
-  }
-
-  if (preyY < 0) {
-    preyY += height;
-  }
-  else if (preyY > height) {
-    preyY -= height;
-  }
-}
-
-// drawPrey()
-//
-// Draw the prey as an ellipse with alpha based on health
-function drawPrey() {
-  fill(preyFill,preyHealth);
-  ellipse(preyX,preyY,preyRadius*2);
-}
-
-// drawPlayer()
-//
-// Draw the player as an ellipse with alpha based on health
-function drawPlayer() {
-  fill(playerFill,playerHealth);
-  ellipse(playerX,playerY,playerRadius*2);
-}
-
-// showGameOver()
-//
-// Display text about the game being over!
-function showGameOver() {
-  textSize(32);
-  textAlign(CENTER,CENTER);
-  fill(0);
-  var gameOverText = "GAME OVER\n";
-  gameOverText += "You ate " + preyEaten + " prey\n";
-  gameOverText += "before you died."
-  text(gameOverText,width/2,height/2);
-}
-**/
+// ---------------- I M A G E / S O U N D     S O U R C E S ---------------- //
+/***
+crystal: https://ubisafe.org/explore/gem-vector-hexagon/#gal_post_7174_clipped-clipart-gem-6.png
+ground: https://opengameart.org/content/handpainted-stone-floor-texture
+orb used as fear: https://opengameart.org/content/orbs-and-plats
+pickup crystal: https://opengameart.org/content/beep-tone-sound-sfx
+courage zero: https://opengameart.org/content/bad-sound-2
+***/
