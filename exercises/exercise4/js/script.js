@@ -405,5 +405,8 @@ function determineWinner () {
     }
   }
 }
+//-------
+
+/** SOUND SOURCE: https://opengameart.org/content/completion-sound **/
 
 //-------
