@@ -1,4 +1,4 @@
-// ---------------------------I N T O  /  I N F O -------------------------- //
+// ------------------------ I N T R O  /  I N F O -------------------------- //
 
 /**
 pong, by mattie k.a.
@@ -14,7 +14,6 @@ var bgColor = 0;
 var fgColor = 255;
 
 // BALL
-
 // Basic definition of a ball object with its key properties of
 // position, size, velocity, and speed
 var ball = {
@@ -27,12 +26,10 @@ var ball = {
 }
 
 // PADDLES
-
 // How far in from the walls the paddles should be drawn on x
 var paddleInset = 50;
 
 // LEFT PADDLE
-
 // Basic definition of a left paddle object with its key properties of
 // position, size, velocity, and speed
 var leftPaddle = {
@@ -48,7 +45,6 @@ var leftPaddle = {
 }
 
 // RIGHT PADDLE
-
 // Basic definition of a left paddle object with its key properties of
 // position, size, velocity, and speed
 var rightPaddle = {
@@ -66,15 +62,15 @@ var rightPaddle = {
 // A variable to hold the beep sound we will play on bouncing
 var beepSFX;
 
-// preload()
-//
+// -------------------------- P R E L O A D -------------------------------- //
+
 // Loads the beep audio for the sound of bouncing
 function preload() {
   beepSFX = new Audio("assets/sounds/beep.wav");
 }
 
-// setup()
-//
+// ----------------------------- S E T U P --------------------------------- //
+
 // Creates the canvas, sets up the drawing modes,
 // Sets initial values for paddle and ball positions
 // and velocities.
@@ -112,8 +108,8 @@ function setupBall() {
   ball.vy = ball.speed;
 }
 
-// draw()
-//
+// ------------------------------ D R A W ---------------------------------- //
+
 // Calls the appropriate functions to run the game
 function draw() {
   // Fill the background
@@ -146,9 +142,9 @@ function draw() {
   displayBall();
 }
 
+// -------------------------- F U N C T I O N S ---------------------------- //
 
-// handleInput(paddle)
-//
+// PADDLE FUNCTIONS (input)
 // Updates the paddle's velocity based on whether one of its movement
 // keys are pressed or not.
 // Takes one parameter: the paddle to handle.
@@ -182,20 +178,22 @@ function handleInput(paddle) {
   }
 }
 
-// updatePosition(object)
-//
+//-------
+
+// UPDATE PROJECTILE POSITION
 // Sets the position of the object passed in based on its velocity
 // Takes one parameter: the object to update, which will be a paddle or a ball
 //
 // NOTE how this relies on the object passed in have .x, .y, .vx, and .vy
 // properties, which is true of both the two paddles and the ball
 function updatePosition(object) {
-  object.x += object.vx;
-  object.y += object.vy;
+  object.x = object.x + object.vx;
+  object.y = object.y + object.vy;
 }
 
-// handleBallWallCollision()
-//
+//-------
+
+// BALL COLLISION WITH WALL
 // Checks if the ball has overlapped the upper or lower 'wall' (edge of the screen)
 // and is so reverses its vy
 function handleBallWallCollision() {
@@ -216,8 +214,9 @@ function handleBallWallCollision() {
   }
 }
 
-// handleBallPaddleCollision(paddle)
-//
+//-------
+
+// BALL COLLISION WITH PADDLE
 // Checks if the ball overlaps the specified paddle and if so
 // reverses the ball's vx so it bounces
 function handleBallPaddleCollision(paddle) {
@@ -247,8 +246,9 @@ function handleBallPaddleCollision(paddle) {
   }
 }
 
-// handleBallOffScreen()
-//
+//-------
+
+// OFFSCREEN BALL HANDLING
 // Checks if the ball has gone off screen to the left or right
 // and moves it back to the centre if so
 function handleBallOffScreen() {
@@ -269,16 +269,20 @@ function handleBallOffScreen() {
   }
 }
 
-// displayBall()
-//
+//--------
+
+// DISPLAY BALL
 // Draws ball on screen based on its properties
 function displayBall() {
   rect(ball.x,ball.y,ball.size,ball.size);
 }
 
-// displayPaddle(paddle)
-//
+//-------
+
+// DISPLAY PADDLE
 // Draws the specified paddle on screen based on its properties
 function displayPaddle(paddle) {
   rect(paddle.x,paddle.y,paddle.w,paddle.h);
 }
+
+//-------
