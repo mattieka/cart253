@@ -10,7 +10,6 @@ pong, by mattie k.a.
 // --------------------------- V A R I A B L E S --------------------------- //
 
 // Game colors
-var bgColor = 0;
 var fgColor = 255;
 
 // BALL
@@ -27,7 +26,7 @@ var ball = {
 
 // PADDLES
 // How far in from the walls the paddles should be drawn on x
-var paddleInset = 50;
+var paddleInset = 20;
 var scoreColor = "#ffffff";
 
 // LEFT PADDLE
@@ -66,12 +65,14 @@ var rightPaddle = {
 
 // A variable to hold the beep sound we will play on bouncing
 var beepSFX;
+var restartSound;
 
 // -------------------------- P R E L O A D -------------------------------- //
 
 // Loads the beep audio for the sound of bouncing
 function preload() {
   beepSFX = new Audio("assets/sounds/beep.wav");
+  restartSound = new Audio("assets/sounds/winner.wav");
 }
 
 // ----------------------------- S E T U P --------------------------------- //
@@ -120,7 +121,7 @@ function setupBall() {
 // Calls the appropriate functions to run the game
 function draw() {
   // Fill the background
-  background(bgColor);
+  backgroundGradient();
 
   // Handle input
   // Notice how we're using the SAME FUNCTION to handle the input
@@ -148,6 +149,9 @@ function draw() {
   displayPaddle(leftPaddle);
   displayPaddle(rightPaddle);
   displayBall();
+
+  // check for a winner
+  determineWinner();
 }
 
 // -------------------------- F U N C T I O N S ---------------------------- //
@@ -267,6 +271,31 @@ function handleBallPaddleCollision(paddle) {
 }
 
 //-------
+//BALL RESET : resets the ball to the middle of the screen after someone scores
+// velocity/direction of the ball depends on who just scored
+
+function ballReset() {
+  // Calculate edges of ball for clearer if statement below
+  var ballLeft = ball.x - ball.size/2;
+  var ballRight = ball.x + ball.size/2;
+
+  if (ballLeft < 0) {
+    rightPaddle.score = rightPaddle.score + 1;
+    console.log("right score: " + rightPaddle.score);
+    ball.x = width/2;
+    ball.y = height/2;
+    ball.vx = random(3,10);
+  } else if (ballRight > width) {
+    leftPaddle.score = leftPaddle.score + 1;
+    ball.x = width/2;
+    ball.y = height/2;
+    ball.vx = random(-10,-3);
+    console.log("left score: " + leftPaddle.score);
+  }
+}
+
+
+//-------
 
 // OFFSCREEN BALL HANDLING
 // Checks if the ball has gone off screen to the left or right
@@ -277,30 +306,14 @@ function handleBallOffScreen() {
   var ballLeft = ball.x - ball.size/2;
   var ballRight = ball.x + ball.size/2;
 
-  // Check for ball going off the sides
-  if (ballRight < 0 || ballLeft > width) {
-    // If it went off either side, reset it to the centre
-    ball.x = width/2;
-    ball.y = height/2;
-    // NOTE that we don't change its velocity here so it just
-    // carries on moving with the same velocity after its
-    // position is reset.
-    // This is where we would count points etc!
-  }
-  if (ballRight < 0) {
-    rightPaddle.score = rightPaddle.score + 1;
-  } else if (ballLeft > width) {
-    leftPaddle.score = leftPaddle.score + 1;
-  }
-  // console.log ("right score: " + rightPaddle.score + " points");
-  // console.log ("left score: " + leftPaddle.score + " points");
+  ballReset();
 }
 
 //--------
 
 // CHECKS SCORE AND CHANGES THE COLOUR OF THE PADDLE TO REFLECT THAT
 function colorPaddle(paddle) {
-  console.log(paddle.score, paddle.scoreColor);
+  //console.log(paddle.score, paddle.scoreColor);
   switch (paddle.score) {
     case 0: paddle.scoreColor = "#ffffff"; break;
     case 1: paddle.scoreColor = "#ef3326"; break;
@@ -329,6 +342,68 @@ function displayPaddle(paddle) {
   fill(paddle.scoreColor);
   rect(paddle.x,paddle.y,paddle.w,paddle.h);
 
+}
+
+//-------
+
+//BACKGROUND GRADIENT
+//changes the color of the background based on where the ball is
+function backgroundGradient() {
+  if (ball.x < width) {
+    background(ball.x-255,127,200);
+  }
+}
+
+//-------
+
+// WIN CONDITIONS
+function determineWinner () {
+  if (leftPaddle.score == 4) {
+    // cover screen in black rectangle
+    fill ("#000000");
+    rect (width/2,height/2,width,height);
+    //center ball so that it stops moving and doesnt add to the score
+    ball.vx = 0;
+    ball.vy = 0;
+    ball.x = width/2;
+    ball.y = height/2;
+    // text and text color
+    textSize(50);
+    textAlign(CENTER);
+    fill ("#ef3326");
+    text("LOSE",width/4*3,height/2);
+    fill ("#4de257");
+    text("WIN",width/4,height/2);
+    //reset message
+    fill ("#ffffff");
+    text ("press ENTER to try again!",width/2,height-50);
+    if (keyIsDown(ENTER)) {
+      restartSound.play();
+      setup();
+    }
+  } else if (rightPaddle.score == 4) {
+    fill ("#000000");
+    rect (width/2,height/2,width,height);
+    //center ball so that it stops moving and doesnt add to the score
+    ball.vx = 0;
+    ball.vy = 0;
+    ball.x = width/2;
+    ball.y = height/2;
+    // text and text color
+    textSize(50);
+    textAlign(CENTER);
+    fill ("#4de257");
+    text("WIN",width/4*3,height/2);
+    fill ("#ef3326");
+    text("LOSE",width/4,height/2);
+    //reset message
+    fill ("#ffffff");
+    text ("press ENTER to try again!",width/2,height-50);
+    if (keyIsDown(ENTER)) {
+      restartSound.play();
+      setup();
+    }
+  }
 }
 
 //-------

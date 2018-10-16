@@ -14,15 +14,17 @@ most recent point with a random y velocity (e.g. if it went off the left side
 of the screen it should launch toward the righthand side with a random y
 velocity). Make sure you keep your random y velocity within a range that makes
 the game still interesting to play (e.g. not too high and not too low)).
-Add a reset() function to handle this.
+Add a reset() function to handle this. - DONE
 
 4) Improve the game by making it visually and sonically interesting in some way
 (e.g. you could make it a metaphor by using images and sounds to convey an idea,
 or you could keep it abstract but use more interesting shapes, perhaps allow
 things to leave a trail, perhaps fill the paddles and balls with randomly
-generated "static", or something else)
+generated "static", or something else) - DONE
 
-Optional challenges: Add a win condition that ends the game. Allow the paddles
+Optional challenges: Add a win condition that ends the game. - DONE
+
+ Allow the paddles
 to move on the x axis. Make the ball move on y with a sine wave or perlin noise.
  Use the relative position the ball hits a paddle to influence its resulting y
  velocity (e.g. hitting the ball off the edge might give it a sharper angle).
