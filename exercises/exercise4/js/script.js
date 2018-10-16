@@ -28,6 +28,7 @@ var ball = {
 // PADDLES
 // How far in from the walls the paddles should be drawn on x
 var paddleInset = 50;
+var scoreColor = "#ffffff";
 
 // LEFT PADDLE
 // Basic definition of a left paddle object with its key properties of
@@ -41,7 +42,9 @@ var leftPaddle = {
   vy: 0,
   speed: 5,
   upKeyCode: 87, // The key code for W
-  downKeyCode: 83 // The key code for S
+  downKeyCode: 83, // The key code for S
+  score: 0, //  score for left paddle
+  scoreColor: this.scoreColor //sets initial score colour
 }
 
 // RIGHT PADDLE
@@ -56,7 +59,9 @@ var rightPaddle = {
   vy: 0,
   speed: 5,
   upKeyCode: 38, // The key code for the UP ARROW
-  downKeyCode: 40 // The key code for the DOWN ARROW
+  downKeyCode: 40, // The key code for the DOWN ARROW
+  score: 0, //  score for the right paddle
+  scoreColor: this.scoreColor //sets initial score colour
 }
 
 // A variable to hold the beep sound we will play on bouncing
@@ -92,10 +97,12 @@ function setupPaddles() {
   // Initialise the left paddle
   leftPaddle.x = paddleInset;
   leftPaddle.y = height/2;
+  leftPaddle.score = 0 // initializes score at zero
 
   // Initialise the right paddle
   rightPaddle.x = width - paddleInset;
   rightPaddle.y = height/2;
+  rightPaddle.score = 0; //initializes score at zero
 }
 
 // setupBall()
@@ -136,6 +143,7 @@ function draw() {
   // Handle the ball going off screen
   handleBallOffScreen();
 
+
   // Display the paddles and ball
   displayPaddle(leftPaddle);
   displayPaddle(rightPaddle);
@@ -175,6 +183,18 @@ function handleInput(paddle) {
   else {
     // Otherwise stop moving
     paddle.vy = 0;
+  }
+
+  // stop paddle from going offscreen if player sends it too far up or down
+  //blocking it at the top
+  if (paddle.y - paddle.h/2 <= 0) {
+    paddle.vy = 0;
+    paddle.y = paddle.y + paddle.h/2;
+  }
+  // blocking it at the bottom
+  if (paddle.y + paddle.h/2 >= height) {
+    paddle.vy = 0;
+    paddle.y = paddle.y - paddle.h/2;
   }
 }
 
@@ -267,6 +287,26 @@ function handleBallOffScreen() {
     // position is reset.
     // This is where we would count points etc!
   }
+  if (ballRight < 0) {
+    rightPaddle.score = rightPaddle.score + 1;
+  } else if (ballLeft > width) {
+    leftPaddle.score = leftPaddle.score + 1;
+  }
+  // console.log ("right score: " + rightPaddle.score + " points");
+  // console.log ("left score: " + leftPaddle.score + " points");
+}
+
+//--------
+
+// CHECKS SCORE AND CHANGES THE COLOUR OF THE PADDLE TO REFLECT THAT
+function colorPaddle(paddle) {
+  console.log(paddle.score, paddle.scoreColor);
+  switch (paddle.score) {
+    case 0: paddle.scoreColor = "#ffffff"; break;
+    case 1: paddle.scoreColor = "#ef3326"; break;
+    case 2: paddle.scoreColor = "#efd426"; break;
+    default: paddle.scoreColor = "#4de257"; break;
+  }
 }
 
 //--------
@@ -274,6 +314,9 @@ function handleBallOffScreen() {
 // DISPLAY BALL
 // Draws ball on screen based on its properties
 function displayBall() {
+  push();
+    fill("#ffffff");
+  pop();
   rect(ball.x,ball.y,ball.size,ball.size);
 }
 
@@ -282,7 +325,10 @@ function displayBall() {
 // DISPLAY PADDLE
 // Draws the specified paddle on screen based on its properties
 function displayPaddle(paddle) {
+  colorPaddle(paddle);
+  fill(paddle.scoreColor);
   rect(paddle.x,paddle.y,paddle.w,paddle.h);
+
 }
 
 //-------
