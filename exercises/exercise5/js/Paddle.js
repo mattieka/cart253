@@ -6,7 +6,7 @@
 // Paddle constructor
 //
 // Sets the properties with the provided arguments or defaults
-function Paddle(x,y,w,h,speed,downKey,upKey) {
+function Paddle(x,y,w,h,speed,downKey,upKey,score,scoreColor) {
   this.x = x;
   this.y = y;
   this.vx = 0;
@@ -16,6 +16,8 @@ function Paddle(x,y,w,h,speed,downKey,upKey) {
   this.speed = speed;
   this.downKey = downKey;
   this.upKey = upKey;
+  this.score = score;
+  this.scoreColor = scoreColor;
 }
 
 
@@ -34,6 +36,25 @@ Paddle.prototype.handleInput = function() {
   else {
     this.vy = 0;
   }
+
+  //NOTE: FUNCTION ADDED! stops paddle from going offscreen if player sends it
+  //      too far up or down. did this last time, now im OOP-ing (??) it.
+  //      ooping. haha. anyway, this function detects when the paddle passes
+  //      the edges of the screen, sets the velocity to 0, then sends it back
+  //      onto the screen by adjusting its y-position.
+
+  // block paddle at the top of the screen
+  if (this.y = this.h/2 <= 0) {
+    this.vy = 0;
+    this.y = this.y + this.h/2;
+  }
+
+  //block paddle at the top of the screen
+  if (this.y + this.h/2 >= height) {
+    this.vy = 0;
+    this.y = this.y - this.h/2;
+  }
+
 }
 
 
