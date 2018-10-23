@@ -69,9 +69,9 @@ Ball.prototype.display = function () {
 // and if so reverse x velocity to bounce
 Ball.prototype.handleBallPaddleCollision = function(paddle) {
   // Check if the ball overlaps the paddle on x axis
-  if (this.x + this.size/2 > paddle.x && this.x < paddle.x + paddle.w) {
+  if (this.x + this.size/2 > paddle.x - paddle.w/2 && this.x - this.size/2 < paddle.x + paddle.w/2) {
     // Check if the ball overlaps the paddle on y axis
-    if (this.y + this.size/2 > paddle.y && this.y < paddle.y + paddle.h) {
+    if (this.y + this.size/2 > paddle.y - paddle.h/2 && this.y - this.size/2 < paddle.y + paddle.h/2) {
       // If so, move ball back to previous position (by subtracting current velocity)
       this.x = this.x - this.vx;
       this.y = this.y - this.vy;
@@ -113,4 +113,60 @@ Ball.prototype.reset = function () {
   }
   this.x = width/2;
   this.y = height/2;
+}
+
+/******** DETERMINE WINNER *********/
+//NOTE: FUNCTION ADDED!
+//checks if a player's score is 4, and if so, declare them the WINNER
+
+Ball.prototype.determineWinner = function () {
+  // when the LEFT PADDLE is the first to reach a score of 4, declare them winner
+  if (leftPaddle.score == 4) {
+    // cover screen in black rectangle
+    fill ("#000000");
+    rect (width/2,height/2,width,height);
+    //center ball so that it stops moving and doesnt add to the score
+    this.vx = 0;
+    this.vy = 0;
+    this.x = width/2;
+    this.y = height/2;
+    // text and text color
+    textSize(50);
+    textAlign(CENTER);
+    fill ("#ef3326");
+    text("LOSE",width/4*3,height/2);
+    fill ("#4de257");
+    text("WIN",width/4,height/2);
+    //reset message
+    fill ("#ffffff");
+    text ("press ENTER to try again!",width/2,height-50);
+    wrongKey();
+    if (keyIsDown(ENTER)) {
+      restartSound.play();
+      setup();
+    }
+  } else if (rightPaddle.score == 4) {
+    fill ("#000000");
+    rect (width/2,height/2,width,height);
+    //center ball so that it stops moving and doesnt add to the score
+    this.vx = 0;
+    this.vy = 0;
+    this.x = width/2;
+    this.y = height/2;
+    // text and text color
+    textSize(50);
+    textAlign(CENTER);
+    fill ("#4de257");
+    text("WIN",width/4*3,height/2);
+    fill ("#ef3326");
+    text("LOSE",width/4,height/2);
+    //reset message
+    fill ("#ffffff");
+    text ("press ENTER to try again!",width/2,height-50);
+    wrongKey();
+    if (keyIsDown(ENTER)) {
+      restartSound.play();
+      setup();
+    }
+  }
 }

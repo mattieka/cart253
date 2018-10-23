@@ -9,12 +9,12 @@ Tracking the score
 which side of the screen it went off, or neither if it's still on screen -
 you could represent this with numbers or strings) - DONE
 
-Displaying the score
+Displaying the score - DONE
 
 Launching the ball with a random y velocity toward the paddle that won the most
 recent point - DONE
 
-Altering the visuals as per your previous version
+Altering the visuals as per your previous version - DONE 
 
 
 In short, make the object-oriented version look and feel the same as the

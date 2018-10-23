@@ -54,7 +54,6 @@ Paddle.prototype.handleInput = function() {
     this.vy = 0;
     this.y = this.y - this.h/2;
   }
-
 }
 
 

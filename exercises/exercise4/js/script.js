@@ -380,6 +380,13 @@ function determineWinner () {
     //reset message
     fill ("#ffffff");
     text ("press ENTER to try again!",width/2,height-50);
+    if (keyIsDown(SHIFT)) {
+      console.log("shift pressed")
+      textSize(10);
+      fill("#ffffff");
+      text("if ball is life then youre my ball",width/2,height/2);
+      text("that is the shift key, dingus",width/2,10);
+    }
     if (keyIsDown(ENTER)) {
       restartSound.play();
       setup();
@@ -402,6 +409,13 @@ function determineWinner () {
     //reset message
     fill ("#ffffff");
     text ("press ENTER to try again!",width/2,height-50);
+    if (keyIsDown(SHIFT)) {
+      console.log("shift pressed")
+      textSize(10);
+      fill("#ffffff");
+      text("if ball is life then youre my ball",width/2,height/2);
+      text("that is the shift key, dingus",width/2,10);
+    }
     if (keyIsDown(ENTER)) {
       restartSound.play();
       setup();
