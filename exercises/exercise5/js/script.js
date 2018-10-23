@@ -78,6 +78,7 @@ function draw() {
 // ---------------------------- F U N C T I O N S -------------------------- //
 // for functions that are not related to the paddle OR the ball
 
+/******** BACKGROUND COLOR *********/
 //NOTE: FUNCTION ADDED!
 // background color changes hue based on the position of the ball.
 function backgroundGradient() {
@@ -89,9 +90,10 @@ function backgroundGradient() {
   }
 }
 
+/******** WRONG KEY! *********/
 //NOTE: FUNCTION ADDED!
 // i keep accidentally hitting shift instead of enter, made a function about it
-// for funsies 
+// for funsies
 function wrongKey () {
   if (keyIsDown(SHIFT)) {
     push();
@@ -102,3 +104,7 @@ function wrongKey () {
     pop();
     }
 }
+
+/** SOUND SOURCE: https://opengameart.org/content/completion-sound **/
+
+// ------------------------------- E N D ----------------------------------- //

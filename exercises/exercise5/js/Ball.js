@@ -87,17 +87,15 @@ Ball.prototype.handleBallPaddleCollision = function(paddle) {
 
 /******** RESET *********/
 // reset()
-//
+// NOTE: FUNCTION ADDED/MODIFIED:
+//triggered if ball is detected offscreen and checks which side
+// then it adjusts score accordingly, and resets the ball back to the center,
+// going toward the player who last scored
+
 // Set position back to the middle of the screen
 Ball.prototype.reset = function () {
-  // triggered if ball is detected offscreen and checks which side
-  // then it adjusts score accordingly, and resets with the ball going toward
-  // the player who last scored
-  // NOTE: FUNCTION ADDED/MODIFIED:
   //       split up the offscreen function into left side and right side
   //       to better keep track of which side the ball went off
-
-
   if (this.x < 0) {
     rightPaddle.score = rightPaddle.score + 1;
     console.log("right score: " + rightPaddle.score);
@@ -170,3 +168,5 @@ Ball.prototype.determineWinner = function () {
     }
   }
 }
+
+// ------------------------------- E N D ----------------------------------- //

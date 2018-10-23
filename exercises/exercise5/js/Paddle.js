@@ -3,8 +3,7 @@
 // A class that defines how a paddle behaves, including the ability
 // to specify the input keys to move it up and down
 
-// Paddle constructor
-//
+/******** PADDLE CONSTRUCTOR *********/
 // Sets the properties with the provided arguments or defaults
 function Paddle(x,y,vx,vy,w,h,speed,downKey,upKey,score,scoreColor) {
   this.x = x;
@@ -24,8 +23,7 @@ function Paddle(x,y,vx,vy,w,h,speed,downKey,upKey,score,scoreColor) {
 /******** PLAYER INPUT *********/
 // handleInput()
 //
-// Check if the up or down keys are pressed and update velocity
-// appropriately
+// Check if the up or down keys are pressed and update velocity appropriately
 Paddle.prototype.handleInput = function() {
   if (keyIsDown(this.upKey)) {
     this.vy = -this.speed;
@@ -56,11 +54,9 @@ Paddle.prototype.handleInput = function() {
   }
 }
 
-
 /******** UPDATE *********/
 // update()
 // Update y position based on velocity
-// Constrain the resulting position to be within the canvas
 Paddle.prototype.update = function() {
   this.y = this.y + this.vy;
 //commented this one out because my function is cooler B)
@@ -68,6 +64,8 @@ Paddle.prototype.update = function() {
 }
 
 /******** PADDLE COLOUR *********/
+// NOTE: FUNCTION ADDED/MODIFIED! color of paddle changes based on the player's
+//       current score! adapted from the function i made in ex4 
 Paddle.prototype.colorPaddle = function () {
   //console.log(paddle.score, paddle.scoreColor);
   switch (this.score) {
@@ -80,9 +78,11 @@ Paddle.prototype.colorPaddle = function () {
 
 /******** DISPLAY *********/
 // Draw the paddle as a rectangle on the screen.
-// NOTE: FUNCTION ADDED! paddle color changes based on score
+// NOTE: FUNCTION MODIFIED! paddle color changes based on score
 Paddle.prototype.display = function() {
   this.colorPaddle();
   fill(this.scoreColor);
   rect(this.x,this.y,this.w,this.h);
 }
+
+// ------------------------------- E N D ----------------------------------- //
