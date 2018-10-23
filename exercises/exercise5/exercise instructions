@@ -1,0 +1,24 @@
+INSTRUCTIONS
+
+This week, the challenge is to recreate your Exercise-4 version of Pong
+in the new Object-Oriented version of Pong represented by the starter code.
+This will mean:
+
+Tracking the score
+(consider the idea of having the Ball's isOffScreen() function either return
+which side of the screen it went off, or neither if it's still on screen -
+you could represent this with numbers or strings)
+
+Displaying the score
+
+Launching the ball with a random y velocity toward the paddle that won the most
+recent point
+
+Altering the visuals as per your previous version
+
+
+In short, make the object-oriented version look and feel the same as the
+non-object-oriented version you made last week.
+
+Optional challenges: Feel free to pursue last week's optional challenges in this
+new context.

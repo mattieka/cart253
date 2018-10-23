@@ -1,12 +1,12 @@
-// Ball
+// --------------------------- B A L L -------------------------------- //
+
 //
 // A class to define how a ball behaves. Including bouncing on the top
 // and bottom edges of the canvas, going off the left and right sides,
 // and bouncing off paddles.
 
-// Ball constructor
-//
-// Sets the properties with the provided arguments
+/******** CONSTRUCTOR *********/
+// gives the ball all of its properties, like size/velocity/position/speed.
 function Ball(x,y,vx,vy,size,speed) {
   this.x = x;
   this.y = y;
@@ -16,8 +16,7 @@ function Ball(x,y,vx,vy,size,speed) {
   this.speed = speed;
 }
 
-// update()
-//
+/******** UPDATE *********/
 // Moves according to velocity, constrains y to be on screen,
 // checks for bouncing on upper or lower edgs, checks for going
 // off left or right side.
@@ -35,6 +34,7 @@ Ball.prototype.update = function () {
   }
 }
 
+/******** OFFSCREEN CHECK *********/
 // isOffScreen()
 //
 // Checks if the ball has moved off the screen and, if so, returns true.
@@ -49,6 +49,8 @@ Ball.prototype.isOffScreen = function () {
   }
 }
 
+
+/******** DISPLAY *********/
 // display()
 //
 // Draw the ball as a rectangle on the screen
@@ -57,6 +59,8 @@ Ball.prototype.display = function () {
   rect(this.x,this.y,this.size,this.size);
 }
 
+
+/******** COLLISIONS *********/
 // handleCollision(paddle)
 //
 // Check if this ball overlaps the paddle passed as an argument
@@ -75,6 +79,8 @@ Ball.prototype.handleCollision = function(paddle) {
   }
 }
 
+
+/******** RESET *********/
 // reset()
 //
 // Set position back to the middle of the screen

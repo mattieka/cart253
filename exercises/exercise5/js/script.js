@@ -1,6 +1,8 @@
-// Basic OO Pong
-// by Pippin Barr
-//
+// ------------------------ I N T R O  /  I N F O -------------------------- //
+
+/**
+object oriented pong, by mattie k.a.
+
 // A primitive implementation of Pong with no scoring system
 // just the ability to play the game with the keyboard.
 //
@@ -8,14 +10,17 @@
 // the left hand paddle.
 //
 // Written with JavaScript OOP.
+**/
+
+// --------------------------- V A R I A B L E S --------------------------- //
 
 // Variable to contain the objects representing our ball and paddles
 var ball;
 var leftPaddle;
 var rightPaddle;
 
-// setup()
-//
+// ----------------------------- S E T U P --------------------------------- //
+
 // Creates the ball and paddles
 function setup() {
   createCanvas(640,480);
@@ -28,8 +33,8 @@ function setup() {
   leftPaddle = new Paddle(0,height/2,10,60,10,83,87);
 }
 
-// draw()
-//
+// ------------------------------ D R A W ---------------------------------- //
+
 // Handles input, updates all the elements, checks for collisions
 // and displays everything.
 function draw() {
