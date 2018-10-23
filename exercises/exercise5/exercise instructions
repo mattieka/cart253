@@ -7,12 +7,12 @@ This will mean:
 Tracking the score
 (consider the idea of having the Ball's isOffScreen() function either return
 which side of the screen it went off, or neither if it's still on screen -
-you could represent this with numbers or strings)
+you could represent this with numbers or strings) - DONE
 
 Displaying the score
 
 Launching the ball with a random y velocity toward the paddle that won the most
-recent point
+recent point - DONE
 
 Altering the visuals as per your previous version
 

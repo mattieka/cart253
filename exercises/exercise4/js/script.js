@@ -350,7 +350,10 @@ function displayPaddle(paddle) {
 //changes the color of the background based on where the ball is
 function backgroundGradient() {
   if (ball.x < width) {
-    background(ball.x-255,127,200);
+    push();
+      colorMode(HSB,255);
+      background(map(ball.x,0,width,0,255),127,200);
+    pop();
   }
 }
 

@@ -6,11 +6,11 @@
 // Paddle constructor
 //
 // Sets the properties with the provided arguments or defaults
-function Paddle(x,y,w,h,speed,downKey,upKey,score,scoreColor) {
+function Paddle(x,y,vx,vy,w,h,speed,downKey,upKey,score,scoreColor) {
   this.x = x;
   this.y = y;
-  this.vx = 0;
-  this.vy = 0;
+  this.vx = vx;
+  this.vy = vy;
   this.w = w;
   this.h = h;
   this.speed = speed;
@@ -44,7 +44,7 @@ Paddle.prototype.handleInput = function() {
   //      onto the screen by adjusting its y-position.
 
   // block paddle at the top of the screen
-  if (this.y = this.h/2 <= 0) {
+  if (this.y - this.h/2 <= 0) {
     this.vy = 0;
     this.y = this.y + this.h/2;
   }
@@ -63,16 +63,27 @@ Paddle.prototype.handleInput = function() {
 // Update y position based on velocity
 // Constrain the resulting position to be within the canvas
 Paddle.prototype.update = function() {
-  this.y += this.vy;
-  this.y = constrain(this.y,0,height-this.h);
+  this.y = this.y + this.vy;
+//commented this one out because my function is cooler B)
+//  this.y = constrain(this.y,0,height-this.h);
 }
 
+/******** PADDLE COLOUR *********/
+Paddle.prototype.colorPaddle = function () {
+  //console.log(paddle.score, paddle.scoreColor);
+  switch (this.score) {
+    case 0: this.scoreColor = "#ffffff"; break;
+    case 1: this.scoreColor = "#ef3326"; break;
+    case 2: this.scoreColor = "#efd426"; break;
+    default: this.scoreColor = "#4de257"; break;
+  }
+}
 
 /******** DISPLAY *********/
-// display()
-//
-// Draw the paddle as a rectangle on the screen
+// Draw the paddle as a rectangle on the screen.
+// NOTE: FUNCTION ADDED! paddle color changes based on score
 Paddle.prototype.display = function() {
-  fill(255);
+  this.colorPaddle();
+  fill(this.scoreColor);
   rect(this.x,this.y,this.w,this.h);
 }

@@ -1,9 +1,8 @@
 // --------------------------- B A L L -------------------------------- //
 
-//
 // A class to define how a ball behaves. Including bouncing on the top
 // and bottom edges of the canvas, going off the left and right sides,
-// and bouncing off paddles.
+// and bouncing off paddles. also keeps track of score!
 
 /******** CONSTRUCTOR *********/
 // gives the ball all of its properties, like size/velocity/position/speed.
@@ -31,6 +30,9 @@ Ball.prototype.update = function () {
   // Check for touching upper or lower edge and reverse velocity if so
   if (this.y === 0 || this.y + this.size === height) {
     this.vy = -this.vy;
+    //NOTE put the sound effect back in:
+    beepSFX.currentTime = 0;
+    beepSFX.play();
   }
 }
 
@@ -40,7 +42,7 @@ Ball.prototype.update = function () {
 // Checks if the ball has moved off the screen and, if so, returns true.
 // Otherwise it returns false.
 Ball.prototype.isOffScreen = function () {
-  // Check for going off screen and reset if so
+  // checks if the ball went offscreen, and if so, triggers reset function
   if (this.x + this.size < 0 || this.x > width) {
     return true;
   }
@@ -61,20 +63,23 @@ Ball.prototype.display = function () {
 
 
 /******** COLLISIONS *********/
-// handleCollision(paddle)
+// handleBallPaddleCollision(paddle)
 //
 // Check if this ball overlaps the paddle passed as an argument
 // and if so reverse x velocity to bounce
-Ball.prototype.handleCollision = function(paddle) {
+Ball.prototype.handleBallPaddleCollision = function(paddle) {
   // Check if the ball overlaps the paddle on x axis
-  if (this.x + this.size > paddle.x && this.x < paddle.x + paddle.w) {
+  if (this.x + this.size/2 > paddle.x && this.x < paddle.x + paddle.w) {
     // Check if the ball overlaps the paddle on y axis
-    if (this.y + this.size > paddle.y && this.y < paddle.y + paddle.h) {
+    if (this.y + this.size/2 > paddle.y && this.y < paddle.y + paddle.h) {
       // If so, move ball back to previous position (by subtracting current velocity)
-      this.x -= this.vx;
-      this.y -= this.vy;
+      this.x = this.x - this.vx;
+      this.y = this.y - this.vy;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
+      // NOTE: put the sound effect for the bounce back.
+      beepSFX.currentTime = 0;
+      beepSFX.play();
     }
   }
 }
@@ -85,6 +90,27 @@ Ball.prototype.handleCollision = function(paddle) {
 //
 // Set position back to the middle of the screen
 Ball.prototype.reset = function () {
+  // triggered if ball is detected offscreen and checks which side
+  // then it adjusts score accordingly, and resets with the ball going toward
+  // the player who last scored
+  // NOTE: FUNCTION ADDED/MODIFIED:
+  //       split up the offscreen function into left side and right side
+  //       to better keep track of which side the ball went off
+
+
+  if (this.x < 0) {
+    rightPaddle.score = rightPaddle.score + 1;
+    console.log("right score: " + rightPaddle.score);
+    this.x = width/2;
+    this.y = height/2;
+    this.vx = random(3,10);
+  } else if (this.x > width) {
+    leftPaddle.score = leftPaddle.score + 1;
+    this.x = width/2;
+    this.y = height/2;
+    this.vx = random(-10,-3);
+    console.log("left score: " + leftPaddle.score);
+  }
   this.x = width/2;
   this.y = height/2;
 }
