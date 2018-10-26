@@ -30,7 +30,6 @@ function setup() {
 
 
 // draw()
-//
 // Handles input, updates all the elements, checks for collisions
 // and displays everything.
 function draw() {
@@ -52,5 +51,6 @@ function draw() {
 
   ball.display();
   leftPaddle.display();
-  rightPaddle.display(;
+  ////////////////////////////////////////////////////// FIXED!!!!!!!
+  rightPaddle.display();
 }
