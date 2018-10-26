@@ -41,7 +41,7 @@ Paddle.prototype.update = function() {
 
 // display()
 // Draw the paddle as a rectangle on the screen
-//////////////////////////////////////////////////////// FIXED!!!!!!!
+//////////////////////////////////////////////////////// FIXED!!!!!!! x2!!!!!
 Paddle.prototype.display = function() {
-  rectangle(this.x,this.y,this.w,this.h);
+  rect(this.x,this.y,this.w,this.h);
 }
