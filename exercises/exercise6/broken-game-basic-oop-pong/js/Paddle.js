@@ -30,13 +30,13 @@ Paddle.prototype.handleInput = function() {
     this.vy = -this.speed;
   }
 }
-
 // update()
 // Update y position based on velocity
 // Constrain the resulting position to be within the canvas
 Paddle.prototype.update = function() {
   this.y += this.vy;
-  this.y = constraint(this.y,0,hight-this.h);
+  ////////////////////////////////////////////////////// FIXED!!!!!!!
+  this.y = constraint(this.y,0,height-this.h);
 }
 
 // display()
