@@ -8,9 +8,9 @@
 // the left hand paddle.
 //
 // Written with JavaScript OOP.
-
 // Variable to contain the objects representing our ball and paddles
-var bal;
+////////////////////////////////////////////////////// FIXED!!!!!!!
+var ball;
 var leftPaddle;
 var rightPaddle;
 // setup()
