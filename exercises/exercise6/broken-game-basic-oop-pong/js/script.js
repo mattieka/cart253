@@ -45,7 +45,7 @@ function draw() {
   if (ball.isOffScreen()){
     reset();
     }
-  }
+
 
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
@@ -54,3 +54,5 @@ function draw() {
   leftPaddle.display();
   ////////////////////////////////////////////////////// FIXED!!!!!!!
   rightPaddle.display();
+  ////////////////////////////////////////////////////// FIXED!!!!!!!
+}
