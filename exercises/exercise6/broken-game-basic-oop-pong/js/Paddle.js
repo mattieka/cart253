@@ -22,11 +22,11 @@ function Paddle(x,y,vx,vy,w,h,speed,downKey,upKey) {
 // Check if the up or down keys are pressed and update velocity
 // appropriately
 Paddle.prototype.handleInput = function() {
-  ////////////////////////////////////////////////////// FIXED!!!!!!! x2
-  if (keyIsDown(upKey)) {
+  ////////////////////////////////////////////////////// FIXED!!!!!!! x4
+  if (keyIsDown(UP_ARROW)) {
     this.vy = -this.speed;
   }
-  else if (keyIsDown(downKey)) {
+  else if (keyIsDown(DOWN_ARROW)) {
     this.vy = -this.speed;
   }
 }
