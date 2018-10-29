@@ -23,10 +23,10 @@ function Paddle(x,y,vx,vy,w,h,speed,downKey,upKey) {
 // appropriately
 Paddle.prototype.handleInput = function() {
   ////////////////////////////////////////////////////// FIXED!!!!!!! x6
-  if (keyIsDown(UP_ARROW)) {
+  if (keyIsDown(this.upKey)) {
     this.vy = -this.speed;
   }
-  else if (keyIsDown(DOWN_ARROW)) {
+  else if (keyIsDown(this.downKey)) {
     this.vy = this.speed;
   }
   else {
