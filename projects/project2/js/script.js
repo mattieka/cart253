@@ -13,11 +13,35 @@ var ball;
 var leftPaddle;
 var rightPaddle;
 
+// variables for playing field (not counting player zone)
+var fieldWidth = 680;
+var fieldHeight = 480;
+
+// variables for avatar pictures
+var spriteGreenHappy;
+var spriteGreenMad;
+var spriteYellowHappy;
+var spriteYellowMad;
+
+// variable to track which sprite is displayed
+var leftAvatar;
+var rightAvatar;
+
+/**************************** P R E L O A D  *********************************/
+/* preloads images */
+function preload() {
+  spriteGreenHappy = loadImage("assets/images/placeholderSprites/spriteGreenHappy.png");
+  spriteGreenMad = loadImage("assets/images/placeholderSprites/spriteGreenMad.png");
+  spriteYellowHappy = loadImage("assets/images/placeholderSprites/spriteYellowHappy.png");
+  spriteYellowMad = loadImage("assets/images/placeholderSprites/spriteYellowMad.png");
+}
+
 /*********************** S E T U P   F U N C T I O N *************************/
 
 // Creates the ball and paddles
 function setup() {
-  createCanvas(640,480);
+  imageMode(CENTER);
+  createCanvas(640,680);
   // Create a ball
   ball = new Ball(width/2,height/2,5,5,10,5);
   // Create the right paddle with UP and DOWN as controls
@@ -27,6 +51,10 @@ function setup() {
   // Keycodes 83 and 87 are W and S respectively
   // Initialize score at 0
   leftPaddle = new Paddle(0,height/2,10,60,10,83,87,0);
+
+  // initialize avatars
+  leftAvatar = spriteYellowHappy;
+  rightAvatar = spriteGreenHappy;
 }
 
 /************************ D R A W    F U N C T I O N *************************/
@@ -35,6 +63,7 @@ function setup() {
 // and displays everything.
 function draw() {
   background(0);
+  avatarZone();
 
   leftPaddle.handleInput();
   rightPaddle.handleInput();
@@ -49,10 +78,28 @@ function draw() {
 
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
+  drawAvatar();
 
   ball.display();
   leftPaddle.display();
   rightPaddle.display();
 }
+
+/*************************** F U N C T I O N S *******************************/
+/* mad science zone.
+   for testing new functions that dont concern the ball/paddle */
+
+//creates avatar area by drawing a rectangle
+function avatarZone() {
+  fill("#ead2f7");
+  rect(0,fieldHeight,width,height-fieldHeight);
+}
+
+//draws avatar based on who previously scored
+function drawAvatar() {
+  image(rightAvatar,width-rightAvatar.width,fieldHeight+(height-fieldHeight)/2);
+  image(leftAvatar,leftAvatar.width,fieldHeight+(height-fieldHeight)/2);
+}
+
 
 /**************************** C R E D I T S **********************************/

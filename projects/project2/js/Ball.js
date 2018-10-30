@@ -31,10 +31,10 @@ Ball.prototype.update = function () {
   this.y = this.y + this.vy;
 
   // Constrain y position to be on screen
-  this.y = constrain(this.y,0,height-this.size);
+  this.y = constrain(this.y,0,fieldHeight-this.size);
 
   // Check for touching upper or lower edge and reverse velocity if so
-  if (this.y === 0 || this.y + this.size === height) {
+  if (this.y === 0 || this.y + this.size === fieldHeight) {
     this.vy = -this.vy;
   }
 }
@@ -105,7 +105,8 @@ Ball.prototype.reset = function () {
     this.x = width/2;
     this.y = height/2;
     this.vx = random(3,10);
-
+    rightAvatar = spriteGreenHappy;
+    leftAvatar = spriteYellowMad;
   // if the ball goes off the right side:
   } else if (this.x > width) {
     leftPaddle.score = leftPaddle.score + 1;
@@ -113,5 +114,7 @@ Ball.prototype.reset = function () {
     this.y = height/2;
     this.vx = random(-10,-3);
     console.log("left score: " + leftPaddle.score);
+    leftAvatar = spriteYellowHappy;
+    rightAvatar = spriteGreenMad;
   }
 }
