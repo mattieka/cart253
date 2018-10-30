@@ -1,21 +1,20 @@
-// Basic OO Pong
-// by Pippin Barr
-//
-// A primitive implementation of Pong with no scoring system
-// just the ability to play the game with the keyboard.
-//
-// Arrow keys control the right hand paddle, W and S control
-// the left hand paddle.
-//
-// Written with JavaScript OOP.
+/************************ I N T R O   /   I N F O ****************************/
+/* Object Oriented Pong by Mattie KA
+   Based on starter code by Pippin Barr.
 
+   Arrow keys control the right hand paddle
+   W and S control the left hand paddle.
+
+Written with JavaScript OOP.*/
+
+/************************** V A R I A B L E S ********************************/
 // Variable to contain the objects representing our ball and paddles
 var ball;
 var leftPaddle;
 var rightPaddle;
 
-// setup()
-//
+/*********************** S E T U P   F U N C T I O N *************************/
+
 // Creates the ball and paddles
 function setup() {
   createCanvas(640,480);
@@ -28,8 +27,8 @@ function setup() {
   leftPaddle = new Paddle(0,height/2,10,60,10,83,87);
 }
 
-// draw()
-//
+/************************ D R A W    F U N C T I O N *************************/
+
 // Handles input, updates all the elements, checks for collisions
 // and displays everything.
 function draw() {
@@ -53,3 +52,5 @@ function draw() {
   leftPaddle.display();
   rightPaddle.display();
 }
+
+/**************************** C R E D I T S **********************************/
