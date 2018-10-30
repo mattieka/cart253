@@ -2,7 +2,7 @@ Project Instructions
   copy/pasted from https://github.com/pippinbarr/cart253-2018/blob/master/projects/Project-2.md
 
 1) Improve the game in the usual ways we have seen in previous exercises by
-      - adding scores,
+DONE!      - adding scores,
       - displaying the score,
       - changing the visual and audio aesthetics of the game, etc.
 
@@ -20,7 +20,7 @@ Project Instructions
         (maybe it makes their paddle smaller, maybe it makes the paddle slower,
         maybe it makes the paddle move randomly, maybe it reverses the paddle
         controls, etc.), make sure you have at least one of these objects in the game
-        
+
 5) Add a new class to the game that creates a new kind of object different from
    Paddles and Balls that interacts with the normal type of ball
    (maybe a kind of food the ball eats to get faster,
@@ -31,3 +31,12 @@ Project Instructions
 6) Use arrays to explore the dynamics of having many instances of objects in
    the game at the same time. (e.g. At minimum have either multiple balls,
    multiple paddles, or multiples of your new classes - potentially all of these!)
+
+-------------------------------------------------------------------------------
+
+brainstorming
+
+npc pictures?? that change expressions as you play the game? (swap between using switch??)
+
+increase canvas size a bit on the bottom to accommodate them, readjust constraints
+on ball and paddle to accommodate them.

@@ -78,7 +78,7 @@ Ball.prototype.handleCollision = function(paddle) {
     if (this.y + this.size > paddle.y && this.y < paddle.y + paddle.h) {
       // If so, move ball back to previous position (by subtracting current velocity)
       this.x = this.x - this.vx;
-      this.y = this.x - this.vy;
+      this.y = this.y - this.vy;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
     }
@@ -114,8 +114,4 @@ Ball.prototype.reset = function () {
     this.vx = random(-10,-3);
     console.log("left score: " + leftPaddle.score);
   }
-
-  // resets the ball's position to the center of the canvas. 
-  this.x = width/2;
-  this.y = height/2;
 }
