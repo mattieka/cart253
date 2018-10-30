@@ -7,7 +7,7 @@
 /************************ C O N S T R U C T O R ******************************/
 
 /* sets constructor properties and their arguments */
-function Paddle(x,y,w,h,speed,downKey,upKey) {
+function Paddle(x,y,w,h,speed,downKey,upKey,score) {
   this.x = x;
   this.y = y;
   this.vx = 0;
@@ -17,6 +17,7 @@ function Paddle(x,y,w,h,speed,downKey,upKey) {
   this.speed = speed;
   this.downKey = downKey;
   this.upKey = upKey;
+  this.score = score;
 }
 
 /*********************** H A N D L E   I N P U T  ****************************/
