@@ -86,8 +86,36 @@ Ball.prototype.handleCollision = function(paddle) {
 }
 
 /*********************** R E S E T     F U N C T I O N  **********************/
-// Set position back to the middle of the screen
+/* NOTE: I made this function in ex5 (object oriented pong) and felt
+         that it should be included here as well.
+
+   reset function is triggered if the ball is detected offscreen
+   and does the following:
+      - checks which side (left or right) the ball went off
+      - adjusts score accordingly,
+      - resets the ball back to the center,
+      - adjusts velocity so that the ball goes toward the player who last scored
+      - randomizes velocity between 3 and 10 (or -10 and -3) to increase challenge */
+
 Ball.prototype.reset = function () {
+  // if the ball goes off the left side:
+  if (this.x < 0) {
+    rightPaddle.score = rightPaddle.score + 1;
+    console.log("right score: " + rightPaddle.score);
+    this.x = width/2;
+    this.y = height/2;
+    this.vx = random(3,10);
+
+  // if the ball goes off the right side:
+  } else if (this.x > width) {
+    leftPaddle.score = leftPaddle.score + 1;
+    this.x = width/2;
+    this.y = height/2;
+    this.vx = random(-10,-3);
+    console.log("left score: " + leftPaddle.score);
+  }
+
+  // resets the ball's position to the center of the canvas. 
   this.x = width/2;
   this.y = height/2;
 }
