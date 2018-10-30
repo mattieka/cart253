@@ -1,7 +1,7 @@
-// Broken Basic OO Pong
-// by Pippin Barr
+// Basic OO Pong, by Mattie KA
+// Previously Broken by Pippin Barr
 //
-// A broken primitive implementation of Pong with no scoring system
+// A no longer broken primitive implementation of Pong with no scoring system
 // just the ability to play the game with the keyboard.
 //
 // Arrow keys control the right hand paddle, W and S control
