@@ -42,8 +42,8 @@ Ball.prototype.update = function () {
 // Otherwise it returns false.
 Ball.prototype.isOffScreen = function () {
   // Check for going off screen and reset if so
-  ////////////////////////////////////////////////////// FIXED!!!!!!!
-    if (this.x + this.size < 0 && this.x > width) {
+  ////////////////////////////////////////////////////// FIXED!!!!!!! x2
+    if (this.x + this.size < 0 || this.x > width) {
     return true;
   }
   else {
