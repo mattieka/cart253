@@ -1,0 +1,33 @@
+Project Instructions
+  copy/pasted from https://github.com/pippinbarr/cart253-2018/blob/master/projects/Project-2.md
+
+1) Improve the game in the usual ways we have seen in previous exercises by
+      - adding scores,
+      - displaying the score,
+      - changing the visual and audio aesthetics of the game, etc.
+
+2) Add a title to the game that displays before the game starts,
+   let the player start the game by clicking the mouse or hitting a key
+
+3) Add an ending to the game when one player reaches 11 points,
+   display a game over screen and give the option to reset the game and play again
+
+4) Add a new class to the game that create a new kind of ball that the players
+   should avoid when playing. this ball should...
+      - look different,
+      - should move differently,
+      - and if the players hit it it should create some disadvantage for them
+        (maybe it makes their paddle smaller, maybe it makes the paddle slower,
+        maybe it makes the paddle move randomly, maybe it reverses the paddle
+        controls, etc.), make sure you have at least one of these objects in the game
+        
+5) Add a new class to the game that creates a new kind of object different from
+   Paddles and Balls that interacts with the normal type of ball
+   (maybe a kind of food the ball eats to get faster,
+   maybe a portal that teleports the ball somewhere else on the screen,
+   maybe a light-switch that changes the colors of the game to be lighter or darker, etc.),
+   make sure you have at least one of these objects in the game.
+
+6) Use arrays to explore the dynamics of having many instances of objects in
+   the game at the same time. (e.g. At minimum have either multiple balls,
+   multiple paddles, or multiples of your new classes - potentially all of these!)
