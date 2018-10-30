@@ -30,9 +30,9 @@ Ball.prototype.update = function () {
 
   // Constrain y position to be on screen
   this.y = constrain(this.y,0,height-this.size);
-
+////////////////////////////////////////////////////// FIXED!!!!!!!
   // Check for touching upper or lower edge and reverse velocity if so
-  if (this.y = 0 || this.y + this.size === height) {
+  if (this.y === 0 || this.y + this.size === height) {
     this.vy = -this.vy;
   }
 }
