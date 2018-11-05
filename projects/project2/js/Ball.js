@@ -85,6 +85,21 @@ Ball.prototype.handleCollision = function(paddle) {
   }
 }
 
+/* check for collision with juanita's robo arm paddles */
+Ball.prototype.handleCollision = function(roboArms) {
+  // Check if the ball overlaps the paddle on x axis
+  if (this.x + this.size > roboArms.x && this.x < roboArms.x + roboArms.w) {
+    // Check if the ball overlaps the paddle on y axis
+    if (this.y + this.size > roboArms.y && this.y < roboArms.y + roboArms.h) {
+      // If so, move ball back to previous position (by subtracting current velocity)
+      this.x = this.x - this.vx;
+      this.y = this.y - this.vy;
+      // Reverse x velocity to bounce
+      this.vx = -this.vx;
+    }
+  }
+}
+
 /*********************** R E S E T     F U N C T I O N  **********************/
 /* NOTE: I made this function in ex5 (object oriented pong) and felt
          that it should be included here as well.
