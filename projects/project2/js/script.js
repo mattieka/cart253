@@ -14,7 +14,7 @@ var leftPaddle;
 var rightPaddle;
 
 // variables for playing field (not counting player zone)
-var fieldWidth = 680;
+var fieldWidth = 640;
 var fieldHeight = 480;
 
 // variables for avatar pictures
@@ -47,8 +47,8 @@ function preload() {
 function setup() {
   imageMode(CENTER);
 
-  var rightCharacter = "juanita";
-  var leftCharacter;
+  rightCharacter = "juanita";
+  leftCharacter = "juanita";
   createCanvas(640,680);
   // Create a ball
   ball = new Ball(width/2,height/2,5,5,10,5);

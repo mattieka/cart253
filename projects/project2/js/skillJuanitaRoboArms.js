@@ -8,7 +8,9 @@
 
 /**************************** V A R I A B L E S ******************************/
 
-
+var topRoboArm;
+var midRoboArm;
+var bottomRoboArm;
 
 /************************** ROBO ARMS CONSTRUCTOR ****************************/
 /* sets constructor properties and their arguments; same as paddles*/
@@ -47,12 +49,12 @@ roboArms.prototype.handleInput = function() {
 
 /********************** U P D A T E    F U N C T I O N ***********************/
 
-/* update function; mostly the same as paddle, but sends the paddles back by
-1px if they reach the top of the screen.
+/* update function; mostly the same as paddle, but allows the paddles to wrap
+   around the screen.
 
 update function does the following:
       - updates y position based on velocity
-      - constrains the resulting position to be within the playing field */
+      - lets paddles wrap */
 
 roboArms.prototype.update = function() {
   //console.log(topRoboArm.y,midRoboArm.y,bottomRoboArm.y);
@@ -75,13 +77,13 @@ roboArms.prototype.update = function() {
 /* carries score from corresponding paddle */
 
 roboArmsSetup = function() {
-  if (rightCharacter = "juanita") {
+  if (rightCharacter === "juanita") {
     topRoboArm = new roboArms (fieldWidth-10,100,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,rightPaddle.score);
     midRoboArm = new roboArms (fieldWidth-10,fieldHeight/2-30,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,rightPaddle.score);
     bottomRoboArm = new roboArms (fieldWidth-10,fieldHeight-160,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,rightPaddle.score);
     console.log("right arms made");
   }
-  if (leftCharacter = "juanita") {
+  if (leftCharacter === "juanita") {
     topRoboArm = new roboArms (0,100,this.vx,this.vy,10,60,10,83,87,leftPaddle.score);
     midRoboArm = new roboArms (0,fieldHeight/2-30,this.vx,this.vy,10,60,10,83,87,leftPaddle.score);
     bottomRoboArm = new roboArms (0,fieldHeight-160,this.vx,this.vy,10,60,10,83,87,leftPaddle.score);
@@ -96,4 +98,5 @@ roboArmsSetup = function() {
 roboArms.prototype.display = function() {
   fill("#4286f4");
   rect(this.x,this.y,this.w,this.h);
+  console.log(this.x,this.y,this.w,this.h);
 }
