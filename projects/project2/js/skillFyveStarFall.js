@@ -9,19 +9,51 @@
 
 /**************************** V A R I A B L E S ******************************/
 
+var stars = [];
+
 /**************************** STAR CONSTRUCTOR ******************************/
 /* sets constructor properties and their arguments*/
 
-function roboArms(x,y,vx,vy,w,h,speed) {
-  this.x = x;
-  this.y = y;
-  this.vx = vx;
-  this.vy = vy;
-  this.w = w;
-  this.h = h;
-  this.speed = speed;
+function Star () {
+  this.x = leftPaddle.x;
+  this.y = leftPaddle.y + leftPaddle.h/2;
+  this.angle = random(-90,90);
+  this.w = 32;
+  this.h = 32;
+  this.speed = 5;
+
+  this.move = function() {
+    this.x = this.x + this.speed;
+    this.y = this.y;
+  };
+
+  this.display = function() {
+    fill("#be8bdd");
+    push();
+      rotate(this.angle);
+      rectMode(CENTER);
+      rect(this.x,this.y,this.w,this.h);
+    pop();
+  };
 }
 
+/************************ S E T U P   F U N C T I O N  **********************/
+/* sets up stars if player chooses fyve */
 
+starFallSetup = function() {
+  if (rightCharacter === "fyve" || leftCharacter === "fyve") {
+    for (var i=0; i<50; i++) {
+      stars.push(new Star());
+    }
+  }
+}
 
-  
+/************************ D R A W    F U N C T I O N  **********************/
+/* draws stars*/
+
+starFallDraw = function() {
+  for (var i = 0; i<stars.length; i++) {
+    stars[i].move();
+    stars[i].display();
+  }
+}

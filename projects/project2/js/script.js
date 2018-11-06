@@ -46,9 +46,10 @@ function preload() {
 // Creates the ball and paddles
 function setup() {
   imageMode(CENTER);
+  angleMode(DEGREES);
 
   rightCharacter = "juanita";
-  leftCharacter = "juanita";
+  leftCharacter = "fyve";
   createCanvas(640,680);
   // Create a ball
   ball = new Ball(width/2,height/2,5,5,10,5);
@@ -65,6 +66,7 @@ function setup() {
   rightAvatar = spriteGreenHappy;
 
   roboArmsSetup();
+  starFallSetup();
 }
 
 /************************ D R A W    F U N C T I O N *************************/
@@ -112,6 +114,9 @@ function draw() {
   topRoboArm.display();
   midRoboArm.display();
   bottomRoboArm.display();
+
+  // fyve's starfall
+  starFallDraw();
 
 }
 
