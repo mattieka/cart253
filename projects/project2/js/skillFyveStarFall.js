@@ -14,10 +14,14 @@ var stars = [];
 /**************************** STAR CONSTRUCTOR ******************************/
 /* sets constructor properties and their arguments*/
 
-function Star () {
-  this.x = leftPaddle.x;
-  this.y = leftPaddle.y + leftPaddle.h/2;
-  this.angle = random(-10,10);
+function Star (paddle,minAngle,maxAngle) {
+  this.paddle = paddle;
+  this.minAngle = minAngle;
+  this.maxAngle = maxAngle;
+
+  this.x = paddle.x;
+  this.y = paddle.y + paddle.h/2;
+  this.angle = random(minAngle,maxAngle);
   this.w = 32;
   this.h = 32;
   this.speed = 5;
@@ -25,6 +29,10 @@ function Star () {
   this.move = function() {
     this.x = this.x + this.speed;
     this.y = this.y + this.angle;
+    if (this.x > width) {
+      this.x = paddle.x;
+      this.y = paddle.y;
+    }
   };
 
   this.display = function() {
@@ -40,9 +48,14 @@ function Star () {
 /* sets up stars if player chooses fyve */
 
 starFallSetup = function() {
-  if (rightCharacter === "fyve" || leftCharacter === "fyve") {
+  if (rightCharacter === "fyve") {
     for (var i=0; i<50; i++) {
-      stars.push(new Star());
+      stars.push(new Star(rightPaddle,170,-170));
+    }
+  }
+  if (leftCharacter === "fyve") {
+    for (var i=0; i<50; i++) {
+      stars.push(new Star(leftPaddle,10,-10));
     }
   }
 }
