@@ -76,6 +76,7 @@ function setup() {
 function draw() {
   background(0);
   avatarZone();
+  drawScore();
 
   leftPaddle.handleInput();
   rightPaddle.handleInput();
@@ -92,6 +93,7 @@ function draw() {
   ball.handleCollision(rightPaddle);
 
   drawAvatar();
+
 
   ball.display();
   leftPaddle.display();
@@ -134,6 +136,15 @@ function avatarZone() {
 function drawAvatar() {
   image(rightAvatar,width-rightAvatar.width,fieldHeight+(height-fieldHeight)/2);
   image(leftAvatar,leftAvatar.width,fieldHeight+(height-fieldHeight)/2);
+}
+
+function drawScore() {
+  push();
+    fill("#000000");
+    textSize(32);
+    text(rightPaddle.score,width-40,fieldHeight+(height-fieldHeight)/2);
+    text(leftPaddle.score,20,fieldHeight+(height-fieldHeight)/2);
+  pop();
 }
 
 

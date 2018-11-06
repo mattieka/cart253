@@ -17,20 +17,19 @@ var stars = [];
 function Star () {
   this.x = leftPaddle.x;
   this.y = leftPaddle.y + leftPaddle.h/2;
-  this.angle = random(-90,90);
+  this.angle = random(-10,10);
   this.w = 32;
   this.h = 32;
   this.speed = 5;
 
   this.move = function() {
     this.x = this.x + this.speed;
-    this.y = this.y;
+    this.y = this.y + this.angle;
   };
 
   this.display = function() {
     fill("#be8bdd");
     push();
-      rotate(this.angle);
       rectMode(CENTER);
       rect(this.x,this.y,this.w,this.h);
     pop();
