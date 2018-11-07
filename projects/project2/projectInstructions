@@ -13,7 +13,7 @@ DONE!      - displaying the score,
    display a game over screen and give the option to reset the game and play again
 
 4) Add a new class to the game that create a new kind of ball that the players
-   should avoid when playing. this ball should...
+   should avoid when playing. this ball should... (STARS!)
       - look different,
       - should move differently,
       - and if the players hit it it should create some disadvantage for them
@@ -30,7 +30,7 @@ DONE!      - displaying the score,
 
 6) Use arrays to explore the dynamics of having many instances of objects in
    the game at the same time. (e.g. At minimum have either multiple balls,
-   multiple paddles, or multiples of your new classes - potentially all of these!)
+   multiple paddles, or multiples of your new classes - potentially all of these!) - STARS 
 
 -------------------------------------------------------------------------------
 

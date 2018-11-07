@@ -197,7 +197,7 @@ function checkPowerUp() {
       }
 }
 
-/************************ T I M E R    F U N C T I O N  **********************/
+/********************** T I M E R    F U N C T I O N S **********************/
 //implements timer into powerup
 
 function Timer(paddle,timerState,timer) {
