@@ -108,7 +108,7 @@ Ball.prototype.handleCollision = function(roboArms) {
    and does the following:
       - checks which side (left or right) the ball went off
       - adjusts score accordingly,
-      - adjusts power up meter (+1 if scored, +3 if scored on)
+      - adjusts power up meter (+1 if scored, +3 if scored on) (NEW!)
       - resets the ball back to the center,
       - adjusts velocity so that the ball goes toward the player who last scored
       - randomizes velocity between 3 and 10 (or -10 and -3) to increase challenge */
@@ -116,21 +116,56 @@ Ball.prototype.handleCollision = function(roboArms) {
 Ball.prototype.reset = function () {
   // if the ball goes off the left side:
   if (this.x < 0) {
+    // increase score
     rightPaddle.score = rightPaddle.score + 1;
-    rightPaddle.powerUpMeter = rightPaddle.powerUpMeter + 1;
-    leftPaddle.powerUpMeter = leftPaddle.powerUpMeter + 3;
-    console.log("right score: " + rightPaddle.score);
-    console.log("right power up meter: " + rightPaddle.powerUpMeter);
+
+    // if current powerup is 9 or more, powerup gets set to 10
+    // else add +1 to powerup meter
+    if (rightPaddle.powerUpMeter >= 9) {
+      rightPaddle.powerUpMeter = 10;
+    } else {
+      rightPaddle.powerUpMeter = rightPaddle.powerUpMeter + 1;
+    }
+
+    // if current opponent powerup is 7 or more, powerup gets set to 10
+    // else add +3 to current powerup
+    if (leftPaddle.powerUpMeter >= 7) {
+      leftPaddle.powerUpMeter = 10;
+    } else {
+      leftPaddle.powerUpMeter = leftPaddle.powerUpMeter + 3;
+    }
+
+    //reset ball position, give random velocity based on who scored, change sprites
     this.x = width/2;
     this.y = height/2;
     this.vx = random(3,10);
+    console.log("right score: " + rightPaddle.score);
+    console.log("right power up meter: " + rightPaddle.powerUpMeter);
     rightAvatar = spriteGreenHappy;
     leftAvatar = spriteYellowMad;
+
   // if the ball goes off the right side:
   } else if (this.x > width) {
+    // increase score
     leftPaddle.score = leftPaddle.score + 1;
-    leftPaddle.powerUpMeter = leftPaddle.powerUpMeter + 1;
-    rightPaddle.powerUpMeter = rightPaddle.powerUpMeter + 3;
+
+    // if current powerup is 9 or more, powerup gets set to 10
+    // else add +1 to powerup meter.
+    if (leftPaddle.powerUpMeter >= 9) {
+      leftPaddle.powerUpMeter = 10;
+    } else {
+      leftPaddle.powerUpMeter = leftPaddle.powerUpMeter + 1;
+    }
+
+    // if current opponent powerup is 7 or more, powerup gets set to 10
+    // else add +3 to current powerup
+    if (rightPaddle.powerUpMeter >= 7) {
+        rightPaddle.powerUpMeter = 10;
+    } else {
+      rightPaddle.powerUpMeter = rightPaddle.powerUpMeter + 3;
+    }
+
+    //reset ball position, give random velocity based on who scored, change sprites
     this.x = width/2;
     this.y = height/2;
     this.vx = random(-10,-3);

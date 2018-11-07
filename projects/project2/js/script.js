@@ -52,6 +52,7 @@ function setup() {
   imageMode(CENTER);
   angleMode(DEGREES);
 
+
   rightCharacter = "juanita";
   leftCharacter = "fyve";
   createCanvas(640,680);
@@ -84,6 +85,7 @@ function draw() {
   drawScore();
   drawPowerUpMeter();
   displayTimer();
+
 
   leftPaddle.handleInput();
   rightPaddle.handleInput();
