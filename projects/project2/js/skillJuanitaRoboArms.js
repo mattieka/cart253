@@ -98,5 +98,26 @@ roboArmsSetup = function() {
 roboArms.prototype.display = function() {
   fill("#4286f4");
   rect(this.x,this.y,this.w,this.h);
-  console.log(this.x,this.y,this.w,this.h);
+}
+
+/***************** A L L   J U A N I T A   F U N C T I O N S *****************/
+//all grouped together into a single draw function so that it doesn't clutter
+//the script function
+
+function roboArmsDraw() {
+  ball.handleCollision(topRoboArm);
+  ball.handleCollision(midRoboArm);
+  ball.handleCollision(bottomRoboArm);
+
+  topRoboArm.handleInput();
+  midRoboArm.handleInput();
+  bottomRoboArm.handleInput();
+
+  topRoboArm.update();
+  midRoboArm.update();
+  bottomRoboArm.update();
+
+  topRoboArm.display();
+  midRoboArm.display();
+  bottomRoboArm.display();
 }
