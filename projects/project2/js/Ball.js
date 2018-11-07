@@ -108,6 +108,7 @@ Ball.prototype.handleCollision = function(roboArms) {
    and does the following:
       - checks which side (left or right) the ball went off
       - adjusts score accordingly,
+      - adjusts power up meter (+1 if scored, +3 if scored on)
       - resets the ball back to the center,
       - adjusts velocity so that the ball goes toward the player who last scored
       - randomizes velocity between 3 and 10 (or -10 and -3) to increase challenge */
@@ -116,7 +117,10 @@ Ball.prototype.reset = function () {
   // if the ball goes off the left side:
   if (this.x < 0) {
     rightPaddle.score = rightPaddle.score + 1;
+    rightPaddle.powerUpMeter = rightPaddle.powerUpMeter + 1;
+    leftPaddle.powerUpMeter = leftPaddle.powerUpMeter + 3;
     console.log("right score: " + rightPaddle.score);
+    console.log("right power up meter: " + rightPaddle.powerUpMeter);
     this.x = width/2;
     this.y = height/2;
     this.vx = random(3,10);
@@ -125,10 +129,13 @@ Ball.prototype.reset = function () {
   // if the ball goes off the right side:
   } else if (this.x > width) {
     leftPaddle.score = leftPaddle.score + 1;
+    leftPaddle.powerUpMeter = leftPaddle.powerUpMeter + 1;
+    rightPaddle.powerUpMeter = rightPaddle.powerUpMeter + 3;
     this.x = width/2;
     this.y = height/2;
     this.vx = random(-10,-3);
     console.log("left score: " + leftPaddle.score);
+    console.log("left power up meter: " + leftPaddle.powerUpMeter);
     leftAvatar = spriteYellowHappy;
     rightAvatar = spriteGreenMad;
   }

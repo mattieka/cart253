@@ -150,17 +150,18 @@ console.log(leftPaddle.powerUpMeter,rightPaddle.powerUpMeter);
 //function that checks if a powerup is ready, and if it is, if the trigger key is pressed
 function checkPowerUp() {
   //left paddle juanita
-      if (leftPaddle.powerUpMeter === 10 && leftCharacter === "juanita") {
+      if (leftPaddle.powerUpMeter >= 10 && leftCharacter === "juanita") {
         if (keyCode === 68 && leftTimer.timerState === "off") {
-          leftTimer.startTimer();
           leftTimer.timerState = "on";
         }
         if (leftTimer.timerState === "on") {
+          leftTimer.startTimer();
+          leftTimer.checkTimer();
           roboArmsDraw();
         }
       }
   // right paddle juanita
-      if (rightPaddle.powerUpMeter === 10 && rightCharacter === "juanita") {
+      if (rightPaddle.powerUpMeter >= 10 && rightCharacter === "juanita") {
         if (keyCode === LEFT_ARROW && rightTimer.timerState === "off") {
           rightTimer.timerState = "on";
         }
@@ -171,22 +172,24 @@ function checkPowerUp() {
         }
       }
   // left paddle fyve
-      if (leftPaddle.powerUpMeter === 10 && leftCharacter === "fyve") {
+      if (leftPaddle.powerUpMeter >= 10 && leftCharacter === "fyve") {
         if (keyCode === 68 && leftTimer.timerState === "off") {
-          leftTimer.startTimer();
           leftTimer.timerState = "on";
         }
         if (leftTimer.timerState === "on") {
+          leftTimer.startTimer();
+          leftTimer.checkTimer();
           starFallDraw();
         }
       }
   // right paddle fyve
-      if (rightPaddle.powerUpMeter === 10 && rightCharacter === "fyve") {
+      if (rightPaddle.powerUpMeter >= 10 && rightCharacter === "fyve") {
         if (keyCode === LEFT_ARROW && rightTimer.timerState === "off") {
-          rightTimer.startTimer();
           rightTimer.timerState = "on";
         }
         if (rightTimer.timerState === "on") {
+          rightTimer.startTimer();
+          rightTimer.checkTimer();
           starFallDraw();
         }
       }
@@ -210,6 +213,7 @@ function Timer(paddle,timerState,timer) {
     if (this.timer === 0) {
       paddle.powerUpMeter = 0;
       this.timerState = "off";
+      this.timer = 10;
     }
   }
 
