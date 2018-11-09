@@ -9,7 +9,7 @@ DONE!      - displaying the score,
 2) Add a title to the game that displays before the game starts,
    let the player start the game by clicking the mouse or hitting a key
 
-3) Add an ending to the game when one player reaches 11 points,
+DONE ! 3) Add an ending to the game when one player reaches 11 points,
    display a game over screen and give the option to reset the game and play again
 
 4) Add a new class to the game that create a new kind of ball that the players
@@ -28,9 +28,9 @@ DONE!      - displaying the score,
    maybe a light-switch that changes the colors of the game to be lighter or darker, etc.),
    make sure you have at least one of these objects in the game.
 
-6) Use arrays to explore the dynamics of having many instances of objects in
+DONE ! - 6) Use arrays to explore the dynamics of having many instances of objects in
    the game at the same time. (e.g. At minimum have either multiple balls,
-   multiple paddles, or multiples of your new classes - potentially all of these!) - STARS 
+   multiple paddles, or multiples of your new classes - potentially all of these!) - STARS
 
 -------------------------------------------------------------------------------
 

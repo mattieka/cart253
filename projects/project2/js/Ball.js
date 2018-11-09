@@ -175,3 +175,57 @@ Ball.prototype.reset = function () {
     rightAvatar = spriteGreenMad;
   }
 }
+
+/*************************** DETERMINE WINNER ********************************/
+//NOTE: function repurposed from the one i made in ex5
+//checks if a player's score is 11, and if so, declare them the WINNER
+
+Ball.prototype.determineWinner = function () {
+  // when the LEFT PADDLE is the first to reach a score of 4, declare them winner
+  if (leftPaddle.score === 3) {
+    // cover screen in black rectangle
+    fill ("#000000");
+    rect (0,0,width,height);
+    //center ball so that it stops moving and doesnt add to the score
+    this.vx = 0;
+    this.vy = 0;
+    this.x = width/2;
+    this.y = height/2;
+    // text and text color
+    textSize(50);
+    textAlign(CENTER);
+    fill ("#ef3326");
+    text("LOSE",width/4*3,height/2);
+    fill ("#4de257");
+    text("WIN",width/4,height/2);
+    //reset message
+    fill ("#ffffff");
+    text ("press ENTER to try again!",width/2,height-50);
+    if (keyIsDown(ENTER)) {
+      //restartSound.play();
+      setup();
+    }
+  } else if (rightPaddle.score === 3) {
+    fill ("#000000");
+    rect (0,0,width,height);
+    //center ball so that it stops moving and doesnt add to the score
+    this.vx = 0;
+    this.vy = 0;
+    this.x = width/2;
+    this.y = height/2;
+    // text and text color
+    textSize(50);
+    textAlign(CENTER);
+    fill ("#4de257");
+    text("WIN",width/4*3,height/2);
+    fill ("#ef3326");
+    text("LOSE",width/4,height/2);
+    //reset message
+    fill ("#ffffff");
+    text ("press ENTER to try again!",width/2,height-50);
+    if (keyIsDown(ENTER)) {
+  //    restartSound.play();
+      setup();
+    }
+  }
+}

@@ -14,10 +14,11 @@ var stars = [];
 /**************************** STAR CONSTRUCTOR ******************************/
 /* sets constructor properties and their arguments*/
 
-function Star (paddle,minAngle,maxAngle) {
+function Star (paddle,minAngle,maxAngle,oppositePaddle) {
   this.paddle = paddle;
   this.minAngle = minAngle;
   this.maxAngle = maxAngle;
+  this.oppositePaddle = oppositePaddle;
 
   this.x = paddle.x;
   this.y = paddle.y + paddle.h/2;
@@ -38,9 +39,26 @@ function Star (paddle,minAngle,maxAngle) {
   this.display = function() {
     fill("#be8bdd");
     push();
-      rectMode(CENTER);
-      rect(this.x,this.y,this.w,this.h);
+      imageMode(CENTER);
+      image(starImage,this.x,this.y,starImage.width/2,starImage.height/2);
+      // rectMode(CENTER);
+      // rect(this.x,this.y,this.w,this.h);
     pop();
+  };
+
+  this.paddleCollide = function() {
+    //check if star overlaps the paddle or the robo arms on the x axis
+    // on multiple lines for clarity
+    if (this.x + starImage.width/2 > oppositePaddle.x && this.x < oppositePaddle.x + oppositePaddle.w
+        ||
+        this.x + starImage.width/2 > roboArms.x && this.x < roboArms.x + roboArms.w) {
+          // check if ball overlaps paddle or robo arms on y axis
+          if (this.y + starImage.height/2 > oppositePaddle.y && this.y < oppositePaddle.x + oppositePaddle.h
+              ||
+              this.y + starImage.height/2 > roboArms.y && this.y < roboArms.y + roboArms.h) {
+                oppositePaddle.score = oppositePaddle.score - 1;
+              }
+        }
   };
 }
 
@@ -49,13 +67,13 @@ function Star (paddle,minAngle,maxAngle) {
 
 starFallSetup = function() {
   if (rightCharacter === "fyve") {
-    for (var i=0; i<50; i++) {
-      stars.push(new Star(rightPaddle,170,-170));
+    for (var i=0; i<30; i++) {
+      stars.push(new Star(rightPaddle,170,-170,leftPaddle));
     }
   }
   if (leftCharacter === "fyve") {
-    for (var i=0; i<50; i++) {
-      stars.push(new Star(leftPaddle,10,-10));
+    for (var i=0; i<30; i++) {
+      stars.push(new Star(leftPaddle,10,-10,rightPaddle));
     }
   }
 }
@@ -67,5 +85,6 @@ starFallDraw = function() {
   for (var i = 0; i<stars.length; i++) {
     stars[i].move();
     stars[i].display();
+    stars[i].paddleCollide();
   }
 }

@@ -17,6 +17,9 @@ var rightPaddle;
 var fieldWidth = 640;
 var fieldHeight = 480;
 
+// variables for images
+var starImage;
+
 // variables for avatar pictures
 var spriteGreenHappy;
 var spriteGreenMad;
@@ -43,6 +46,7 @@ function preload() {
   spriteGreenMad = loadImage("assets/images/placeholderSprites/spriteGreenMad.png");
   spriteYellowHappy = loadImage("assets/images/placeholderSprites/spriteYellowHappy.png");
   spriteYellowMad = loadImage("assets/images/placeholderSprites/spriteYellowMad.png");
+  starImage = loadImage("assets/images/sprites/star.png");
 }
 
 /*********************** S E T U P   F U N C T I O N *************************/
@@ -101,6 +105,7 @@ function draw() {
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
 
+
   drawAvatar();
 
 
@@ -110,6 +115,7 @@ function draw() {
 
   checkPowerUp();
 
+  ball.determineWinner();
 }
 
 /*************************** F U N C T I O N S *******************************/
