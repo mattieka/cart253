@@ -12,6 +12,7 @@ Written with JavaScript OOP.*/
 var ball;
 var leftPaddle;
 var rightPaddle;
+var titleDone = false;
 
 // variables for playing field (not counting player zone)
 var fieldWidth = 640;
@@ -25,6 +26,7 @@ var spriteGreenHappy;
 var spriteGreenMad;
 var spriteYellowHappy;
 var spriteYellowMad;
+var spriteJuanita;
 
 // variable to track which sprite is displayed
 var leftAvatar;
@@ -37,6 +39,8 @@ var leftCharacter;
 // variables related to powerups
 var timer;
 var powerUpMeter = 10;
+var starSetupDone = false;
+var starPositionReset = false;
 
 
 /**************************** P R E L O A D  *********************************/
@@ -46,6 +50,7 @@ function preload() {
   spriteGreenMad = loadImage("assets/images/placeholderSprites/spriteGreenMad.png");
   spriteYellowHappy = loadImage("assets/images/placeholderSprites/spriteYellowHappy.png");
   spriteYellowMad = loadImage("assets/images/placeholderSprites/spriteYellowMad.png");
+  spriteJuanita = loadImage("assets/images/sprites/juanita.png");
   starImage = loadImage("assets/images/sprites/star.png");
 }
 
@@ -56,9 +61,6 @@ function setup() {
   imageMode(CENTER);
   angleMode(DEGREES);
 
-
-  rightCharacter = "juanita";
-  leftCharacter = "fyve";
   createCanvas(640,680);
   // Create a ball
   ball = new Ball(width/2,height/2,5,5,10,5);
@@ -74,8 +76,8 @@ function setup() {
   leftAvatar = spriteYellowHappy;
   rightAvatar = spriteGreenHappy;
 
-  roboArmsSetup();
-  starFallSetup();
+//  roboArmsSetup();
+//  starFallSetup();
   timerSetup();
 }
 
@@ -84,6 +86,10 @@ function setup() {
 // Handles input, updates all the elements, checks for collisions
 // and displays everything.
 function draw() {
+  if (titleDone === false) {
+    titleScreen();
+  }
+  else {
   background(0);
   avatarZone();
   drawScore();
@@ -116,6 +122,7 @@ function draw() {
   checkPowerUp();
 
   ball.determineWinner();
+  }
 }
 
 /*************************** F U N C T I O N S *******************************/

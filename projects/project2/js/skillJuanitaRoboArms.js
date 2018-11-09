@@ -105,6 +105,7 @@ roboArms.prototype.display = function() {
 //the script function
 
 function roboArmsDraw() {
+
   ball.handleCollision(topRoboArm);
   ball.handleCollision(midRoboArm);
   ball.handleCollision(bottomRoboArm);

@@ -27,13 +27,47 @@ function Star (paddle,minAngle,maxAngle,oppositePaddle) {
   this.h = 32;
   this.speed = 5;
 
-  this.move = function() {
-    this.x = this.x + this.speed;
-    this.y = this.y + this.angle;
-    if (this.x > width) {
-      this.x = paddle.x;
-      this.y = paddle.y;
+  this.resetPosition = function () {
+    if (starPositionReset === false){
+      if (rightCharacter === "fyve") {
+        this.paddle = rightPaddle;
+        this.minAngle = 170;
+        this.maxAngle = -170
+        this.oppositePaddle = leftPaddle;
+        this.x = paddle.x;
+        this.y = paddle.y + paddle.h/2;
+      }
+      if (leftCharacter === "fyve") {
+        this.paddle = leftPaddle;
+        this.minAngle = 10;
+        this.maxAngle = -10;
+        this.oppositePaddle = rightPaddle;
+        this.x = paddle.x;
+        this.y = paddle.y + paddle.h/2;
+      }
+
+      starPositionReset = true;
     }
+  }
+
+  this.move = function() {
+    if (this.paddle === leftPaddle) {
+      this.x = this.x + this.speed;
+      this.y = this.y + this.angle;
+      if (this.x > width) {
+        this.x = paddle.x;
+        this.y = paddle.y;
+      }
+    }
+    if (this.paddle === rightPaddle) {
+      this.x = this.x - this.speed;
+      this.y = this.y - this.angle;
+      if (this.x < 0) {
+        this.x = paddle.x;
+        this.y = paddle.y;
+      }
+    }
+
   };
 
   this.display = function() {
@@ -41,8 +75,6 @@ function Star (paddle,minAngle,maxAngle,oppositePaddle) {
     push();
       imageMode(CENTER);
       image(starImage,this.x,this.y,starImage.width/2,starImage.height/2);
-      // rectMode(CENTER);
-      // rect(this.x,this.y,this.w,this.h);
     pop();
   };
 
@@ -67,12 +99,12 @@ function Star (paddle,minAngle,maxAngle,oppositePaddle) {
 
 starFallSetup = function() {
   if (rightCharacter === "fyve") {
-    for (var i=0; i<30; i++) {
-      stars.push(new Star(rightPaddle,170,-170,leftPaddle));
+    for (var i=0; i<20; i++) {
+      stars.push(new Star(rightPaddle,90,-90,leftPaddle));
     }
   }
   if (leftCharacter === "fyve") {
-    for (var i=0; i<30; i++) {
+    for (var i=0; i<3; i++) {
       stars.push(new Star(leftPaddle,10,-10,rightPaddle));
     }
   }
@@ -83,8 +115,9 @@ starFallSetup = function() {
 
 starFallDraw = function() {
   for (var i = 0; i<stars.length; i++) {
+//    stars[i].resetPosition();
     stars[i].move();
     stars[i].display();
-    stars[i].paddleCollide();
+  //  stars[i].paddleCollide();
   }
 }
