@@ -45,13 +45,19 @@ function Star (paddle,minAngle,maxAngle,oppositePaddle) {
         this.x = paddle.x;
         this.y = paddle.y + paddle.h/2;
       }
-
       starPositionReset = true;
     }
   }
 
   this.move = function() {
-    if (this.paddle === leftPaddle) {
+    if (leftCharacter === "fyve") {
+      function keyPressed() {
+        if (keycode === 68) {
+          for (var i=0; i<20; i++) {
+            stars.push(new Star(leftPaddle,10,-10,rightPaddle));
+          }
+        }
+      }
       this.x = this.x + this.speed;
       this.y = this.y + this.angle;
       if (this.x > width) {
@@ -59,6 +65,7 @@ function Star (paddle,minAngle,maxAngle,oppositePaddle) {
         this.y = paddle.y;
       }
     }
+
     if (this.paddle === rightPaddle) {
       this.x = this.x - this.speed;
       this.y = this.y - this.angle;
@@ -115,7 +122,7 @@ starFallSetup = function() {
 
 starFallDraw = function() {
   for (var i = 0; i<stars.length; i++) {
-//    stars[i].resetPosition();
+    stars[i].resetPosition();
     stars[i].move();
     stars[i].display();
   //  stars[i].paddleCollide();

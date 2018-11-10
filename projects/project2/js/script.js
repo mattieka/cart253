@@ -195,6 +195,7 @@ function checkPowerUp() {
           leftTimer.startTimer();
           leftTimer.checkTimer();
           starFallDraw();
+          console.log(Star.x);
         }
       }
   // right paddle fyve

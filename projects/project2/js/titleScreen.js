@@ -52,5 +52,5 @@ function titleScreen () {
       }
     }
     console.log(rightCharacter);
-    starFallSetup();
+    //starFallSetup();
 }
