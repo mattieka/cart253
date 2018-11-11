@@ -72,13 +72,17 @@ function setup() {
   // Initialize score at 0
   leftPaddle = new Paddle(0,height/2,this.vx,this.vy,10,60,10,83,87,0,0);
 
-  // initialize avatars
-  leftAvatar = spriteYellowHappy;
-  rightAvatar = spriteGreenHappy;
+  if (titleDone === true) {
+    // initialize avatars
+    leftAvatar = spriteYellowHappy;
+    rightAvatar = spriteGreenHappy;
 
-//  roboArmsSetup();
-//  starFallSetup();
-  timerSetup();
+    roboArmsSetup();
+    starFallSetup();
+    timerSetup();
+
+  }
+
 }
 
 /************************ D R A W    F U N C T I O N *************************/

@@ -17,9 +17,9 @@ function titleScreen () {
       leftCharacter = "fyve";
 
       rightCharacter = "juanita";
-      topRoboArm = new roboArms (fieldWidth-10,100,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,rightPaddle.score);
-      midRoboArm = new roboArms (fieldWidth-10,fieldHeight/2-30,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,rightPaddle.score);
-      bottomRoboArm = new roboArms (fieldWidth-10,fieldHeight-160,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,rightPaddle.score);
+      // topRoboArm = new roboArms (fieldWidth-10,100,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,rightPaddle.score);
+      // midRoboArm = new roboArms (fieldWidth-10,fieldHeight/2-30,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,rightPaddle.score);
+      // bottomRoboArm = new roboArms (fieldWidth-10,fieldHeight-160,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,rightPaddle.score);
       push();
         rectMode(CENTER);
         strokeWeight(5);
@@ -30,13 +30,14 @@ function titleScreen () {
       text("Now hit enter to play!",width/2,height/4*3);
         if (keyIsDown(ENTER)) {
           titleDone = true;
+          setup();
         }
       }
     if (keyIsDown(RIGHT_ARROW) || rightCharacter === "fyve") {
       leftCharacter = "juanita";
-        topRoboArm = new roboArms (0,100,this.vx,this.vy,10,60,10,83,87,leftPaddle.score);
-        midRoboArm = new roboArms (0,fieldHeight/2-30,this.vx,this.vy,10,60,10,83,87,leftPaddle.score);
-        bottomRoboArm = new roboArms (0,fieldHeight-160,this.vx,this.vy,10,60,10,83,87,leftPaddle.score);
+        // topRoboArm = new roboArms (0,100,this.vx,this.vy,10,60,10,83,87,leftPaddle.score);
+        // midRoboArm = new roboArms (0,fieldHeight/2-30,this.vx,this.vy,10,60,10,83,87,leftPaddle.score);
+        // bottomRoboArm = new roboArms (0,fieldHeight-160,this.vx,this.vy,10,60,10,83,87,leftPaddle.score);
 
       rightCharacter = "fyve";
       push();
@@ -49,8 +50,7 @@ function titleScreen () {
       text("Now hit enter to play!",width/2,height/4*3);
         if (keyIsDown(ENTER)) {
           titleDone = true;
+          setup();
       }
     }
-    console.log(rightCharacter);
-    //starFallSetup();
 }
