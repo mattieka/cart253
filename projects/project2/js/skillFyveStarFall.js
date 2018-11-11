@@ -59,9 +59,10 @@ function Star (paddle,minAngle,maxAngle,oppositePaddle) {
 
   this.paddleCollide = function() {
     //check if star overlaps the paddle or the robo arms on the x axis
-    var distance = dist(this.x,this.y,this.oppositePaddle.x+this.oppositePaddle.w/2,this.oppositePaddle.y+this.oppositePaddle.h/2);
-    if (distance < 10) {
+    var distancePaddle = dist(this.x,this.y,this.oppositePaddle.x+this.oppositePaddle.w/2,this.oppositePaddle.y+this.oppositePaddle.h/2);
+    if (distancePaddle < 10) {
       this.oppositePaddle.score = this.oppositePaddle.score - 1;
+      console.log(this.oppositePaddle.score);
     }
   };
 }

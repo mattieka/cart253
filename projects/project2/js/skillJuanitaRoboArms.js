@@ -45,8 +45,6 @@ roboArms.prototype.handleInput = function() {
   }
 }
 
-
-
 /********************** U P D A T E    F U N C T I O N ***********************/
 
 /* update function; mostly the same as paddle, but allows the paddles to wrap
@@ -57,9 +55,6 @@ update function does the following:
       - lets paddles wrap */
 
 roboArms.prototype.update = function() {
-  //console.log(topRoboArm.y,midRoboArm.y,bottomRoboArm.y);
-
-  //this.y = constrain(this.y,0,fieldHeight-this.h);
   //bounces
   if (this.y <= 0) {
     this.y = fieldHeight-this.h;
@@ -81,7 +76,7 @@ roboArmsSetup = function() {
     topRoboArm = new roboArms (fieldWidth-10,100,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,rightPaddle.score);
     midRoboArm = new roboArms (fieldWidth-10,fieldHeight/2-30,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,rightPaddle.score);
     bottomRoboArm = new roboArms (fieldWidth-10,fieldHeight-160,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,rightPaddle.score);
-    console.log("right arms made");
+
   }
   if (leftCharacter === "juanita") {
     topRoboArm = new roboArms (0,100,this.vx,this.vy,10,60,10,83,87,leftPaddle.score);
@@ -121,4 +116,6 @@ function roboArmsDraw() {
   topRoboArm.display();
   midRoboArm.display();
   bottomRoboArm.display();
+
+
 }

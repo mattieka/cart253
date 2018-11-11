@@ -70,7 +70,7 @@ function setup() {
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
   // Initialize score at 0
-  leftPaddle = new Paddle(0,height/2,this.vx,this.vy,10,60,10,83,87,0,0);
+  leftPaddle = new Paddle(0,height/2,this.vx,this.vy,10,60,10,83,87,0,10);
 
   if (titleDone === true) {
     // initialize avatars
