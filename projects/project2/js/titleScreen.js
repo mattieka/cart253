@@ -13,8 +13,8 @@ function titleScreen () {
     text("Each character has a SPECIAL ABILITY that you can use when your TP is at 10! Press 'd' or '<--' to use it!",width/2-width/4-10,height/5,350);
   pop();
   imageMode(CENTER);
-  image(spriteJuanita,width/3,height/2-40);
-  image(spriteYellowHappy,width/3*2,height/2-40);
+  image(juanitaHappy,width/3,height/2-40);
+  image(fyveHappy,width/3*2,height/2-40);
     if (keyIsDown(LEFT_ARROW) || rightCharacter === "juanita") {
 
       leftCharacter = "fyve";
@@ -25,7 +25,7 @@ function titleScreen () {
         strokeWeight(5);
         noFill();
         stroke("#ead2f7");
-        rect(width/3,height/2-40,spriteJuanita.width+5,spriteJuanita.height+5);
+        rect(width/3,height/2-40,juanitaHappy.width+5,juanitaHappy.height+5);
       pop();
       text("JUANITA", width/2,height/3*2-10);
       textSize(20);
@@ -47,7 +47,7 @@ function titleScreen () {
         strokeWeight(5);
         noFill();
         stroke("#ead2f7");
-        rect(width/3*2,height/2-40,spriteGreenHappy.width+5,spriteGreenHappy.height+5);
+        rect(width/3*2,height/2-40,fyveHappy.width+5,fyveHappy.height+5);
       pop();
       text("FYVE", width/2,height/3*2-10);
       textSize(20);

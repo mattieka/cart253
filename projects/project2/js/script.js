@@ -22,11 +22,12 @@ var fieldHeight = 480;
 var starImage;
 
 // variables for avatar pictures
-var spriteGreenHappy;
-var spriteGreenMad;
-var spriteYellowHappy;
-var spriteYellowMad;
-var spriteJuanita;
+// juanita
+var juanitaHappy;
+var juanitaMad;
+// fyve
+var fyveHappy;
+var fyveMad;
 
 // variable to track which sprite is displayed
 var leftAvatar;
@@ -47,11 +48,10 @@ var roboArmsActive = false;
 /**************************** P R E L O A D  *********************************/
 /* preloads images */
 function preload() {
-  spriteGreenHappy = loadImage("assets/images/placeholderSprites/spriteGreenHappy.png");
-  spriteGreenMad = loadImage("assets/images/placeholderSprites/spriteGreenMad.png");
-  spriteYellowHappy = loadImage("assets/images/placeholderSprites/spriteYellowHappy.png");
-  spriteYellowMad = loadImage("assets/images/placeholderSprites/spriteYellowMad.png");
-  spriteJuanita = loadImage("assets/images/sprites/juanita.png");
+  juanitaHappy = loadImage("assets/images/sprites/juanitaHappy.png");
+  juanitaMad = loadImage("assets/images/sprites/juanitaMad.png");
+  fyveHappy = loadImage("assets/images/sprites/fyveHappy.png");
+  fyveMad = loadImage("assets/images/sprites/fyveMad.png");
   starImage = loadImage("assets/images/sprites/star.png");
 }
 
@@ -75,8 +75,16 @@ function setup() {
 
   if (titleDone === true) {
     // initialize avatars
-    leftAvatar = spriteYellowHappy;
-    rightAvatar = spriteGreenHappy;
+    if (leftCharacter === "juanita") {
+      leftAvatar = juanitaHappy;
+      rightAvatar = fyveHappy;
+    }
+
+    if (rightCharacter === "juanita") {
+      leftAvatar = fyveHappy;
+      rightAvatar = juanitaHappy;
+    }
+
 
     roboArmsSetup();
     starFallSetup();

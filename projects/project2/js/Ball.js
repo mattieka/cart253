@@ -141,8 +141,16 @@ Ball.prototype.reset = function () {
     this.vx = random(3,10);
     console.log("right score: " + rightPaddle.score);
     console.log("right power up meter: " + rightPaddle.powerUpMeter);
-    rightAvatar = spriteGreenHappy;
-    leftAvatar = spriteYellowMad;
+
+    if (rightCharacter === "juanita") {
+      rightAvatar = juanitaHappy;
+      leftAvatar = fyveMad;
+    }
+
+    if (rightCharacter === "fyve") {
+      rightAvatar = fyveHappy;
+      leftAvatar = juanitaMad;
+    }
 
   // if the ball goes off the right side:
   } else if (this.x > width) {
@@ -171,8 +179,16 @@ Ball.prototype.reset = function () {
     this.vx = random(-10,-3);
     console.log("left score: " + leftPaddle.score);
     console.log("left power up meter: " + leftPaddle.powerUpMeter);
-    leftAvatar = spriteYellowHappy;
-    rightAvatar = spriteGreenMad;
+
+    if (leftCharacter === "juanita") {
+      leftAvatar = juanitaHappy;
+      rightAvatar = fyveMad;
+    }
+
+    if (leftCharacter === "fyve") {
+      leftAvatar = fyveHappy;
+      rightAvatar = juanitaMad;
+    }
   }
 }
 
@@ -182,7 +198,7 @@ Ball.prototype.reset = function () {
 
 Ball.prototype.determineWinner = function () {
   // when the LEFT PADDLE is the first to reach a score of 4, declare them winner
-  if (leftPaddle.score === 1) {
+  if (leftPaddle.score === 11) {
     // cover screen in black rectangle
     fill ("#000000");
     rect (0,0,width,height);
@@ -207,7 +223,7 @@ Ball.prototype.determineWinner = function () {
       titleDone = false;
       titleScreen();
     }
-  } else if (rightPaddle.score === 1) {
+  } else if (rightPaddle.score === 11) {
     fill ("#000000");
     rect (0,0,width,height);
     //center ball so that it stops moving and doesnt add to the score
