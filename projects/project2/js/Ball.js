@@ -182,7 +182,7 @@ Ball.prototype.reset = function () {
 
 Ball.prototype.determineWinner = function () {
   // when the LEFT PADDLE is the first to reach a score of 4, declare them winner
-  if (leftPaddle.score === 11) {
+  if (leftPaddle.score === 1) {
     // cover screen in black rectangle
     fill ("#000000");
     rect (0,0,width,height);
@@ -200,12 +200,14 @@ Ball.prototype.determineWinner = function () {
     text("WIN",width/4,height/2);
     //reset message
     fill ("#ffffff");
-    text ("press ENTER to try again!",width/2,height-50);
-    if (keyIsDown(ENTER)) {
+    textSize(32);
+    text ("press SPACEBAR to try again!",width/2,height-50);
+    if (keyIsDown(32)) {
       //restartSound.play();
-      setup();
+      titleDone = false;
+      titleScreen();
     }
-  } else if (rightPaddle.score === 11) {
+  } else if (rightPaddle.score === 1) {
     fill ("#000000");
     rect (0,0,width,height);
     //center ball so that it stops moving and doesnt add to the score
@@ -223,9 +225,10 @@ Ball.prototype.determineWinner = function () {
     //reset message
     fill ("#ffffff");
     text ("press ENTER to try again!",width/2,height-50);
-    if (keyIsDown(ENTER)) {
+    if (keyIsDown(32)) {
   //    restartSound.play();
-      setup();
+      titleDone = false;
+      titleScreen();
     }
   }
 }

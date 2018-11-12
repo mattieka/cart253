@@ -6,13 +6,13 @@ DONE!      - adding scores,
 DONE!      - displaying the score,
       - changing the visual and audio aesthetics of the game, etc.
 
-2) Add a title to the game that displays before the game starts,
+DONE! 2) Add a title to the game that displays before the game starts,
    let the player start the game by clicking the mouse or hitting a key
 
 DONE ! 3) Add an ending to the game when one player reaches 11 points,
    display a game over screen and give the option to reset the game and play again
 
-4) Add a new class to the game that create a new kind of ball that the players
+DONE ! 4) Add a new class to the game that create a new kind of ball that the players
    should avoid when playing. this ball should... (STARS!)
       - look different,
       - should move differently,
@@ -21,7 +21,7 @@ DONE ! 3) Add an ending to the game when one player reaches 11 points,
         maybe it makes the paddle move randomly, maybe it reverses the paddle
         controls, etc.), make sure you have at least one of these objects in the game
 
-5) Add a new class to the game that creates a new kind of object different from
+DONE ! (TIMER) Add a new class to the game that creates a new kind of object different from
    Paddles and Balls that interacts with the normal type of ball
    (maybe a kind of food the ball eats to get faster,
    maybe a portal that teleports the ball somewhere else on the screen,
@@ -38,7 +38,7 @@ brainstorming
 
 npc pictures?? that change expressions as you play the game? (swap between using switch??)
 
-increase canvas size a bit on the bottom to accommodate them, readjust constraints
+DONE ! - increase canvas size a bit on the bottom to accommodate them, readjust constraints
 on ball and paddle to accommodate them.
 
 TP METER: when opponent scores, increase TP by 3.
@@ -46,10 +46,11 @@ TP METER: when opponent scores, increase TP by 3.
           when opponent scores after using ability, increase TP by 7
  10 TP lets you use your ability w/ control key toward middle ("d" on left, "<-" on right)
 
-playable characters and their abilities:
-1) Juanita: extra paddles
-2) Dudes: seeing double (balls multiply)
-3) Ereth: opponent's controls reverse
-4) Zephorya: Severed Wax Head Shield (shields her side, opponent must break shields)
-5) Fyve: Starfall (stars come from the screen, opponent must avoid)
-6) Ceese: Polaroid (take a "picture" of the screen, then press the key again to reset screen to that position)
+-------------------------------------------------------------------------------
+
+stuff left to do
+
+DONE - explain TP somewhere
+DONE - explain player abilities somewhere
+- get icons
+- add sounds

@@ -7,47 +7,53 @@ function titleScreen () {
   textSize(30);
   textAlign(CENTER);
   fill ("#ffffff");
-  text("Right-side Player, choose your character!",width/2,height/4);
-
+  text("Right-side Player, choose your character!",width/2,70);
+  push();
+    textSize(20);
+    text("Each character has a SPECIAL ABILITY that you can use when your TP is at 10! Press 'd' or '<--' to use it!",width/2-width/4-10,height/5,350);
+  pop();
   imageMode(CENTER);
-  image(spriteJuanita,width/3,height/2);
-  image(spriteYellowHappy,width/3*2,height/2);
+  image(spriteJuanita,width/3,height/2-40);
+  image(spriteYellowHappy,width/3*2,height/2-40);
     if (keyIsDown(LEFT_ARROW) || rightCharacter === "juanita") {
 
       leftCharacter = "fyve";
-
       rightCharacter = "juanita";
-      // topRoboArm = new roboArms (fieldWidth-10,100,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,rightPaddle.score);
-      // midRoboArm = new roboArms (fieldWidth-10,fieldHeight/2-30,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,rightPaddle.score);
-      // bottomRoboArm = new roboArms (fieldWidth-10,fieldHeight-160,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,rightPaddle.score);
+
       push();
         rectMode(CENTER);
         strokeWeight(5);
         noFill();
         stroke("#ead2f7");
-        rect(width/3,height/2,spriteJuanita.width+5,spriteJuanita.height+5);
+        rect(width/3,height/2-40,spriteJuanita.width+5,spriteJuanita.height+5);
       pop();
-      text("Now hit enter to play!",width/2,height/4*3);
+      text("JUANITA", width/2,height/3*2-10);
+      textSize(20);
+      text("Juanita's special ability is ROBOARMS, which gives her two extra paddles! The ROBOARMS are immune to Fyve's special ability!",width/2-width/4-10,height/2+150,350);
+      textSize(30);
+      text("Now hit enter to play!",width/2,height-50);
         if (keyIsDown(ENTER)) {
           titleDone = true;
           setup();
         }
       }
     if (keyIsDown(RIGHT_ARROW) || rightCharacter === "fyve") {
-      leftCharacter = "juanita";
-        // topRoboArm = new roboArms (0,100,this.vx,this.vy,10,60,10,83,87,leftPaddle.score);
-        // midRoboArm = new roboArms (0,fieldHeight/2-30,this.vx,this.vy,10,60,10,83,87,leftPaddle.score);
-        // bottomRoboArm = new roboArms (0,fieldHeight-160,this.vx,this.vy,10,60,10,83,87,leftPaddle.score);
 
+      leftCharacter = "juanita";
       rightCharacter = "fyve";
+
       push();
         rectMode(CENTER);
         strokeWeight(5);
         noFill();
         stroke("#ead2f7");
-        rect(width/3*2,height/2,spriteGreenHappy.width+5,spriteGreenHappy.height+5);
+        rect(width/3*2,height/2-40,spriteGreenHappy.width+5,spriteGreenHappy.height+5);
       pop();
-      text("Now hit enter to play!",width/2,height/4*3);
+      text("FYVE", width/2,height/3*2-10);
+      textSize(20);
+      text("Fyve's special ability is STARFALL, which sends stars shooting at the other player! If their paddle is hit by a star, they LOSE POINTS!",width/2-width/4-10,height/2+150,350);
+      textSize(30);
+      text("Now hit enter to play!",width/2,height-50);
         if (keyIsDown(ENTER)) {
           titleDone = true;
           setup();

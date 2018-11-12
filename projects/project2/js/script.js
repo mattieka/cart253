@@ -41,6 +41,7 @@ var timer;
 var powerUpMeter = 10;
 var starSetupDone = false;
 var starPositionReset = false;
+var roboArmsActive = false;
 
 
 /**************************** P R E L O A D  *********************************/
@@ -120,8 +121,15 @@ function draw() {
 
 
   ball.display();
-  leftPaddle.display();
-  rightPaddle.display();
+
+  if (roboArmsActive === false && leftCharacter === "juanita" || leftTimer.timerState === "off" || leftCharacter === "fyve") {
+    leftPaddle.display();
+  }
+
+  if (roboArmsActive === false && rightCharacter === "juanita" || rightTimer.timerState === "off" || rightCharacter === "fyve") {
+    rightPaddle.display();
+  }
+
 
   checkPowerUp();
 
@@ -130,8 +138,6 @@ function draw() {
 }
 
 /*************************** F U N C T I O N S *******************************/
-/* mad science zone.
-   for testing new functions that dont concern the ball/paddle */
 
 //creates avatar area by drawing a rectangle
 function avatarZone() {
@@ -176,6 +182,7 @@ function checkPowerUp() {
         if (leftTimer.timerState === "on") {
           leftTimer.startTimer();
           leftTimer.checkTimer();
+          roboArmsActive = true;
           roboArmsDraw();
         }
       }
@@ -187,6 +194,7 @@ function checkPowerUp() {
         if (rightTimer.timerState === "on") {
           rightTimer.startTimer();
           rightTimer.checkTimer();
+          roboArmsActive = true;
           roboArmsDraw();
         }
       }
@@ -199,7 +207,6 @@ function checkPowerUp() {
           leftTimer.startTimer();
           leftTimer.checkTimer();
           starFallDraw();
-          console.log(Star.x);
         }
       }
   // right paddle fyve
@@ -234,6 +241,7 @@ function Timer(paddle,timerState,timer) {
       paddle.powerUpMeter = 0;
       this.timerState = "off";
       this.timer = 10;
+
     }
   }
 
