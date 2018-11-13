@@ -45,7 +45,16 @@ nice, these are both multiples of 16.
     grid increments
 
 i did it, and, it hurts to look at
+heres the example i followed, i, dont really understand how it works:
+https://editor.p5js.org/Tiri/sketches/Sk_-uQu6
 
 --
 
 3) make that "character"
+
+i did that, and, made the move functions and my god shes going so fast please
+slow down
+
+--
+
+4) slow her down????
