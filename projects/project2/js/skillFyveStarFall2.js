@@ -1,3 +1,5 @@
+//PREVIOUS VERSION OF STARFALL - NO LONGER NEEDED 
+
 /************************* PLAYER SKILLS: FYVE ***************************/
 
 /* All code pertaining to the player "Fyve" is kept here. This includes:

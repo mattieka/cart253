@@ -4,7 +4,6 @@
 
 function titleScreen () {
   background(0);
-  charaSelect.pause();
   textSize(30);
   textAlign(CENTER);
   fill ("#ffffff");
@@ -16,12 +15,7 @@ function titleScreen () {
   imageMode(CENTER);
   image(juanitaHappy,width/3,height/2-40);
   image(fyveHappy,width/3*2,height/2-40);
-    if (keyIsDown(LEFT_ARROW) || rightCharacter === "juanita") {
-      charaSelect.currentTime = 0;
-      charaSelect.play();
-      leftCharacter = "fyve";
-      rightCharacter = "juanita";
-
+    if (rightCharacter === "juanita") {
       push();
         rectMode(CENTER);
         strokeWeight(5);
@@ -34,16 +28,9 @@ function titleScreen () {
       text("Juanita's special ability is ROBOARMS, which gives her two extra paddles! The ROBOARMS are immune to Fyve's special ability!",width/2-width/4-10,height/2+150,350);
       textSize(30);
       text("Now hit enter to play!",width/2,height-50);
-        if (keyIsDown(ENTER)) {
-          titleDone = true;
-          setup();
-        }
       }
     if (keyIsDown(RIGHT_ARROW) || rightCharacter === "fyve") {
-      charaSelect.currentTime = 0;
-      charaSelect.play();
-      leftCharacter = "juanita";
-      rightCharacter = "fyve";
+
 
       push();
         rectMode(CENTER);
@@ -57,9 +44,27 @@ function titleScreen () {
       text("Fyve's special ability is STARFALL, which sends stars shooting at the other player! If their paddle is hit by a star, they LOSE POINTS!",width/2-width/4-10,height/2+150,350);
       textSize(30);
       text("Now hit enter to play!",width/2,height-50);
-        if (keyIsDown(ENTER)) {
-          titleDone = true;
-          setup();
-      }
     }
+}
+
+
+//keyPressed
+
+function keyPressed() {
+  if (titleDone === false) {
+    if (keyCode === LEFT_ARROW) {
+      charaSelect.currentTime = 0;
+      charaSelect.play();
+      leftCharacter = "fyve";
+      rightCharacter = "juanita";
+    } else if (keyCode === RIGHT_ARROW) {
+      charaSelect.currentTime = 0;
+      charaSelect.play();
+      leftCharacter = "juanita";
+      rightCharacter = "fyve";
+    } else if (keyCode === ENTER) {
+      titleDone = true;
+      setup();
+    }    
+  }
 }
