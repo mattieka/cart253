@@ -2,8 +2,8 @@
 /* Object Oriented Pong by Mattie KA
    Based on starter code by Pippin Barr.
 
-   Arrow keys control the right hand paddle
-   W and S control the left hand paddle.
+   Arrow keys control the right hand paddle, left arrow for right hand powerup.
+   W and S control the left hand paddle, D for left hand powerup.
 
 Written with JavaScript OOP.*/
 
@@ -20,6 +20,8 @@ var fieldHeight = 480;
 
 // variables for images
 var starImage;
+var roboArmsRight;
+var roboArmsLeft;
 
 // variables for avatar pictures
 // juanita
@@ -28,6 +30,9 @@ var juanitaMad;
 // fyve
 var fyveHappy;
 var fyveMad;
+
+//variables for sounds
+var charaSelect;
 
 // variable to track which sprite is displayed
 var leftAvatar;
@@ -39,6 +44,7 @@ var leftCharacter;
 
 // variables related to powerups
 var timer;
+var ballColorChange = 0;
 var powerUpMeter = 10;
 var starSetupDone = false;
 var starPositionReset = false;
@@ -48,11 +54,18 @@ var roboArmsActive = false;
 /**************************** P R E L O A D  *********************************/
 /* preloads images */
 function preload() {
+
+  //images
   juanitaHappy = loadImage("assets/images/sprites/juanitaHappy.png");
   juanitaMad = loadImage("assets/images/sprites/juanitaMad.png");
   fyveHappy = loadImage("assets/images/sprites/fyveHappy.png");
   fyveMad = loadImage("assets/images/sprites/fyveMad.png");
   starImage = loadImage("assets/images/sprites/star.png");
+  roboArmsRight = loadImage("assets/images/sprites/roboArmRight.png");
+  roboArmsLeft = loadImage("assets/images/sprites/roboArmLeft.png");
+
+  //sounds
+  charaSelect = new Audio("assets/sounds/charaselect.wav");
 }
 
 /*********************** S E T U P   F U N C T I O N *************************/
@@ -64,7 +77,7 @@ function setup() {
 
   createCanvas(640,680);
   // Create a ball
-  ball = new Ball(width/2,height/2,5,5,10,5);
+  ball = new Ball(width/2,height/2,5,5,13,5);
   // Create the right paddle with UP and DOWN as controls
   // Initialize score at 0
   rightPaddle = new Paddle(width-10,height/2,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,0,10);
@@ -174,9 +187,10 @@ function drawPowerUpMeter() {
 console.log(leftPaddle.powerUpMeter,rightPaddle.powerUpMeter);
   push();
     fill("#000000");
-    textSize(32);
-    text(leftPaddle.powerUpMeter,40,height-50);
-    text(rightPaddle.powerUpMeter,width-40,height-50);
+    textSize(25);
+    textAlign(CENTER);
+    text("TP: "+leftPaddle.powerUpMeter,leftAvatar.width,fieldHeight+(height-fieldHeight)-10);
+    text("TP: "+rightPaddle.powerUpMeter,width-rightAvatar.width,fieldHeight+(height-fieldHeight)-10);
   pop();
 }
 
@@ -255,13 +269,14 @@ function Timer(paddle,timerState,timer) {
 
   this.drawTimer = function() {
     push();
-      textSize(50);
-      fill("#FFFFFF");
-      if (paddle.x < width) {
-        text(this.timer,paddle.x+10,paddle.y + paddle.w);
+      textAlign(CENTER);
+      textSize(30);
+      fill("#000000");
+      if (this.paddle === leftPaddle) {
+        text(this.timer,leftAvatar.width,fieldHeight+(height-fieldHeight)-leftAvatar.height-40);
       }
-      if (paddle.x > width-40) {
-        text(this.timer,paddle.x-60,paddle.y);
+      if (this.paddle === rightPaddle) {
+        text(this.timer,width-rightAvatar.width,fieldHeight+(height-fieldHeight)-rightAvatar.height-40);
       }
     pop();
   }
@@ -280,3 +295,8 @@ displayTimer = function() {
 
 
 /**************************** C R E D I T S **********************************/
+/*
+Art (character icons and robo arms): Me! I drew them.
+Sounds:
+Character Select: https://opengameart.org/content/mouse-click
+/*

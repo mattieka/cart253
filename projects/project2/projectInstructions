@@ -21,7 +21,8 @@ DONE ! 4) Add a new class to the game that create a new kind of ball that the pl
         maybe it makes the paddle move randomly, maybe it reverses the paddle
         controls, etc.), make sure you have at least one of these objects in the game
 
-DONE ! (TIMER) Add a new class to the game that creates a new kind of object different from
+DONE ! (TIMER --> when timer is on, ball changes color)
+      5) Add a new class to the game that creates a new kind of object different from
    Paddles and Balls that interacts with the normal type of ball
    (maybe a kind of food the ball eats to get faster,
    maybe a portal that teleports the ball somewhere else on the screen,
@@ -52,5 +53,5 @@ stuff left to do
 
 DONE - explain TP somewhere
 DONE - explain player abilities somewhere
-- get icons
+DONE - get icons
 - add sounds

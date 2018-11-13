@@ -91,8 +91,12 @@ roboArmsSetup = function() {
 
 // Draws three robo arm paddles on the screen.
 roboArms.prototype.display = function() {
-  fill("#4286f4");
-  rect(this.x,this.y,this.w,this.h);
+  if (rightCharacter === "juanita") {
+    image(roboArmsRight,this.x+5,this.y+30,this.w,this.h);
+  }
+  if (leftCharacter === "juanita") {
+    image(roboArmsLeft,this.x+5,this.y+30,this.w,this.h);
+  }
 }
 
 /***************** A L L   J U A N I T A   F U N C T I O N S *****************/

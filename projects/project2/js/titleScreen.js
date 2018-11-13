@@ -4,6 +4,7 @@
 
 function titleScreen () {
   background(0);
+  charaSelect.pause();
   textSize(30);
   textAlign(CENTER);
   fill ("#ffffff");
@@ -16,7 +17,8 @@ function titleScreen () {
   image(juanitaHappy,width/3,height/2-40);
   image(fyveHappy,width/3*2,height/2-40);
     if (keyIsDown(LEFT_ARROW) || rightCharacter === "juanita") {
-
+      charaSelect.currentTime = 0;
+      charaSelect.play();
       leftCharacter = "fyve";
       rightCharacter = "juanita";
 
@@ -38,7 +40,8 @@ function titleScreen () {
         }
       }
     if (keyIsDown(RIGHT_ARROW) || rightCharacter === "fyve") {
-
+      charaSelect.currentTime = 0;
+      charaSelect.play();
       leftCharacter = "juanita";
       rightCharacter = "fyve";
 

@@ -60,7 +60,17 @@ Ball.prototype.isOffScreen = function () {
 
 /* Draws the ball as a rectangle on the screen */
 Ball.prototype.display = function () {
-  fill(255);
+  if (leftTimer.timerState === "on" || rightTimer.timerState === "on") {
+      colorMode(HSB,255);
+      if (ballColorChange === 255) {
+        ballColorChange = 0;
+      }
+      ballColorChange = ballColorChange + 1;
+      fill(ballColorChange,255,255);
+
+  } else {
+    fill(255);
+  }
   rect(this.x,this.y,this.size,this.size);
 }
 
@@ -109,6 +119,7 @@ Ball.prototype.handleCollision = function(roboArms) {
       - checks which side (left or right) the ball went off
       - adjusts score accordingly,
       - adjusts power up meter (+1 if scored, +3 if scored on) (NEW!)
+      - changes avatars based on who scored (NEW!)
       - resets the ball back to the center,
       - adjusts velocity so that the ball goes toward the player who last scored
       - randomizes velocity between 3 and 10 (or -10 and -3) to increase challenge */
