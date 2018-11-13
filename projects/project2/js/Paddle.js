@@ -54,3 +54,5 @@ Paddle.prototype.display = function() {
   fill(255);
   rect(this.x,this.y,this.w,this.h);
 }
+
+/********************************* E N D *************************************/

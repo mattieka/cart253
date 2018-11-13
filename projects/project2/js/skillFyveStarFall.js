@@ -1,14 +1,13 @@
 /************************* PLAYER SKILLS: FYVE ***************************/
 
-/* All code pertaining to the player "Fyve" is kept here. This includes:
-
-1) their sprites/artwork
-2) functions/behaviors for their special ability: StarFall
-     - StarFall sends stars shooting from their paddle that make the other
-       lose points.
+/* All code pertaining to the player "Fyve"'s
+  functions/behaviors for their special ability: StarFall
+  StarFall sends stars shooting from their paddle that make the other
+  lose points. */
 
 /**************************** V A R I A B L E S ******************************/
 
+// variable for star array
 var stars = [];
 
 /**************************** STAR CONSTRUCTOR ******************************/
@@ -27,6 +26,15 @@ function Star (paddle,minAngle,maxAngle,oppositePaddle) {
   this.h = 32;
   this.speed = 7;
 
+/* STAR MOVEMENT FUNCTION : -------------------------------------
+    - checks which paddle the stars belong to
+    - moves horizontally at 'speed' or '-speed' based on which paddle stars belong to
+    - moves vertically based on the angle it is assigned, divided by 7 so that they
+      dont immidiately shoot off the screen
+    - when the stars go offscreen, their position is reset to their corresponding
+      paddle and a new angle is chosen randomly so that the stars don't always
+      have the same angle
+*/
   this.move = function() {
     if (this.paddle === leftPaddle) {
       this.x = this.x + this.speed;
@@ -49,20 +57,30 @@ function Star (paddle,minAngle,maxAngle,oppositePaddle) {
     }
   };
 
+/* STAR DISPLAY FUNCTION : -------------------------------------
+    - sets image mode to center, displays star image at their current x and y positions
+    - image shrunk down a bit so they are not gigantic
+*/
   this.display = function() {
-    fill("#be8bdd");
     push();
       imageMode(CENTER);
       image(starImage,this.x,this.y,starImage.width/2,starImage.height/2);
     pop();
   };
 
+/* STAR COLLISION FUNCTION : -------------------------------------
+    - calculates distance between star and paddle, and if theres an overlap,
+      reduce score. if score is already 0, leave it at zero.
+*/
   this.paddleCollide = function() {
-    //check if star overlaps the paddle or the robo arms on the x axis
+    //check if star overlaps the paddle
     var distancePaddle = dist(this.x,this.y,this.oppositePaddle.x+this.oppositePaddle.w/2,this.oppositePaddle.y+this.oppositePaddle.h/2);
     if (distancePaddle < 10) {
-      this.oppositePaddle.score = this.oppositePaddle.score - 1;
-      console.log(this.oppositePaddle.score);
+      if (this.oppositePaddle.score >= 1) {
+        this.oppositePaddle.score = this.oppositePaddle.score - 1;
+      } else if (this.oppositePaddle.score <= 0) {
+          this.oppositePaddle.score = 0;
+      }
     }
   };
 }
@@ -93,3 +111,5 @@ starFallDraw = function() {
     stars[i].paddleCollide();
   }
 }
+
+/********************************* E N D *************************************/

@@ -1,13 +1,14 @@
 /************************* PLAYER SKILLS: JUANITA ***************************/
 
-/* All code pertaining to the player "Juanita" is kept here. This includes:
+/* All code pertaining to the player "Juanita"'s functions/behaviors for her
+  special ability: Robo Arms
 
-1) her sprites/artwork
-2) functions/behaviors for her special ability: Robo Arms
-     - Robo Arms increase the amount of paddles she has.
+  Robo Arms increase the amount of paddles she has from one to three, and they
+  look like cool robot hands.
 
 /**************************** V A R I A B L E S ******************************/
 
+//robo arm variables
 var topRoboArm;
 var midRoboArm;
 var bottomRoboArm;
@@ -120,6 +121,6 @@ function roboArmsDraw() {
   topRoboArm.display();
   midRoboArm.display();
   bottomRoboArm.display();
-
-
 }
+
+/********************************* E N D *************************************/

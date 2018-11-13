@@ -58,7 +58,10 @@ Ball.prototype.isOffScreen = function () {
 
 /********************* D I S P L A Y   F U N C T I O N  **********************/
 
-/* Draws the ball as a rectangle on the screen */
+/* Draws the ball as a rectangle on the screen
+
+NEW! if the timer is on, the ball will change hue until time is up */
+
 Ball.prototype.display = function () {
   if (leftTimer.timerState === "on" || rightTimer.timerState === "on") {
       colorMode(HSB,255);
@@ -67,7 +70,6 @@ Ball.prototype.display = function () {
       }
       ballColorChange = ballColorChange + 1;
       fill(ballColorChange,255,255);
-
   } else {
     fill(255);
   }
@@ -91,6 +93,9 @@ Ball.prototype.handleCollision = function(paddle) {
       this.y = this.y - this.vy;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
+      // play collision sound
+      collisionSound.currentTime = 0;
+      collisionSound.play();
     }
   }
 }
@@ -106,6 +111,9 @@ Ball.prototype.handleCollision = function(roboArms) {
       this.y = this.y - this.vy;
       // Reverse x velocity to bounce
       this.vx = -this.vx;
+      // play collision sound
+      collisionSound.currentTime = 0;
+      collisionSound.play();
     }
   }
 }
@@ -125,7 +133,7 @@ Ball.prototype.handleCollision = function(roboArms) {
       - randomizes velocity between 3 and 10 (or -10 and -3) to increase challenge */
 
 Ball.prototype.reset = function () {
-  // if the ball goes off the left side:
+  // IF BALL GOES OFF THE LEFT SIDE ---------------------------
   if (this.x < 0) {
     // increase score
     rightPaddle.score = rightPaddle.score + 1;
@@ -146,24 +154,25 @@ Ball.prototype.reset = function () {
       leftPaddle.powerUpMeter = leftPaddle.powerUpMeter + 3;
     }
 
-    //reset ball position, give random velocity based on who scored, change sprites
+    //reset ball position, give random velocity based on who scored
     this.x = width/2;
     this.y = height/2;
     this.vx = random(3,10);
     console.log("right score: " + rightPaddle.score);
     console.log("right power up meter: " + rightPaddle.powerUpMeter);
 
+
+    //change sprites based on who scored
     if (rightCharacter === "juanita") {
       rightAvatar = juanitaHappy;
       leftAvatar = fyveMad;
     }
-
     if (rightCharacter === "fyve") {
       rightAvatar = fyveHappy;
       leftAvatar = juanitaMad;
     }
 
-  // if the ball goes off the right side:
+  // IF BALL GOES OFF THE RIGHT SIDE------------------
   } else if (this.x > width) {
     // increase score
     leftPaddle.score = leftPaddle.score + 1;
@@ -184,18 +193,18 @@ Ball.prototype.reset = function () {
       rightPaddle.powerUpMeter = rightPaddle.powerUpMeter + 3;
     }
 
-    //reset ball position, give random velocity based on who scored, change sprites
+    //reset ball position, give random velocity based on who scored
     this.x = width/2;
     this.y = height/2;
     this.vx = random(-10,-3);
     console.log("left score: " + leftPaddle.score);
     console.log("left power up meter: " + leftPaddle.powerUpMeter);
 
+    //changes sprites based on who scored
     if (leftCharacter === "juanita") {
       leftAvatar = juanitaHappy;
       rightAvatar = fyveMad;
     }
-
     if (leftCharacter === "fyve") {
       leftAvatar = fyveHappy;
       rightAvatar = juanitaMad;
@@ -208,7 +217,7 @@ Ball.prototype.reset = function () {
 //checks if a player's score is 11, and if so, declare them the WINNER
 
 Ball.prototype.determineWinner = function () {
-  // when the LEFT PADDLE is the first to reach a score of 4, declare them winner
+  // when the LEFT PADDLE is the first to reach a score of 11, declare them winner
   if (leftPaddle.score === 11) {
     // cover screen in black rectangle
     fill ("#000000");
@@ -218,22 +227,24 @@ Ball.prototype.determineWinner = function () {
     this.vy = 0;
     this.x = width/2;
     this.y = height/2;
-    // text and text color
+    // text and text color, so that "LOSE" is displayed in red on loser's side,
+    // and "WIN" is displayed in green on the winner's side
     textSize(50);
     textAlign(CENTER);
     fill ("#ef3326");
     text("LOSE",width/4*3,height/2);
     fill ("#4de257");
     text("WIN",width/4,height/2);
-    //reset message
+    // reset message
     fill ("#ffffff");
     textSize(32);
     text ("press SPACEBAR to try again!",width/2,height-50);
+    // revert titlescreen variable to false, restart program from title screen.
     if (keyIsDown(32)) {
-      //restartSound.play();
       titleDone = false;
       titleScreen();
     }
+  // when the RIGHT PADDLE is the first to reach a score of 11, declare them winner
   } else if (rightPaddle.score === 11) {
     fill ("#000000");
     rect (0,0,width,height);
@@ -242,7 +253,8 @@ Ball.prototype.determineWinner = function () {
     this.vy = 0;
     this.x = width/2;
     this.y = height/2;
-    // text and text color
+    // text and text color, so that "LOSE" is displayed in red on loser's side,
+    // and "WIN" is displayed in green on the winner's side
     textSize(50);
     textAlign(CENTER);
     fill ("#4de257");
@@ -251,11 +263,13 @@ Ball.prototype.determineWinner = function () {
     text("LOSE",width/4,height/2);
     //reset message
     fill ("#ffffff");
-    text ("press ENTER to try again!",width/2,height-50);
+    text ("press SPACEBAR to try again!",width/2,height-50);
+    // revert titlescreen variable to false, restart program from title screen.
     if (keyIsDown(32)) {
-  //    restartSound.play();
       titleDone = false;
       titleScreen();
     }
   }
 }
+
+/******************************** E N D **************************************/

@@ -33,6 +33,9 @@ var fyveMad;
 
 //variables for sounds
 var charaSelect;
+var startGame;
+var timerStart;
+var collisionSound;
 
 // variable to track which sprite is displayed
 var leftAvatar;
@@ -66,15 +69,18 @@ function preload() {
 
   //sounds
   charaSelect = new Audio("assets/sounds/charaselect.wav");
+  startGame = new Audio("assets/sounds/startGame.mp3");
+  timerStart = new Audio("assets/sounds/timerStart.mp3");
+  collisionSound = new Audio("assets/sounds/collisionSound.wav");
 }
 
 /*********************** S E T U P   F U N C T I O N *************************/
 
-// Creates the ball and paddles
+// Creates the ball and paddles, sets avatars, runs special ability and timer setup
 function setup() {
   imageMode(CENTER);
   angleMode(DEGREES);
-
+  //create canvas
   createCanvas(640,680);
   // Create a ball
   ball = new Ball(width/2,height/2,5,5,13,5);
@@ -92,25 +98,21 @@ function setup() {
       leftAvatar = juanitaHappy;
       rightAvatar = fyveHappy;
     }
-
     if (rightCharacter === "juanita") {
       leftAvatar = fyveHappy;
       rightAvatar = juanitaHappy;
     }
-
-
     roboArmsSetup();
     starFallSetup();
     timerSetup();
-
   }
-
 }
 
 /************************ D R A W    F U N C T I O N *************************/
 
 // Handles input, updates all the elements, checks for collisions
-// and displays everything.
+// and displays everything. also constrains score so that it doesnt go negative
+
 function draw() {
   if (titleDone === false) {
     titleScreen();
@@ -136,11 +138,7 @@ function draw() {
 
   ball.handleCollision(leftPaddle);
   ball.handleCollision(rightPaddle);
-
-
   drawAvatar();
-
-
   ball.display();
 
   if (roboArmsActive === false && leftCharacter === "juanita" || leftTimer.timerState === "off" || leftCharacter === "fyve") {
@@ -151,28 +149,26 @@ function draw() {
     rightPaddle.display();
   }
 
-
   checkPowerUp();
-
   ball.determineWinner();
   }
 }
 
-/*************************** F U N C T I O N S *******************************/
+/************************* AVATAR AREA FUNCTIONS *****************************/
 
-//creates avatar area by drawing a rectangle
+// AVATAR ZONE : creates avatar area by drawing a rectangle --------------
 function avatarZone() {
   fill("#ead2f7");
   rect(0,fieldHeight,width,height-fieldHeight);
 }
 
-//draws avatar based on who previously scored
+// DRAW AVATAR : draws avatar based on avatar variables  ------------------
 function drawAvatar() {
   image(rightAvatar,width-rightAvatar.width,fieldHeight+(height-fieldHeight)/2);
   image(leftAvatar,leftAvatar.width,fieldHeight+(height-fieldHeight)/2);
 }
 
-//function that draws the score onscreen
+// DRAW SCORE : function that draws the score onscreen --------------------
 function drawScore() {
   push();
     fill("#000000");
@@ -182,6 +178,7 @@ function drawScore() {
   pop();
 }
 
+// DRAW POWERUPMETER : ----------------------------------------------------
 //function that displays TP (power up meter), tells player if they can use special ability
 function drawPowerUpMeter() {
 console.log(leftPaddle.powerUpMeter,rightPaddle.powerUpMeter);
@@ -194,11 +191,14 @@ console.log(leftPaddle.powerUpMeter,rightPaddle.powerUpMeter);
   pop();
 }
 
-//function that checks if a powerup is ready, and if it is, if the trigger key is pressed
+// CHECK POWERUP : checks if a powerup is ready, lets player trigger powerup by using keys
+                  // if powerup is triggered, play sound when timer starts.
 function checkPowerUp() {
   //left paddle juanita
       if (leftPaddle.powerUpMeter >= 10 && leftCharacter === "juanita") {
         if (keyCode === 68 && leftTimer.timerState === "off") {
+          timerStart.currentTime = 0;
+          timerStart.play();
           leftTimer.timerState = "on";
         }
         if (leftTimer.timerState === "on") {
@@ -211,6 +211,8 @@ function checkPowerUp() {
   // right paddle juanita
       if (rightPaddle.powerUpMeter >= 10 && rightCharacter === "juanita") {
         if (keyCode === LEFT_ARROW && rightTimer.timerState === "off") {
+          timerStart.currentTime = 0;
+          timerStart.play();
           rightTimer.timerState = "on";
         }
         if (rightTimer.timerState === "on") {
@@ -223,7 +225,10 @@ function checkPowerUp() {
   // left paddle fyve
       if (leftPaddle.powerUpMeter >= 10 && leftCharacter === "fyve") {
         if (keyCode === 68 && leftTimer.timerState === "off") {
+          timerStart.currentTime = 0;
+          timerStart.play();
           leftTimer.timerState = "on";
+
         }
         if (leftTimer.timerState === "on") {
           leftTimer.startTimer();
@@ -234,6 +239,8 @@ function checkPowerUp() {
   // right paddle fyve
       if (rightPaddle.powerUpMeter >= 10 && rightCharacter === "fyve") {
         if (keyCode === LEFT_ARROW && rightTimer.timerState === "off") {
+          timerStart.currentTime = 0;
+          timerStart.play();
           rightTimer.timerState = "on";
         }
         if (rightTimer.timerState === "on") {
@@ -247,26 +254,29 @@ function checkPowerUp() {
 /********************** T I M E R    F U N C T I O N S **********************/
 //implements timer into powerup
 
+// TIMER CLASS, has paddle, timerstate, and timer parameters
 function Timer(paddle,timerState,timer) {
   this.paddle = paddle;
   this.timerState = timerState;
   this.timer = timer;
 
+// START TIMER : starts countdown of 10 seconds based on framecount ---------
   this.startTimer = function() {
     if (frameCount % 60 === 0 && this.timer > 0) {
       this.timer-- ;
     }
-  }
+  };
 
+// CHECK TIMER : if timer hits 0, sets TP to 0, switches off and resets timer ----
   this.checkTimer = function() {
     if (this.timer === 0) {
       paddle.powerUpMeter = 0;
       this.timerState = "off";
       this.timer = 10;
-
     }
-  }
+  };
 
+// DRAW TIMER : draws timers on scree above each avatar
   this.drawTimer = function() {
     push();
       textAlign(CENTER);
@@ -279,7 +289,7 @@ function Timer(paddle,timerState,timer) {
         text(this.timer,width-rightAvatar.width,fieldHeight+(height-fieldHeight)-rightAvatar.height-40);
       }
     pop();
-  }
+  };
 }
 
 // sets up each player's timer
@@ -299,4 +309,7 @@ displayTimer = function() {
 Art (character icons and robo arms): Me! I drew them.
 Sounds:
 Character Select: https://opengameart.org/content/mouse-click
+Starting Game: https://opengameart.org/content/ui-accept-or-forward
+Timer Starting: https://opengameart.org/content/ui-failed-or-error
+Collision Sound: https://opengameart.org/content/sci-fi-shwop-1
 */
