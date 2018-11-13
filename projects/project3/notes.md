@@ -41,4 +41,11 @@ nice, these are both multiples of 16.
 
 --
 
-3) draw a grid onscreen so i can see if my "character is actually moving"
+2) draw a grid onscreen so i can see if my "character" is actually moving by
+    grid increments
+
+i did it, and, it hurts to look at
+
+--
+
+3) make that "character"
