@@ -17,7 +17,7 @@ ok but actually i want to...
 
 * be able to move a "character" (lets be real, its
 going to be a box) around the screen in increments of 16 so that it adheres to
-the grid.
+the grid. **DONE!!!!**
 
 * create collisions that function properly
 
@@ -79,3 +79,7 @@ gridline but i have no idea how to actually do that...
 
 UM I DID IT, that page above for processing was super helpful. i had to
 round the position of the character to the nearest gridline.
+
+--
+
+COLLISION TIME!!! gonna make some "rocks" to collide with 
