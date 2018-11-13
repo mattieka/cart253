@@ -48,7 +48,7 @@ var leftCharacter;
 // variables related to powerups
 var timer;
 var ballColorChange = 0;
-var powerUpMeter = 10;
+var powerUpMeter = 0;
 var starSetupDone = false;
 var starPositionReset = false;
 var roboArmsActive = false;
@@ -86,11 +86,11 @@ function setup() {
   ball = new Ball(width/2,height/2,5,5,13,5);
   // Create the right paddle with UP and DOWN as controls
   // Initialize score at 0
-  rightPaddle = new Paddle(width-10,height/2,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,0,10);
+  rightPaddle = new Paddle(width-10,height/2,this.vx,this.vy,10,60,10,DOWN_ARROW,UP_ARROW,0,0);
   // Create the left paddle with W and S as controls
   // Keycodes 83 and 87 are W and S respectively
   // Initialize score at 0
-  leftPaddle = new Paddle(0,height/2,this.vx,this.vy,10,60,10,83,87,0,10);
+  leftPaddle = new Paddle(0,height/2,this.vx,this.vy,10,60,10,83,87,0,0);
 
   if (titleDone === true) {
     // initialize avatars
