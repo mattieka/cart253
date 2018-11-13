@@ -57,4 +57,25 @@ slow down
 
 --
 
-4) slow her down????
+4) slow her down???? with mad science??
+gonna center the rectangle because i feel like things will be easier for my
+tiny brain to understand
+
+also gonna reduce speed to 8 from 16 and see if that breaks my grid
+update: it... didnt BREAK, but now the character can be like halfway through
+a square on the grid and that seems ominous from a programming perspective
+
+i wonder if you can reduce the speed but have the character snap to the nearest
+gridline...
+UPDATE: yeah there is, this sorta helped??
+https://forum.processing.org/two/discussion/8116/how-to-make-a-grid-and-how-to-make-objects-snap-to-it
+
+i would have to round the x and y position values to the number nearest a
+gridline but i have no idea how to actually do that...
+
+--
+
+5) snap to a gridline??????????
+
+UM I DID IT, that page above for processing was super helpful. i had to
+round the position of the character to the nearest gridline.

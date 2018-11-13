@@ -7,6 +7,7 @@ By Mattie KA
 
 /* -------------------------- V A R I A B L E S ----------------------------- */
 
+var gridSize = 16;
 var playerCharacter;
 
 /* ---------------------------- P R E L O A D ------------------------------- */
@@ -52,7 +53,7 @@ function grid() {
 
 //SETUP CHARACTER
 function setupCharacter() {
-  playerCharacter = new Character(width/2,height/2,32,32,16,this.vx,this.vy);
+  playerCharacter = new Character(width/2,height/2,32,32,3,this.vx,this.vy);
 }
 
 //CHARACTER CONSTRUCTOR
@@ -85,6 +86,8 @@ Character.prototype.handleInput = function() {
   }
 
   else {
+    playerCharacter.x = round(playerCharacter.x/gridSize)*gridSize;
+    playerCharacter.y = round(playerCharacter.y/gridSize)*gridSize;
     this.vy = 0;
     this.vx = 0;
   }
@@ -99,6 +102,7 @@ Character.prototype.move = function() {
 Character.prototype.display = function() {
   noStroke();
   fill("#A847C9");
+  rectMode(CENTER);
   rect(this.x,this.y,this.w,this.h);
 }
 
