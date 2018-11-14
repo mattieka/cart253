@@ -57,6 +57,28 @@ function handleInput() {
 /* ------------------------------ MOVEMENT --------------------------------- */
 
 function playerMove() {
+  //collision with wall
+  //left wall
+  if (playerCharacter.position.x <= 0) {
+    wallCollideText();
+    playerCharacter.position.x = playerCharacter.width/2;
+    playerCharacterVX = 0;
+  //right wall
+  } else if (playerCharacter.position.x >= width) {
+      wallCollideText();
+      playerCharacter.position.x = width - playerCharacter.width/2;
+      playerCharacterVX = 0;
+  //top wall
+  } else if (playerCharacter.position.y >=height) {
+      wallCollideText();
+      playerCharacter.position.y = height - playerCharacter.height/2;
+      playerCharacterVY = 0;
+  //bottom wall
+  } else if (playerCharacter.position.y <= 0) {
+      wallCollideText();
+      playerCharacter.position.y = playerCharacter.height/2;
+      playerCharacterVY = 0;
+  }
   playerCharacter.position.x = playerCharacter.position.x + playerCharacterVX;
   playerCharacter.position.y = playerCharacter.position.y + playerCharacterVY;
 }
@@ -70,8 +92,17 @@ function playerMove() {
 // }
 /* ---------------------------- COLLISION CHECK ------------------------------ */
 function checkCollisions() {
-  playerCharacter.collide(rocks);
-  playerCharacter.collide(ponds);
+  playerCharacter.collide(rocks,rockCollision);
+  playerCharacter.collide(ponds,pondCollision);
+}
+
+/* -------------------------- WALL COLLIDE TEXT ----------------------------- */
+
+function wallCollideText() {
+  textAlign(CENTER);
+  textSize(50);
+  fill("#FFFFFF");
+  text("hey thats the wall",width/2,50);
 }
 
 /* ---------------------------- RUN CHARACTER ------------------------------ */

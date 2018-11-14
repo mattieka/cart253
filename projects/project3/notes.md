@@ -12,7 +12,7 @@ games move up by 8 which is weird but ok. i guess i'll try 16x16 since 8x8 seems
 excessively small.
 
 3) What are my goals for this?
-submit this on time lol
+submit this assignment on time lol
 ok but actually i want to...
 
 * be able to move a "character" (lets be real, its
@@ -22,12 +22,14 @@ the grid. **DONE!!!!**
 * create collisions that function properly **DONE!!!***
 
 * let some kinda dialog box open when pressing a key to interact with another
-  character
+  character ***not gonna be a dialogue box, just smth that triggers when the
+  collision happens*** **DONE!!!***
 
 * put objects to collide with into an array **DONE SORTA? theres a group
 function in p5.play that does this for you**
 
-ok thats good for now or im going to die
+* not go offscreen **DONE!***
+
 
 ************************** TO-DO LIST ********************
 
@@ -58,7 +60,7 @@ slow down
 
 --
 
-4) slow her down???? with mad science??
+4) slow her down???? 
 gonna center the rectangle because i feel like things will be easier for my
 tiny brain to understand
 
@@ -92,4 +94,5 @@ ok i had to rewrite like All the code but collisions work now!
 
 --
 
-7) things be happening when you do a collision 
+7) things be happening when you do a collision
+just slapping some text on the screen for now

@@ -20,3 +20,10 @@ function setupRock() {
     rocks.add(aRock);
   }
 }
+
+function rockCollision() {
+  textAlign(CENTER);
+  textSize(50);
+  fill("#FFFFFF");
+  text("ow a rock",width/2,50);
+}

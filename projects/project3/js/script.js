@@ -1,6 +1,11 @@
 /*****************
 
 Grid-based movement and interactions with other objects.
+Uses p5.play library
+
+NOTE: when you collide with the wall the text flashes a lot so if youre
+sensitive to flashing lights please be careful!!!!!
+
 By Mattie KA
 
 ******************/

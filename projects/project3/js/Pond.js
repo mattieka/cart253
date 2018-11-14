@@ -20,3 +20,10 @@ function setupPond() {
     ponds.add(aPond);
   }
 }
+
+function pondCollision() {
+  textAlign(CENTER);
+  textSize(50);
+  fill("#FFFFFF");
+  text("oh its a pond",width/2,50);
+}
