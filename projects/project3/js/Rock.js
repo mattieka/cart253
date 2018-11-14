@@ -2,24 +2,21 @@
 
 //all functions pertaining to the rocks
 
-/* ---------------------------- CONSTRUCTOR -------------------------------- */
+/* ---------------------------- VARIABLE -------------------------------- */
 
-function Rock (x,y,w,h) {
-  this.x = x;
-  this.y = y;
-  this.w = w;
-  this.h = h;
-}
+var aRock;
 
-/* ------------------------------ DISPLAY --------------------------------- */
-
-Rock.prototype.display = function() {
-  noStroke();
-  fill("#666699");
-  rectMode(CENTER);
-  rect(round(this.x/gridSize)*gridSize,round(this.y/gridSize)*gridSize,this.w,this.h)
-}
+/* ------------------------------ SETUP ROCK --------------------------------- */
 
 function setupRock() {
-  rock1 = new Rock(width/3,height/2,32,32)
+  rocks = new Group();
+  for (var i = 0; i < 1; i++) {
+    var aRock = createSprite(width/3,height/3,32,32);
+    aRock.addImage(loadImage("assets/images/sprites/rock.png"));
+    aRock.position.x = round(aRock.position.x/gridSize)*gridSize;
+    aRock.position.y = round(aRock.position.y/gridSize)*gridSize;
+    console.log(width/3,height/3);
+    console.log(aRock.position.x,aRock.position.y);
+    rocks.add(aRock);
+  }
 }

@@ -19,12 +19,13 @@ ok but actually i want to...
 going to be a box) around the screen in increments of 16 so that it adheres to
 the grid. **DONE!!!!**
 
-* create collisions that function properly
+* create collisions that function properly **DONE!!!***
 
 * let some kinda dialog box open when pressing a key to interact with another
   character
 
-* put objects to collide with into an array
+* put objects to collide with into an array **DONE SORTA? theres a group
+function in p5.play that does this for you**
 
 ok thats good for now or im going to die
 
@@ -82,4 +83,13 @@ round the position of the character to the nearest gridline.
 
 --
 
-COLLISION TIME!!! gonna make some "rocks" to collide with 
+6) COLLISION TIME!!! gonna make some "rocks" to collide with
+
+so it turns out that using p5.play is a whole other ball game and it doesnt
+play nice with constructors ):
+
+ok i had to rewrite like All the code but collisions work now!
+
+--
+
+7) things be happening when you do a collision 

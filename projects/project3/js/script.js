@@ -36,8 +36,7 @@ function draw() {
   background(70);
   grid();
   runCharacter();
-  rock1.display();
-
+  drawSprites();
 }
 
 /* -------------------------- F U N C T I O N S ---------------------------- */
