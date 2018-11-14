@@ -71,6 +71,7 @@ function playerMove() {
 /* ---------------------------- COLLISION CHECK ------------------------------ */
 function checkCollisions() {
   playerCharacter.collide(rocks);
+  playerCharacter.collide(ponds);
 }
 
 /* ---------------------------- RUN CHARACTER ------------------------------ */

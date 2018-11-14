@@ -26,6 +26,7 @@ function setup() {
   createCanvas(800,512);
   setupCharacter();
   setupRock();
+  setupPond();
 }
 
 
