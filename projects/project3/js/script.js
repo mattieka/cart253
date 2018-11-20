@@ -15,11 +15,14 @@ By Mattie KA
 var gridSize = 16;
 var playerCharacter;
 var rock1;
+var textBox;
 
 /* ---------------------------- P R E L O A D ------------------------------- */
 // Description of preload
 
 function preload() {
+  textBox = loadImage("assets/images/text/textbox.png");
+  testDialogue = loadJSON("dialogueJSON/testDialogue.json");
 }
 
 
@@ -32,6 +35,7 @@ function setup() {
   setupCharacter();
   setupRock();
   setupPond();
+  updateTextBoxDimensions();
 }
 
 
@@ -41,8 +45,8 @@ function setup() {
 function draw() {
   background(70);
   grid();
-  runCharacter();
   drawSprites();
+  runCharacter();
 }
 
 /* -------------------------- F U N C T I O N S ---------------------------- */

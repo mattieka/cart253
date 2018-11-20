@@ -5,6 +5,11 @@
 /* ---------------------------- VARIABLE -------------------------------- */
 
 var aRock;
+var rockText =
+  [
+    "ow a rock!!!",
+    "stop hitting rocks!!"
+  ];
 
 /* ------------------------------ SETUP ROCK --------------------------------- */
 
@@ -17,13 +22,18 @@ function setupRock() {
     aRock.position.y = round(aRock.position.y/gridSize)*gridSize;
     console.log(width/3,height/3);
     console.log(aRock.position.x,aRock.position.y);
+    rockDialogue = new Dialogue(rockText,0);
     rocks.add(aRock);
   }
 }
 
 function rockCollision() {
-  textAlign(CENTER);
-  textSize(50);
+  textAlign(LEFT);
+  textSize(32);
   fill("#FFFFFF");
-  text("ow a rock",width/2,50);
+  showRockDialogue();
+}
+
+function showRockDialogue() {
+  rockDialogue.display();
 }
