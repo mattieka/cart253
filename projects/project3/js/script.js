@@ -22,6 +22,7 @@ var textBox;
 
 function preload() {
   textBox = loadImage("assets/images/text/textbox.png");
+  avatar = loadImage("assets/images/sprites/juanitaHappy.png");
   testDialogue = loadJSON("dialogueJSON/testDialogue.json");
 }
 
@@ -35,6 +36,7 @@ function setup() {
   setupCharacter();
   setupRock();
   setupPond();
+  setupFriend();
   updateTextBoxDimensions();
 }
 
