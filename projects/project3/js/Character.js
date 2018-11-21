@@ -94,7 +94,9 @@ function playerMove() {
 function checkCollisions() {
   playerCharacter.collide(rocks,rockCollision);
   playerCharacter.collide(ponds,pondCollision);
-  playerCharacter.collide(friends,juanitaCollision);
+  playerCharacter.collide(juanita.sprite,juanitaCollision);
+  playerCharacter.collide(ereth.sprite,erethCollision);
+  console.log(erethArray)
 }
 
 /* -------------------------- WALL COLLIDE TEXT ----------------------------- */

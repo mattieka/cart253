@@ -14,27 +14,49 @@ var avatarStartY;
 var avatarTextStartX;
 var avatarTextStartY;
 
-/* ------------------------ TEXT BOX CONSTRUCTOR --------------------------- */
+var erethArray;
+var juanitaArray;
+var juanitaText = [
+  "hewwo?????"
+];
+var erethText = [
+  "is this thing on",
+  "hello???",
+  "i really hope this works"
+];
+
+/* ------------------------ DIALOGUECONSTRUCTOR --------------------------- */
 
 function Dialogue(dialogueArray,currentText) {
   this.dialogueArray = dialogueArray;
   this.currentText = currentText;
 }
 
-/* -------------------------- DISPLAY FUNCTION ----------------------------- */
+/* ------------------------ DIALOGUE SETUP --------------------------- */
 
-Dialogue.prototype.display = function() {
-  image(textBox,textBoxX,textBoxY);
-  text(this.dialogueArray[currentText],textStartX,textStartY,textBoxWidth,textBoxHeight);
+function setupDialogue() {
+  juanitaArray = new Dialogue(juanitaText,0);
+  erethArray = new Dialogue(erethText,0);
 }
 
+/* -------------------------- DISPLAY FUNCTION ----------------------------- */
+//display text in text box
+Dialogue.prototype.display = function() {
+  image(textBox,textBoxX,textBoxY);
+  textSettings();
+  text(this.dialogueArray[this.currentText],textStartX,textStartY,textBoxWidth,textBoxHeight);
+  console.log(this.dialogueArray,this.currentText,"just PLEASE DISPLAY");
+}
+
+//display both avatar/portrait of character and text in text box
 Dialogue.prototype.avatarDisplay = function() {
   image(textBox,textBoxX,textBoxY);
   image(avatar,avatarStartX,avatarStartY);
-  text(this.dialogueArray[currentText],avatarTextStartX,avatarTextStartY,textBoxWidth,textBoxHeight)
+  textSettings();
+  text(this.dialogueArray[this.currentText],avatarTextStartX,avatarTextStartY,textBoxWidth,textBoxHeight)
 }
 
-
+//updates text box size and margins for text
 function updateTextBoxDimensions() {
   textBoxY = height - 192;
   textStartX = textBoxX + 32;
@@ -45,4 +67,11 @@ function updateTextBoxDimensions() {
   avatarStartY = textStartY;
   avatarTextStartX = avatarStartX + avatar.width + 16;
   avatarTextStartY = textStartY;
+}
+
+//function that stores text alignment/size/etc for easy access 
+function textSettings() {
+  textAlign(LEFT);
+  textSize(32);
+  fill("#FFFFFF");
 }

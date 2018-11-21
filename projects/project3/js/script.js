@@ -1,6 +1,8 @@
 /*****************
 
 Grid-based movement and interactions with other objects.
+An attempt at dialogue was made
+
 Uses p5.play library
 
 NOTE: when you collide with the wall the text flashes a lot so if youre
@@ -24,8 +26,9 @@ function preload() {
   textBox = loadImage("assets/images/text/textbox.png");
   avatar = loadImage("assets/images/sprites/juanitaHappy.png");
   testDialogue = loadJSON("dialogueJSON/testDialogue.json");
+  juanitaImage = loadImage("assets/images/sprites/juanita.png");
+  erethImage = loadImage("assets/images/sprites/ereth.png");
 }
-
 
 /* ------------------------------ S E T U P --------------------------------- */
 
@@ -36,6 +39,7 @@ function setup() {
   setupCharacter();
   setupRock();
   setupPond();
+  setupDialogue();
   setupFriend();
   updateTextBoxDimensions();
 }
@@ -49,6 +53,7 @@ function draw() {
   grid();
   drawSprites();
   runCharacter();
+
 }
 
 /* -------------------------- F U N C T I O N S ---------------------------- */
