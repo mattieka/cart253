@@ -14,12 +14,13 @@ var avatarStartY;
 var avatarTextStartX;
 var avatarTextStartY;
 
-var erethArray;
-var juanitaArray;
-var juanitaText = [
+var erethDialogue;
+var juanitaDialogue;
+
+var juanitaArray = [
   "hewwo?????"
 ];
-var erethText = [
+var erethArray = [
   "is this thing on",
   "hello???",
   "i really hope this works"
@@ -35,8 +36,8 @@ function Dialogue(dialogueArray,currentText) {
 /* ------------------------ DIALOGUE SETUP --------------------------- */
 
 function setupDialogue() {
-  juanitaArray = new Dialogue(juanitaText,0);
-  erethArray = new Dialogue(erethText,0);
+  juanitaDialogue = new Dialogue(juanitaArray,0);
+  erethDialogue = new Dialogue(erethArray,0);
 }
 
 /* -------------------------- DISPLAY FUNCTION ----------------------------- */
@@ -69,7 +70,7 @@ function updateTextBoxDimensions() {
   avatarTextStartY = textStartY;
 }
 
-//function that stores text alignment/size/etc for easy access 
+//function that stores text alignment/size/etc for easy access
 function textSettings() {
   textAlign(LEFT);
   textSize(32);

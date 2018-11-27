@@ -94,9 +94,15 @@ function playerMove() {
 function checkCollisions() {
   playerCharacter.collide(rocks,rockCollision);
   playerCharacter.collide(ponds,pondCollision);
-  playerCharacter.collide(juanita.sprite,juanitaCollision);
-  playerCharacter.collide(ereth.sprite,erethCollision);
-  console.log(erethArray)
+  playerCharacter.collide(juanita.sprite,juanita.collision.bind(juanita));
+  playerCharacter.collide(ereth.sprite,ereth.collision.bind(ereth));
+}
+
+/* ------------------------- TALKSWITCH CHECK ---------------------------- */
+
+function checkTalkSwitch() {
+  juanita.showDialogue();
+  ereth.showDialogue();
 }
 
 /* -------------------------- WALL COLLIDE TEXT ----------------------------- */
@@ -113,4 +119,5 @@ function runCharacter() {
   handleInput();
   playerMove();
   checkCollisions();
+  checkTalkSwitch();
 }

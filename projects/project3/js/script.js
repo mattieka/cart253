@@ -69,3 +69,9 @@ function grid() {
     }
   }
 }
+
+//KEY PRESSED
+function keyPressed(){
+  ereth.keyPressed();
+  juanita.keyPressed();
+}
