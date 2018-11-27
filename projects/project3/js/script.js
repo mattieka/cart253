@@ -24,10 +24,13 @@ var textBox;
 
 function preload() {
   textBox = loadImage("assets/images/text/textbox.png");
-  avatar = loadImage("assets/images/sprites/juanitaHappy.png");
   testDialogue = loadJSON("dialogueJSON/testDialogue.json");
   juanitaImage = loadImage("assets/images/sprites/juanita.png");
   erethImage = loadImage("assets/images/sprites/ereth.png");
+  dudesImage = loadImage("assets/images/sprites/dudes.png");
+  dudesRaw = loadJSON("dialogueJSON/dudesDialogue.json");
+  dudesPortrait = loadImage("assets/images/sprites/dudesPortrait.png");
+  fyvePortrait = loadImage("assets/images/sprites/fyvePortrait.png");
 }
 
 /* ------------------------------ S E T U P --------------------------------- */
@@ -74,4 +77,5 @@ function grid() {
 function keyPressed(){
   ereth.keyPressed();
   juanita.keyPressed();
+  dudes.keyPressed();
 }

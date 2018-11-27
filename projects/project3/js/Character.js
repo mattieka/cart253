@@ -96,13 +96,15 @@ function checkCollisions() {
   playerCharacter.collide(ponds,pondCollision);
   playerCharacter.collide(juanita.sprite,juanita.collision.bind(juanita));
   playerCharacter.collide(ereth.sprite,ereth.collision.bind(ereth));
+  playerCharacter.collide(dudes.sprite,dudes.collision.bind(dudes));
 }
 
 /* ------------------------- TALKSWITCH CHECK ---------------------------- */
 
 function checkTalkSwitch() {
-  juanita.showDialogue();
-  ereth.showDialogue();
+  // juanita.showDialogue();
+  // ereth.showDialogue();
+  dudes.showDialogue();
 }
 
 /* -------------------------- WALL COLLIDE TEXT ----------------------------- */

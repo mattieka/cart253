@@ -14,12 +14,22 @@ var avatarStartY;
 var avatarTextStartX;
 var avatarTextStartY;
 
+
+var currentSpeaker;
 var erethDialogue;
 var juanitaDialogue;
+var dudesDialogue;
+
+var fyvePortrait;
+var dudesPortrait;
+
+var dudesRaw;
+var dudesArray = [];
 
 var juanitaArray = [
   "hewwo?????"
 ];
+
 var erethArray = [
   "is this thing on",
   "hello???",
@@ -36,8 +46,10 @@ function Dialogue(dialogueArray,currentText) {
 /* ------------------------ DIALOGUE SETUP --------------------------- */
 
 function setupDialogue() {
+  dudesArray = dudesRaw.dudesConvo;
   juanitaDialogue = new Dialogue(juanitaArray,0);
   erethDialogue = new Dialogue(erethArray,0);
+  dudesDialogue = new Dialogue(dudesArray,0);
 }
 
 /* -------------------------- DISPLAY FUNCTION ----------------------------- */
@@ -46,15 +58,25 @@ Dialogue.prototype.display = function() {
   image(textBox,textBoxX,textBoxY);
   textSettings();
   text(this.dialogueArray[this.currentText],textStartX,textStartY,textBoxWidth,textBoxHeight);
-  console.log(this.dialogueArray,this.currentText,"just PLEASE DISPLAY");
+  //console.log(this.dialogueArray,this.currentText,"just PLEASE DISPLAY");
 }
 
 //display both avatar/portrait of character and text in text box
 Dialogue.prototype.avatarDisplay = function() {
   image(textBox,textBoxX,textBoxY);
-  image(avatar,avatarStartX,avatarStartY);
+  //image(avatar,avatarStartX,avatarStartY);
   textSettings();
   text(this.dialogueArray[this.currentText],avatarTextStartX,avatarTextStartY,textBoxWidth,textBoxHeight)
+}
+
+//display text pulled from json file
+Dialogue.prototype.jsonDisplay = function() {
+  image(textBox,textBoxX,textBoxY);
+  textSettings();
+  this.detectSpeaker();
+  image(currentSpeaker,avatarStartX,avatarStartY);
+  text(this.dialogueArray[this.currentText].text,avatarTextStartX,avatarTextStartY,textBoxWidth,textBoxHeight);
+  console.log(currentSpeaker);
 }
 
 //updates text box size and margins for text
@@ -65,8 +87,8 @@ function updateTextBoxDimensions() {
   textBoxWidth = textBox.width-32;
   textBoxHeight = textBox.height-16;
   avatarStartX = textStartX;
-  avatarStartY = textStartY;
-  avatarTextStartX = avatarStartX + avatar.width + 16;
+  avatarStartY = textStartY + 16;
+  avatarTextStartX = avatarStartX + fyvePortrait.width + 16;
   avatarTextStartY = textStartY;
 }
 
@@ -76,3 +98,13 @@ function textSettings() {
   textSize(32);
   fill("#FFFFFF");
 }
+
+//detect image
+Dialogue.prototype.detectSpeaker = function() {
+  if (this.dialogueArray[this.currentText].name === "fyve") {
+      currentSpeaker = fyvePortrait;
+    }
+    else if (this.dialogueArray[this.currentText].name === "dudes") {
+      currentSpeaker = dudesPortrait;
+    }
+  }

@@ -31,6 +31,7 @@ function setupFriend() {
 
   juanita = new Friend(200,200,juanitaImage,"off",juanitaDialogue);
   ereth = new Friend (300,300,erethImage,"off",erethDialogue);
+  dudes = new Friend (300,400,dudesImage,"off",dudesDialogue);
 }
 
 /* ------------------------- FRIEND COLLISION ---------------------------- */
@@ -38,37 +39,38 @@ function setupFriend() {
 //doesnt work
 
 Friend.prototype.collision = function() {
-  console.log(this)
+  // console.log(this)
   this.talkSwitch = "on";
-  console.log(this.talkSwitch);
-  console.log(this.dialogueLink);
+  // console.log(this.talkSwitch);
+  // console.log(this.dialogueLink);
 }
 
 /* ------------------------- DIALOGUE KEYPRESS  ---------------------------- */
-//meant to allow player to press the spacebar to get to the next dialogue box
-//in a shocking turn of events, it doesnt work
+//allows player to press the spacebar to get to the next dialogue box
 
 Friend.prototype.keyPressed = function() {
   if (this.talkSwitch === "on") {
 
       if (this.dialogueLink.currentText <= this.dialogueLink.dialogueArray.length && keyCode === 32) {
         this.dialogueLink.currentText = this.dialogueLink.currentText + 1;
-        console.log("key was pressed");
-      }
+    }
   }
 }
 
 /* ---------------------- DISPLAY FRIEND DIALOGUE -------------------------- */
-// function meant to display first dialogue box in an interaction of a character.
-//also doesnt work :/
+// function that displays first dialogue box in an interaction of a character.
 Friend.prototype.showDialogue = function() {
+  //console.log(this.talkSwitch,this.dialogueLink.currentText,this.dialogueLink.dialogueArray);
   if (this.talkSwitch === "on" && this.dialogueLink.currentText < this.dialogueLink.dialogueArray.length) {
     speed = 0;
-    this.dialogueLink.display();
-    //this.textBoxInput();
+
+    //this.dialogueLink.display();
+    this.dialogueLink.jsonDisplay();
+    //console.log(this.dialogueLink,this.dialogueLink.currentText)
   } else if (this.dialogueLink.currentText >= this.dialogueLink.dialogueArray.length) {
     this.talkSwitch = "off";
     speed = 5;
+    this.dialogueLink.currentText = 0;
   } else if (this.talkSwitch === "off") {
   //do nothing
   }
