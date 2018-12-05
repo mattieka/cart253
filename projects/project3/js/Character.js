@@ -10,7 +10,7 @@ var playerCharacterVY;
 
 function setupCharacter() {
   playerCharacter = createSprite(width/2,height/2,32,32);
-  playerCharacter.addImage(loadImage("assets/images/sprites/playerSprite.png"))
+  playerCharacter.addImage(loadImage("assets/images/sprites/walkSprites/down/fyveDown_0.png"))
 }
 
 /* ---------------------------- CONSTRUCTOR -------------------------------- */

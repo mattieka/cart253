@@ -35,14 +35,22 @@ function Friend(x,y,friendImage,talkSwitch,dialogueLink) {
   this.friendImage = friendImage;
   this.talkSwitch = talkSwitch;
   this.dialogueLink = dialogueLink;
-  //console.log(dialogueLink);
-
 
   this.sprite = createSprite(this.x,this.y);
   this.sprite.addAnimation("label",this.friendImage);
-  //this.sprite.addImage(friendImage);
   this.sprite.position.x = round(this.sprite.position.x/gridSize)*gridSize;
   this.sprite.position.y = round(this.sprite.position.y/gridSize)*gridSize;
+
+  //set animation speeds
+  if (this.friendImage === juanitaAnimation || this.friendImage === phorAnimation) {
+    this.sprite.animation.frameDelay = 7;
+  } else if (this.friendImage === dudesAnimation) {
+    this.sprite.animation.frameDelay = 8;
+  } else if (this.friendImage === ceeseAnimation) {
+    this.sprite.animation = 6;
+  } else if (this.friendImage === erethAnimation){
+    this.sprite.animation.frameDelay = 14;
+  }
 }
 
 /* ------------------------------ FRIEND SETUP/CREATION --------------------------------- */
@@ -105,6 +113,8 @@ function preloadAnimations() {
   erethAnimation = loadAnimation("assets/images/sprites/erethIdle/ereth_0.png","assets/images/sprites/erethIdle/ereth_8.png");
   phorAnimation = loadAnimation("assets/images/sprites/phorIdle/phor_00.png","assets/images/sprites/phorIdle/phor_18.png");
   ceeseAnimation = loadAnimation("assets/images/sprites/ceeseIdle/ceese_00.png","assets/images/sprites/ceeseIdle/ceese_11.png");
+  fyveDown = loadAnimation("assets/images/sprites/walkSprites/down/fyveDown_0.png","assets/images/sprites/down/fyveDown_3.png");
+  fyveLeft = loadAnimation("assets/images/sprites/walkSprites/left/fyveLeft_0.png","assets/images/sprites/left/fyveLeft_3.png");
 }
 
 /* ------------------------------ PORTRAIT PRELOAD --------------------------------- */
