@@ -4,8 +4,19 @@
 
 /* ---------------------------- VARIABLES -------------------------------- */
 
+//variables for animations
+var juanitaAnimation;
+var dudesAnimation;
+var erethAnimation;
+var phorAnimation;
+var ceeseAnimation;
+
+//variables for each friend
 var juanita;
+var dudes;
 var ereth;
+var phor;
+var ceese;
 var talkSwitch;
 
 /* ------------------------- FRIEND CONSTRUCTOR ---------------------------- */
@@ -16,27 +27,39 @@ function Friend(x,y,friendImage,talkSwitch,dialogueLink) {
   this.friendImage = friendImage;
   this.talkSwitch = talkSwitch;
   this.dialogueLink = dialogueLink;
-  console.log(dialogueLink);
+  //console.log(dialogueLink);
 
 
   this.sprite = createSprite(this.x,this.y);
-  this.sprite.addImage(friendImage);
+  this.sprite.addAnimation("label",this.friendImage);
+  //this.sprite.addImage(friendImage);
   this.sprite.position.x = round(this.sprite.position.x/gridSize)*gridSize;
   this.sprite.position.y = round(this.sprite.position.y/gridSize)*gridSize;
+}
+
+/* ------------------------------ ANIMATION PRELOAD --------------------------------- */
+
+function preloadAnimations() {
+  juanitaAnimation = loadAnimation("assets/images/sprites/juanitaIdle/juanita_00.png","assets/images/sprites/juanitaIdle/juanita_11.png");
+  dudesAnimation = loadAnimation("assets/images/sprites/dudesIdle/dudes_00.png","assets/images/sprites/dudesIdle/dudes_10.png");
+  erethAnimation = loadAnimation("assets/images/sprites/erethIdle/ereth_0.png","assets/images/sprites/erethIdle/ereth_8.png");
+  phorAnimation = loadAnimation("assets/images/sprites/phorIdle/phor_00.png","assets/images/sprites/phorIdle/phor_18.png");
+  ceeseAnimation = loadAnimation("assets/images/sprites/ceeseIdle/ceese_00.png","assets/images/sprites/ceeseIdle/ceese_11.png");
 }
 
 /* ------------------------------ FRIEND SETUP/CREATION --------------------------------- */
 
 function setupFriend() {
 
-  juanita = new Friend(200,200,juanitaImage,"off",juanitaDialogue);
-  ereth = new Friend (300,300,erethImage,"off",erethDialogue);
-  dudes = new Friend (300,400,dudesImage,"off",dudesDialogue);
+  juanita = new Friend(200,200,juanitaAnimation,"off",juanitaDialogue);
+  ereth = new Friend (300,300,erethAnimation,"off",erethDialogue);
+  dudes = new Friend (300,400,dudesAnimation,"off",dudesDialogue);
+  phor = new Friend (450,450,phorAnimation,"off",dudesDialogue);
+  ceese = new Friend(400,150,ceeseAnimation,"off",dudesDialogue);
 }
 
 /* ------------------------- FRIEND COLLISION ---------------------------- */
 //function meant to trigger dialogue-starting switch when a specific friend is collided with
-//doesnt work
 
 Friend.prototype.collision = function() {
   // console.log(this)

@@ -19,19 +19,19 @@ var playerCharacter;
 var rock1;
 var textBox;
 
+
 /* ---------------------------- P R E L O A D ------------------------------- */
 // Description of preload
 
 function preload() {
   textBox = loadImage("assets/images/text/textbox.png");
   testDialogue = loadJSON("dialogueJSON/testDialogue.json");
-  juanitaImage = loadImage("assets/images/sprites/juanita.png");
-  erethImage = loadImage("assets/images/sprites/ereth.png");
-  dudesImage = loadImage("assets/images/sprites/dudes.png");
+
   dudesRaw = loadJSON("dialogueJSON/dudesDialogue.json");
   dudesPortrait = loadImage("assets/images/sprites/dudesPortrait.png");
   fyvePortrait = loadImage("assets/images/sprites/fyvePortrait.png");
-}
+  preloadAnimations();
+  }
 
 /* ------------------------------ S E T U P --------------------------------- */
 
@@ -75,7 +75,9 @@ function grid() {
 
 //KEY PRESSED
 function keyPressed(){
-  ereth.keyPressed();
   juanita.keyPressed();
   dudes.keyPressed();
+  ereth.keyPressed();
+  phor.keyPressed();
+  ceese.keyPressed();
 }

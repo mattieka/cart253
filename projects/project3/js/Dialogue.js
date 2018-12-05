@@ -19,6 +19,7 @@ var currentSpeaker;
 var erethDialogue;
 var juanitaDialogue;
 var dudesDialogue;
+var phorDialogue;
 
 var fyvePortrait;
 var dudesPortrait;
