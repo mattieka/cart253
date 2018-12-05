@@ -28,8 +28,7 @@ function preload() {
   testDialogue = loadJSON("dialogueJSON/testDialogue.json");
 
   dudesRaw = loadJSON("dialogueJSON/dudesDialogue.json");
-  dudesPortrait = loadImage("assets/images/sprites/dudesPortrait.png");
-  fyvePortrait = loadImage("assets/images/sprites/fyvePortrait.png");
+  preloadPortraits();
   preloadAnimations();
   }
 

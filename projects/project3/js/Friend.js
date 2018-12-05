@@ -11,6 +11,14 @@ var erethAnimation;
 var phorAnimation;
 var ceeseAnimation;
 
+//variables for each character's dialogue portrait
+var juanitaPortrait;
+var dudesPortrait;
+var erethPortrait;
+var phorPortrait;
+var fyvePortrait;
+var ceesePortrait;
+
 //variables for each friend
 var juanita;
 var dudes;
@@ -35,16 +43,6 @@ function Friend(x,y,friendImage,talkSwitch,dialogueLink) {
   //this.sprite.addImage(friendImage);
   this.sprite.position.x = round(this.sprite.position.x/gridSize)*gridSize;
   this.sprite.position.y = round(this.sprite.position.y/gridSize)*gridSize;
-}
-
-/* ------------------------------ ANIMATION PRELOAD --------------------------------- */
-
-function preloadAnimations() {
-  juanitaAnimation = loadAnimation("assets/images/sprites/juanitaIdle/juanita_00.png","assets/images/sprites/juanitaIdle/juanita_11.png");
-  dudesAnimation = loadAnimation("assets/images/sprites/dudesIdle/dudes_00.png","assets/images/sprites/dudesIdle/dudes_10.png");
-  erethAnimation = loadAnimation("assets/images/sprites/erethIdle/ereth_0.png","assets/images/sprites/erethIdle/ereth_8.png");
-  phorAnimation = loadAnimation("assets/images/sprites/phorIdle/phor_00.png","assets/images/sprites/phorIdle/phor_18.png");
-  ceeseAnimation = loadAnimation("assets/images/sprites/ceeseIdle/ceese_00.png","assets/images/sprites/ceeseIdle/ceese_11.png");
 }
 
 /* ------------------------------ FRIEND SETUP/CREATION --------------------------------- */
@@ -97,4 +95,25 @@ Friend.prototype.showDialogue = function() {
   } else if (this.talkSwitch === "off") {
   //do nothing
   }
+}
+
+/* ------------------------------ ANIMATION PRELOAD --------------------------------- */
+
+function preloadAnimations() {
+  juanitaAnimation = loadAnimation("assets/images/sprites/juanitaIdle/juanita_00.png","assets/images/sprites/juanitaIdle/juanita_11.png");
+  dudesAnimation = loadAnimation("assets/images/sprites/dudesIdle/dudes_00.png","assets/images/sprites/dudesIdle/dudes_10.png");
+  erethAnimation = loadAnimation("assets/images/sprites/erethIdle/ereth_0.png","assets/images/sprites/erethIdle/ereth_8.png");
+  phorAnimation = loadAnimation("assets/images/sprites/phorIdle/phor_00.png","assets/images/sprites/phorIdle/phor_18.png");
+  ceeseAnimation = loadAnimation("assets/images/sprites/ceeseIdle/ceese_00.png","assets/images/sprites/ceeseIdle/ceese_11.png");
+}
+
+/* ------------------------------ PORTRAIT PRELOAD --------------------------------- */
+
+function preloadPortraits() {
+  juanitaPortrait = loadImage("assets/images/sprites/portraits/juanitaPortrait.png");
+  dudesPortrait = loadImage("assets/images/sprites/portraits/dudesPortrait.png");
+  erethPortrait = loadImage("assets/images/sprites/portraits/erethPortrait.png");
+  phorPortrait = loadImage ("assets/images/sprites/portraits/phorPortrait.png");
+  fyvePortrait = loadImage("assets/images/sprites/portraits/fyvePortrait.png");
+  ceesePortrait = loadImage("assets/images/sprites/portraits/ceesePortrait.png");
 }
