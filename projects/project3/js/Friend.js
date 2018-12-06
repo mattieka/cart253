@@ -41,6 +41,7 @@ function Friend(x,y,friendImage,talkSwitch,dialogueLink) {
   this.sprite.addAnimation("label",this.friendImage);
   this.sprite.position.x = round(this.sprite.position.x/gridSize)*gridSize;
   this.sprite.position.y = round(this.sprite.position.y/gridSize)*gridSize;
+  this.sprite.debug = true;
 
   //set animation speeds
   if (this.friendImage === juanitaAnimation || this.friendImage === phorAnimation) {
@@ -57,7 +58,6 @@ function Friend(x,y,friendImage,talkSwitch,dialogueLink) {
 /* ------------------------------ FRIEND SETUP/CREATION --------------------------------- */
 
 function setupFriend() {
-
   juanita = new Friend(200,200,juanitaAnimation,"off",juanitaDialogue);
   ereth = new Friend (300,300,erethAnimation,"off",erethDialogue);
   dudes = new Friend (300,400,dudesAnimation,"off",dudesDialogue);
@@ -99,11 +99,20 @@ Friend.prototype.showDialogue = function() {
     //console.log(this.dialogueLink,this.dialogueLink.currentText)
   } else if (this.dialogueLink.currentText >= this.dialogueLink.dialogueArray.length) {
     this.talkSwitch = "off";
-    speed = 5;
+    speed = 3;
     this.dialogueLink.currentText = 0;
   } else if (this.talkSwitch === "off") {
   //do nothing
   }
+}
+
+/* ------------------------------ BOUNDING BOX RESET  --------------------------------- */
+
+function setSpriteBoundingBoxes() {
+  juanita.sprite.setCollider("rectangle",0,8,48,32);
+  dudes.sprite.setCollider("rectangle",0,16,32,32);
+  ereth.sprite.setCollider("rectangle",0,16,32,16);
+
 }
 
 /* ------------------------------ ANIMATION PRELOAD --------------------------------- */

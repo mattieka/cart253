@@ -18,6 +18,8 @@ function setupCharacter() {
   playerCharacter.addAnimation("up",fyveUp);
   playerCharacter.addAnimation("left",fyveLeft);
   playerCharacter.addAnimation("right",fyveRight);
+  playerCharacter.setCollider("rectangle",0,16,32,32)
+  playerCharacter.debug=true;
 }
 
 /* ---------------------------- CONSTRUCTOR -------------------------------- */

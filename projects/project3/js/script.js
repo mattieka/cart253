@@ -31,7 +31,7 @@ function preload() {
   preloadPortraits();
   preloadAnimations();
   preloadWalkAnimations();
-  
+
   }
 
 /* ------------------------------ S E T U P --------------------------------- */
@@ -46,6 +46,7 @@ function setup() {
   setupDialogue();
   setupFriend();
   updateTextBoxDimensions();
+  setSpriteBoundingBoxes();
 }
 
 
