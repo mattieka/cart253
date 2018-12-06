@@ -30,6 +30,8 @@ function preload() {
   dudesRaw = loadJSON("dialogueJSON/dudesDialogue.json");
   preloadPortraits();
   preloadAnimations();
+  preloadWalkAnimations();
+  
   }
 
 /* ------------------------------ S E T U P --------------------------------- */

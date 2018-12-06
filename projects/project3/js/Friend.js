@@ -11,6 +11,7 @@ var erethAnimation;
 var phorAnimation;
 var ceeseAnimation;
 
+
 //variables for each character's dialogue portrait
 var juanitaPortrait;
 var dudesPortrait;
@@ -113,8 +114,6 @@ function preloadAnimations() {
   erethAnimation = loadAnimation("assets/images/sprites/erethIdle/ereth_0.png","assets/images/sprites/erethIdle/ereth_8.png");
   phorAnimation = loadAnimation("assets/images/sprites/phorIdle/phor_00.png","assets/images/sprites/phorIdle/phor_18.png");
   ceeseAnimation = loadAnimation("assets/images/sprites/ceeseIdle/ceese_00.png","assets/images/sprites/ceeseIdle/ceese_11.png");
-  fyveDown = loadAnimation("assets/images/sprites/walkSprites/down/fyveDown_0.png","assets/images/sprites/down/fyveDown_3.png");
-  fyveLeft = loadAnimation("assets/images/sprites/walkSprites/left/fyveLeft_0.png","assets/images/sprites/left/fyveLeft_3.png");
 }
 
 /* ------------------------------ PORTRAIT PRELOAD --------------------------------- */

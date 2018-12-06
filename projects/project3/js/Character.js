@@ -2,15 +2,22 @@
 
 //all functions pertaining to the player character
 
-var speed = 5;
+var speed = 3;
 var playerCharacterVX;
 var playerCharacterVY;
+var fyveLeft;
+var fyveDown;
+var fyveUp;
+var fyveRight;
 
 /* ------------------------------ SETUP --------------------------------- */
 
 function setupCharacter() {
   playerCharacter = createSprite(width/2,height/2,32,32);
-  playerCharacter.addImage(loadImage("assets/images/sprites/walkSprites/down/fyveDown_0.png"))
+  playerCharacter.addAnimation("down",fyveDown);
+  playerCharacter.addAnimation("up",fyveUp);
+  playerCharacter.addAnimation("left",fyveLeft);
+  playerCharacter.addAnimation("right",fyveRight);
 }
 
 /* ---------------------------- CONSTRUCTOR -------------------------------- */
@@ -30,27 +37,37 @@ function setupCharacter() {
 function handleInput() {
   if(keyIsDown(UP_ARROW)) {
     playerCharacterVY = -speed;
+    playerCharacterVX = 0;
+    playerCharacter.changeAnimation("up",fyveUp);
   }
 
   else if(keyIsDown(DOWN_ARROW)) {
     playerCharacterVY = speed;
+    playerCharacterVX = 0;
+    playerCharacter.changeAnimation("down",fyveDown);
   }
 
   else if (keyIsDown(LEFT_ARROW)) {
     playerCharacterVX = -speed;
+    playerCharacterVY = 0;
+    playerCharacter.changeAnimation("left",fyveLeft);
   }
 
   else if (keyIsDown(RIGHT_ARROW)) {
     playerCharacterVX = speed;
+    playerCharacterVY = 0;
+    playerCharacter.changeAnimation("right",fyveRight);
   }
 
   else {
     //snaps player to grid
     playerCharacter.position.x = round(playerCharacter.position.x/gridSize)*gridSize;
     playerCharacter.position.y = round(playerCharacter.position.y/gridSize)*gridSize;
+
     //sets velocity to 0
     playerCharacterVY = 0;
     playerCharacterVX = 0;
+
   }
 }
 
@@ -79,8 +96,17 @@ function playerMove() {
       playerCharacter.position.y = playerCharacter.height/2;
       playerCharacterVY = 0;
   }
+  //update position
   playerCharacter.position.x = playerCharacter.position.x + playerCharacterVX;
   playerCharacter.position.y = playerCharacter.position.y + playerCharacterVY;
+
+  if (playerCharacterVX > 0 || playerCharacterVY > 0 || playerCharacterVX < 0 || playerCharacterVY < 0) {
+    playerCharacter.animation.play()
+  } else {
+    //stops animation
+    playerCharacter.animation.playing = false;
+    playerCharacter.animation.goToFrame(0);
+  }
 }
 // /* ------------------------------ DISPLAY --------------------------------- */
 //
@@ -116,10 +142,22 @@ function wallCollideText() {
   text("hey thats the wall",width/2,50);
 }
 
+/* -------------------------- PRELOAD WALK ANIMATIONS ----------------------------- */
+
+function preloadWalkAnimations() {
+  fyveDown = loadAnimation("assets/images/sprites/walkSprites/down/fyveDown_0.png","assets/images/sprites/walkSprites/down/fyveDown_3.png");
+  fyveLeft = loadAnimation("assets/images/sprites/walkSprites/left/fyveLeft_0.png","assets/images/sprites/walkSprites/left/fyveLeft_3.png");
+  fyveRight = loadAnimation("assets/images/sprites/walkSprites/right/fyveRight_0.png","assets/images/sprites/walkSprites/right/fyveRight_3.png");
+  fyveUp = loadAnimation("assets/images/sprites/walkSprites/up/fyveUp_0.png","assets/images/sprites/walkSprites/up/fyveUp_3.png");
+}
+
+
+
 /* ---------------------------- RUN CHARACTER ------------------------------ */
 function runCharacter() {
   handleInput();
   playerMove();
+  playerCharacter.animation.frameDelay = 7;
   checkCollisions();
   checkTalkSwitch();
 }
