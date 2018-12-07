@@ -19,7 +19,9 @@ function setupCharacter() {
   playerCharacter.addAnimation("left",fyveLeft);
   playerCharacter.addAnimation("right",fyveRight);
   playerCharacter.setCollider("rectangle",0,16,32,32)
-  playerCharacter.debug=true;
+  playerCharacter.debug = true;
+  playerCharacter.depth = 2;
+  console.log(playerCharacter.depth);
 }
 
 /* ---------------------------- CONSTRUCTOR -------------------------------- */
@@ -153,7 +155,14 @@ function preloadWalkAnimations() {
   fyveUp = loadAnimation("assets/images/sprites/walkSprites/up/fyveUp_0.png","assets/images/sprites/walkSprites/up/fyveUp_3.png");
 }
 
-
+/* ---------------------------- CHECK CHARACTER DEPTH ------------------------------ */
+function checkDepth() {
+  if (playerCharacter.position.y > juanita.y) {
+    juanita.sprite.depth = 1;
+  } if (playerCharacter.position.y > dudes.y) {
+    dudes.sprite.depth = 1;
+  }
+}
 
 /* ---------------------------- RUN CHARACTER ------------------------------ */
 function runCharacter() {

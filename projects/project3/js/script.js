@@ -58,6 +58,7 @@ function draw() {
   grid();
   drawSprites();
   runCharacter();
+  allCheckDepth();
 
 }
 

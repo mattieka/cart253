@@ -11,7 +11,6 @@ var erethAnimation;
 var phorAnimation;
 var ceeseAnimation;
 
-
 //variables for each character's dialogue portrait
 var juanitaPortrait;
 var dudesPortrait;
@@ -42,6 +41,9 @@ function Friend(x,y,friendImage,talkSwitch,dialogueLink) {
   this.sprite.position.x = round(this.sprite.position.x/gridSize)*gridSize;
   this.sprite.position.y = round(this.sprite.position.y/gridSize)*gridSize;
   this.sprite.debug = true;
+  this.sprite.depth = 3;
+  console.log(this.sprite.depth)
+
 
   //set animation speeds
   if (this.friendImage === juanitaAnimation || this.friendImage === phorAnimation) {
@@ -104,6 +106,26 @@ Friend.prototype.showDialogue = function() {
   } else if (this.talkSwitch === "off") {
   //do nothing
   }
+}
+
+/* ------------------------------ CHECK DEPTH --------------------------------- */
+
+Friend.prototype.checkDepth = function() {
+  var distance = dist(this.x,this.y,playerCharacter.position.x,playerCharacter.position.y);
+  if (distance < 48 && playerCharacter.position.y > this.y) {
+    this.sprite.depth = 1;
+  } else {
+    this.sprite.depth = 3;
+  }
+}
+/* ------------------------------ COLLECTIVE DEPTH CHECK --------------------------------- */
+
+function allCheckDepth() {
+  juanita.checkDepth();
+  dudes.checkDepth();
+  ereth.checkDepth();
+  phor.checkDepth();
+  ceese.checkDepth();
 }
 
 /* ------------------------------ BOUNDING BOX RESET  --------------------------------- */
