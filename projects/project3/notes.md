@@ -102,6 +102,6 @@ just slapping some text on the screen for now
 WHAT'S LEFT
 - place characters permanently
 - make some kinda background
-- intro dialogue
-- outro dialogue
-- sounds?? 
+- **DONE** intro dialogue
+- **DONE** outro dialogue
+- sounds??
