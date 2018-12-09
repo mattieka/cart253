@@ -14,28 +14,24 @@ var avatarStartY;
 var avatarTextStartX;
 var avatarTextStartY;
 
-
 var currentSpeaker;
-var erethDialogue;
 var juanitaDialogue;
 var dudesDialogue;
+var erethDialogue;
 var phorDialogue;
+var ceeseDialogue;
 
-var fyvePortrait;
-var dudesPortrait;
-
+var juanitaRaw;
 var dudesRaw;
+var erethRaw;
+var phorRaw;
+var ceeseRaw;
+
+var juanitaArray = [];
 var dudesArray = [];
-
-var juanitaArray = [
-  "hewwo?????"
-];
-
-var erethArray = [
-  "is this thing on",
-  "hello???",
-  "i really hope this works"
-];
+var erethArray = [];
+var phorArray = [];
+var ceeseArray = [];
 
 /* ------------------------ DIALOGUECONSTRUCTOR --------------------------- */
 
@@ -47,10 +43,17 @@ function Dialogue(dialogueArray,currentText) {
 /* ------------------------ DIALOGUE SETUP --------------------------- */
 
 function setupDialogue() {
+  juanitaArray = juanitaRaw.juanitaConvo;
   dudesArray = dudesRaw.dudesConvo;
+  erethArray = erethRaw.erethConvo;
+  phorArray = phorRaw.phorConvo;
+  ceeseArray = ceeseRaw.ceeseConvo;
+
   juanitaDialogue = new Dialogue(juanitaArray,0);
-  erethDialogue = new Dialogue(erethArray,0);
   dudesDialogue = new Dialogue(dudesArray,0);
+  erethDialogue = new Dialogue(erethArray,0);
+  phorDialogue = new Dialogue(phorArray,0);
+  ceeseDialogue = new Dialogue(ceeseArray,0);
 }
 
 /* -------------------------- DISPLAY FUNCTION ----------------------------- */
@@ -84,19 +87,28 @@ Dialogue.prototype.jsonDisplay = function() {
 function updateTextBoxDimensions() {
   textBoxY = height - 192;
   textStartX = textBoxX + 32;
-  textStartY = textBoxY + 16;
-  textBoxWidth = textBox.width-32;
+  textStartY = textBoxY + 32;
+  textBoxWidth = textBox.width-fyvePortrait.width-64;
   textBoxHeight = textBox.height-16;
   avatarStartX = textStartX;
-  avatarStartY = textStartY + 16;
+  avatarStartY = textStartY;
   avatarTextStartX = avatarStartX + fyvePortrait.width + 16;
   avatarTextStartY = textStartY;
 }
 
+
+function preloadDialogue() {
+  textBox = loadImage("assets/images/text/textbox.png");
+  juanitaRaw = loadJSON("dialogueJSON/juanitaDialogue.json");
+  dudesRaw = loadJSON("dialogueJSON/dudesDialogue.json");
+  erethsRaw = loadJSON("dialogueJSON/erethDialogue.json");
+  phorRaw = loadJSON("dialogueJSON/phorDialogue.json");
+  ceeseRaw = loadJSON("dialogueJSON/ceeseDialogue.json");
+}
 //function that stores text alignment/size/etc for easy access
 function textSettings() {
   textAlign(LEFT);
-  textSize(32);
+  textSize(24);
   fill("#FFFFFF");
 }
 
@@ -107,5 +119,17 @@ Dialogue.prototype.detectSpeaker = function() {
     }
     else if (this.dialogueArray[this.currentText].name === "dudes") {
       currentSpeaker = dudesPortrait;
+    }
+    else if (this.dialogueArray[this.currentText].name === "ereth") {
+      currentSpeaker = erethPortrait;
+    }
+    else if (this.dialogueArray[this.currentText].name === "phor") {
+      currentSpeaker = phorPortrait;
+    }
+    else if (this.dialogueArray[this.currentText].name === "ceese") {
+      currentSpeaker = ceesePortrait;
+    }
+    else if (this.dialogueArray[this.currentText].name === "none") {
+      currentSpeaker = null;
     }
   }

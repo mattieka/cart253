@@ -61,10 +61,10 @@ function Friend(x,y,friendImage,talkSwitch,dialogueLink) {
 
 function setupFriend() {
   juanita = new Friend(200,200,juanitaAnimation,"off",juanitaDialogue);
-  ereth = new Friend (300,300,erethAnimation,"off",erethDialogue);
   dudes = new Friend (300,400,dudesAnimation,"off",dudesDialogue);
-  phor = new Friend (450,450,phorAnimation,"off",dudesDialogue);
-  ceese = new Friend(400,150,ceeseAnimation,"off",dudesDialogue);
+  ereth = new Friend (300,300,erethAnimation,"off",erethDialogue);
+  phor = new Friend (450,450,phorAnimation,"off",phorDialogue);
+  ceese = new Friend(400,150,ceeseAnimation,"off",ceeseDialogue);
 }
 
 /* ------------------------- FRIEND COLLISION ---------------------------- */

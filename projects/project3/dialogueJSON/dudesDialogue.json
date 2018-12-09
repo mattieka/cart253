@@ -1,13 +1,25 @@
 {"dudesConvo":
   [
-    {"name":"fyve","text":"Hey."},
-    {"name":"dudes", "text": "Hey yourself."},
-    {"name":"fyve", "text":"..."},
-    {"name":"dudes", "text": "D'you remember when the gift shop opened?"},
+    {"name":"dudes","text":"'sup Fyve?"},
+    {"name":"fyve", "text": "Hi Dudes."},
+    {"name":"dudes", "text": "You doin' okay?"},
+    {"name":"fyve", "text": "Not bad, all things considered. A little nervous."},
+    {"name":"dudes", "text":"Yeah, I don’t blame ya. But we gotta do what we gotta do, right?"},
+    {"name":"fyve", "text":"Mm."},
+    {"name":"dudes", "text": "..."},
+    {"name":"dudes", "text": "Do you remember back when the gift shop first opened?"},
     {"name":"dudes", "text": "Like, back before it was even a thing?"},
-    {"name":"fyve", "text":"No? I wasn't there yet."},
-    {"name":"dudes", "text": "Oh, right, yeah. It was before your time."},
-    {"name":"fyve", "text":"What happened?"},
-    {"name":"dudes", "text": "mattie doesnt want to write dialogue rn"}
+    {"name":"fyve", "text":"Barely. Memory's still kinda foggy."},
+    {"name":"dudes", "text": "Well, it was Fate's idea, y'know? To open the gift shop."},
+    {"name":"fyve", "text":"Hahah, really?"},
+    {"name":"dudes", "text": "It was back when stuff got real bad at home. Fate didn’t like seein’ me mope around. She gave me a purpose. "},
+    {"name":"fyve", "text":"Hah. That’s just like her, isnt it?"},
+    {"name":"dudes", "text": "Yeah. Classic Fate. Always stickin’ her antennae in other people's business."},
+    {"name":"dudes", "text": "It really came back to bite her, huh? Ain't there a word for that? Hubris?"},
+    {"name":"fyve", "text":"Yeah..."},
+    {"name":"dudes", "text":"I feel real bad about taking her down. Even though she did some pretty awful stuff. ‘s that weird?"},
+    {"name":"fyve", "text":"I don't think so. Can’t say I'm looking forward to what's about to go down, myself."},
+    {"name":"dudes", "text":"… good luck, Fyve. Even if we could, I don't think any of us could handle seein’ her like this, ‘cept for you."},
+    {"name":"none","text":"(obtained ID tag.)"}
   ]
 }

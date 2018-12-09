@@ -24,10 +24,8 @@ var textBox;
 // Description of preload
 
 function preload() {
-  textBox = loadImage("assets/images/text/textbox.png");
-  testDialogue = loadJSON("dialogueJSON/testDialogue.json");
-
-  dudesRaw = loadJSON("dialogueJSON/dudesDialogue.json");
+  
+  preloadDialogue();
   preloadPortraits();
   preloadAnimations();
   preloadWalkAnimations();

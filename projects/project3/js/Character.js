@@ -132,9 +132,11 @@ function checkCollisions() {
 /* ------------------------- TALKSWITCH CHECK ---------------------------- */
 
 function checkTalkSwitch() {
-  // juanita.showDialogue();
-  // ereth.showDialogue();
+  juanita.showDialogue();
   dudes.showDialogue();
+  ereth.showDialogue();
+  phor.showDialogue();
+  ceese.showDialogue();
 }
 
 /* -------------------------- WALL COLLIDE TEXT ----------------------------- */
