@@ -131,9 +131,11 @@ function allCheckDepth() {
 /* ------------------------------ BOUNDING BOX RESET  --------------------------------- */
 
 function setSpriteBoundingBoxes() {
-  juanita.sprite.setCollider("rectangle",0,8,48,32);
+  juanita.sprite.setCollider("rectangle",0,16,32,16);
   dudes.sprite.setCollider("rectangle",0,16,32,32);
   ereth.sprite.setCollider("rectangle",0,16,32,16);
+  phor.sprite.setCollider("rectangle",0,16,32,32);
+  ceese.sprite.setCollider("rectangle",0,16,32,32);
 
 }
 

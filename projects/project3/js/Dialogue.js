@@ -101,7 +101,7 @@ function preloadDialogue() {
   textBox = loadImage("assets/images/text/textbox.png");
   juanitaRaw = loadJSON("dialogueJSON/juanitaDialogue.json");
   dudesRaw = loadJSON("dialogueJSON/dudesDialogue.json");
-  erethsRaw = loadJSON("dialogueJSON/erethDialogue.json");
+  erethRaw = loadJSON("dialogueJSON/erethDialogue.json");
   phorRaw = loadJSON("dialogueJSON/phorDialogue.json");
   ceeseRaw = loadJSON("dialogueJSON/ceeseDialogue.json");
 }
@@ -114,8 +114,11 @@ function textSettings() {
 
 //detect image
 Dialogue.prototype.detectSpeaker = function() {
-  if (this.dialogueArray[this.currentText].name === "fyve") {
+  if (this.dialogueArray[this.currentText].name === "fyve" || this.dialogueArray[this.currentText].name === "none") {
       currentSpeaker = fyvePortrait;
+    }
+    else if (this.dialogueArray[this.currentText].name === "juanita") {
+      currentSpeaker = juanitaPortrait;
     }
     else if (this.dialogueArray[this.currentText].name === "dudes") {
       currentSpeaker = dudesPortrait;
@@ -128,8 +131,5 @@ Dialogue.prototype.detectSpeaker = function() {
     }
     else if (this.dialogueArray[this.currentText].name === "ceese") {
       currentSpeaker = ceesePortrait;
-    }
-    else if (this.dialogueArray[this.currentText].name === "none") {
-      currentSpeaker = null;
     }
   }

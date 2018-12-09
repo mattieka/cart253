@@ -4,8 +4,8 @@
     {"name":"fyve", "text": "Hey Ceesaroni."},
     {"name":"ceese", "text": "C'mere. One last pic."},
     {"name":"none", "text": "(the shutter clicks, and ceese takes a selfie of the two of you with her polaroid.)"},
-    {"name":"fyve", "text":"A warning woulda been nice. If I die, this crappy picture is the last memory youll have of me."},
-    {"name":"ceese", "text":"You're not gonna die, Fyve. We all know youre gonna stop Fate from ruinin’ the world or whatever."},
+    {"name":"fyve", "text":"A warning woulda been nice. If I die, this crappy picture is the last memory you'll have of me."},
+    {"name":"ceese", "text":"You're not gonna die, Fyve. We all know you're gonna stop Fate from ruinin’ the world or whatever."},
     {"name":"fyve", "text": "Why the selfie then?"},
     {"name":"ceese", "text": "So we can look back on this awful day and laugh about it."},
     {"name":"fyve", "text": "That's... optimistic of you."},
@@ -15,9 +15,8 @@
     {"name":"fyve", "text": "Fair point."},
     {"name":"ceese", "text":"G'luck Fyve. You got this."},
     {"name":"fyve", "text": "Thanks."},
-    {"name":"ceese", "text": "Yeah, of course."},
-    {"name":"fyve", "text": "See ya soon, okay?"},
-    {"name":"ceese", "text": "For sure."},
+    {"name":"ceese", "text": "See ya soon, okay?"},
+    {"name":"fyve", "text": "For sure."},
     {"name":"none", "text":"(obtained group scrapbook.)"}
   ]
 }

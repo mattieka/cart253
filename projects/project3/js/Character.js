@@ -125,8 +125,10 @@ function checkCollisions() {
   playerCharacter.collide(rocks,rockCollision);
   playerCharacter.collide(ponds,pondCollision);
   playerCharacter.collide(juanita.sprite,juanita.collision.bind(juanita));
-  playerCharacter.collide(ereth.sprite,ereth.collision.bind(ereth));
   playerCharacter.collide(dudes.sprite,dudes.collision.bind(dudes));
+  playerCharacter.collide(ereth.sprite,ereth.collision.bind(ereth));
+  playerCharacter.collide(phor.sprite,phor.collision.bind(phor));
+  playerCharacter.collide(ceese.sprite,ceese.collision.bind(ceese));
 }
 
 /* ------------------------- TALKSWITCH CHECK ---------------------------- */
