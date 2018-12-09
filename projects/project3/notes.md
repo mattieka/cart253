@@ -60,7 +60,7 @@ slow down
 
 --
 
-4) slow her down???? 
+4) slow her down????
 gonna center the rectangle because i feel like things will be easier for my
 tiny brain to understand
 
@@ -96,3 +96,12 @@ ok i had to rewrite like All the code but collisions work now!
 
 7) things be happening when you do a collision
 just slapping some text on the screen for now
+
+--
+
+WHAT'S LEFT
+- place characters permanently
+- make some kinda background
+- intro dialogue
+- outro dialogue
+- sounds?? 

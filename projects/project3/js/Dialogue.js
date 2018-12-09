@@ -98,6 +98,7 @@ function updateTextBoxDimensions() {
 
 
 function preloadDialogue() {
+  introString = loadStrings("dialogueJSON/introString.txt");
   textBox = loadImage("assets/images/text/textbox.png");
   juanitaRaw = loadJSON("dialogueJSON/juanitaDialogue.json");
   dudesRaw = loadJSON("dialogueJSON/dudesDialogue.json");
@@ -105,6 +106,7 @@ function preloadDialogue() {
   phorRaw = loadJSON("dialogueJSON/phorDialogue.json");
   ceeseRaw = loadJSON("dialogueJSON/ceeseDialogue.json");
 }
+
 //function that stores text alignment/size/etc for easy access
 function textSettings() {
   textAlign(LEFT);

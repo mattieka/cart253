@@ -18,13 +18,15 @@ var gridSize = 16;
 var playerCharacter;
 var rock1;
 var textBox;
+var gameState =  "intro";
+var introString;
 
 
 /* ---------------------------- P R E L O A D ------------------------------- */
 // Description of preload
 
 function preload() {
-  
+
   preloadDialogue();
   preloadPortraits();
   preloadAnimations();
@@ -54,10 +56,14 @@ function setup() {
 function draw() {
   background(70);
   grid();
-  drawSprites();
-  runCharacter();
-  allCheckDepth();
 
+  if (gameState === "intro") {
+    intro();
+  } else if (gameState === "game") {
+    drawSprites();
+    runCharacter();
+    allCheckDepth();
+  }
 }
 
 /* -------------------------- F U N C T I O N S ---------------------------- */
@@ -81,4 +87,19 @@ function keyPressed(){
   ereth.keyPressed();
   phor.keyPressed();
   ceese.keyPressed();
+}
+
+function intro() {
+  background(0);
+  textSettings();
+  textAlign(CENTER);
+  text(introString[0],width/2,height/5);
+  text(introString[1],width/2,height/5*2);
+  text(introString[2],width/2,height/5*3);
+  text(introString[3],width/2,height/5*4);
+  if (keyWentDown(32) === true && gameState === "intro") {
+    console.log(gameState);
+    gameState = "game";
+    console.log(gameState);
+  }
 }
