@@ -80,7 +80,7 @@ Dialogue.prototype.jsonDisplay = function() {
   this.detectSpeaker();
   image(currentSpeaker,avatarStartX,avatarStartY);
   text(this.dialogueArray[this.currentText].text,avatarTextStartX,avatarTextStartY,textBoxWidth,textBoxHeight);
-  console.log(currentSpeaker);
+  //console.log(currentSpeaker);
 }
 
 //updates text box size and margins for text
@@ -105,6 +105,19 @@ function preloadDialogue() {
   erethRaw = loadJSON("dialogueJSON/erethDialogue.json");
   phorRaw = loadJSON("dialogueJSON/phorDialogue.json");
   ceeseRaw = loadJSON("dialogueJSON/ceeseDialogue.json");
+}
+
+function resetDialogue() {
+  juanitaDialogue.currentText = 0;
+  dudesDialogue.currentText = 0;
+  erethDialogue.currentText = 0;
+  phorDialogue.currentText = 0;
+  ceeseDialogue.currentText = 0;
+  juanita.interactCounter = 0;
+  dudes.interactCounter = 0;
+  ereth.interactCounter = 0;
+  phor.interactCounter = 0;
+  ceese.interactCounter = 0;
 }
 
 //function that stores text alignment/size/etc for easy access

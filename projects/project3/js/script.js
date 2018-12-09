@@ -63,6 +63,9 @@ function draw() {
     drawSprites();
     runCharacter();
     allCheckDepth();
+    checkTalked();
+  } else if (gameState === "outro") {
+    outro();
   }
 }
 
@@ -100,6 +103,27 @@ function intro() {
   if (keyWentDown(32) === true && gameState === "intro") {
     console.log(gameState);
     gameState = "game";
+    console.log(gameState);
+  }
+}
+
+function checkTalked() {
+  if (friendsTalkedTo === 5) {
+    gameState = "outro";
+  }
+}
+
+function outro() {
+  background(0);
+  textSettings();
+  textAlign(CENTER);
+  text(introString[5],width/2,height/5*2);
+  text(introString[6],width/2,height/5*3);
+  if (keyWentDown(32) === true && gameState === "outro") {
+    console.log(gameState);
+    gameState = "intro";
+    friendsTalkedTo = 0;
+    resetDialogue();
     console.log(gameState);
   }
 }

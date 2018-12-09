@@ -27,6 +27,9 @@ var phor;
 var ceese;
 var talkSwitch;
 
+var friendsTalkedTo = 0;
+var interactCounter;
+
 /* ------------------------- FRIEND CONSTRUCTOR ---------------------------- */
 // function that adds a new friend object and loads the appropriate sprite
 function Friend(x,y,friendImage,talkSwitch,dialogueLink) {
@@ -35,6 +38,7 @@ function Friend(x,y,friendImage,talkSwitch,dialogueLink) {
   this.friendImage = friendImage;
   this.talkSwitch = talkSwitch;
   this.dialogueLink = dialogueLink;
+  this.interactCounter = 0;
 
   this.sprite = createSprite(this.x,this.y);
   this.sprite.addAnimation("label",this.friendImage);
@@ -42,7 +46,7 @@ function Friend(x,y,friendImage,talkSwitch,dialogueLink) {
   this.sprite.position.y = round(this.sprite.position.y/gridSize)*gridSize;
   this.sprite.debug = true;
   this.sprite.depth = 3;
-  console.log(this.sprite.depth)
+  //console.log(this.sprite.depth)
 
 
   //set animation speeds
@@ -73,6 +77,7 @@ function setupFriend() {
 Friend.prototype.collision = function() {
   // console.log(this)
   this.talkSwitch = "on";
+  this.interactCounter = this.interactCounter + 1;
   // console.log(this.talkSwitch);
   // console.log(this.dialogueLink);
 }
@@ -99,11 +104,18 @@ Friend.prototype.showDialogue = function() {
     //this.dialogueLink.display();
     this.dialogueLink.jsonDisplay();
     //console.log(this.dialogueLink,this.dialogueLink.currentText)
-  } else if (this.dialogueLink.currentText >= this.dialogueLink.dialogueArray.length) {
+  } else if (this.talkSwitch === "on" && this.dialogueLink.currentText >= this.dialogueLink.dialogueArray.length) {
+    if (this.interactCounter === 1) {
+      friendsTalkedTo = friendsTalkedTo + 1;
+      console.log(friendsTalkedTo)
+    }
+    console.log("done dialogue: "+friendsTalkedTo);
+    console.log("interact counter: "+this.interactCounter)
     this.talkSwitch = "off";
     speed = 3;
-    this.dialogueLink.currentText = 0;
-  } else if (this.talkSwitch === "off") {
+    //this.dialogueLink.currentText = 0;
+  }
+    else if (this.talkSwitch === "off") {
   //do nothing
   }
 }
