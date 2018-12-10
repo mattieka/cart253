@@ -6,7 +6,7 @@
 
 var currentText = 0;
 var textBoxX = 0;
-var textBoxY;
+var textBoxY = 512 - 192;
 var textStartX;
 var textStaryY;
 var avatarStartX;
@@ -85,7 +85,7 @@ Dialogue.prototype.jsonDisplay = function() {
 
 //updates text box size and margins for text
 function updateTextBoxDimensions() {
-  textBoxY = height - 192;
+  //textBoxY = height - 192;
   textStartX = textBoxX + 32;
   textStartY = textBoxY + 32;
   textBoxWidth = textBox.width-fyvePortrait.width-64;

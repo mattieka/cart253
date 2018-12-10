@@ -62,6 +62,7 @@ function draw() {
     intro();
   } else if (gameState === "game") {
     image(backgroundImage,0,0);
+    checkForTextBoxPosition();
     drawSprites();
     runCharacter();
     allCheckDepth();
@@ -96,6 +97,16 @@ function keyPressed(){
   ereth.keyPressed();
   phor.keyPressed();
   ceese.keyPressed();
+}
+
+function checkForTextBoxPosition() {
+  if (playerCharacter.position.y > height/2) {
+    textBoxY = 0;
+    updateTextBoxDimensions();
+  } else {
+    textBoxY = height - 192;
+    updateTextBoxDimensions();
+  }
 }
 
 function intro() {
