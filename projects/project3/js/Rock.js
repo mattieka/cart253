@@ -1,10 +1,16 @@
-/* -------------------------- ROCK OBJECT ----------------------------- */
+/* -------------------------- EXTRA OBJECTS ----------------------------- */
 
 //all functions pertaining to the rocks
 
 /* ---------------------------- VARIABLE -------------------------------- */
 
 var aRock;
+var bookCase;
+var cuteTeddy;
+var mitkerTheToad;
+var tree;
+var waxStatue;
+
 var rockText =
   [
     "ow a rock!!!",
@@ -12,6 +18,10 @@ var rockText =
   ];
 
 /* ------------------------------ SETUP ROCK --------------------------------- */
+
+function setupExtras() {
+  
+}
 
 function setupRock() {
   rocks = new Group();

@@ -64,11 +64,11 @@ function Friend(x,y,friendImage,talkSwitch,dialogueLink) {
 /* ------------------------------ FRIEND SETUP/CREATION --------------------------------- */
 
 function setupFriend() {
-  juanita = new Friend(200,200,juanitaAnimation,"off",juanitaDialogue);
-  dudes = new Friend (300,400,dudesAnimation,"off",dudesDialogue);
-  ereth = new Friend (300,300,erethAnimation,"off",erethDialogue);
-  phor = new Friend (450,450,phorAnimation,"off",phorDialogue);
-  ceese = new Friend(400,150,ceeseAnimation,"off",ceeseDialogue);
+  juanita = new Friend(100,150,juanitaAnimation,"off",juanitaDialogue);
+  dudes = new Friend (690,170,dudesAnimation,"off",dudesDialogue);
+  ereth = new Friend (600,400,erethAnimation,"off",erethDialogue);
+  phor = new Friend (200,350,phorAnimation,"off",phorDialogue);
+  ceese = new Friend(width/2,height/2,ceeseAnimation,"off",ceeseDialogue);
 }
 
 /* ------------------------- FRIEND COLLISION ---------------------------- */

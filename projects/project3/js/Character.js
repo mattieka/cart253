@@ -13,7 +13,7 @@ var fyveRight;
 /* ------------------------------ SETUP --------------------------------- */
 
 function setupCharacter() {
-  playerCharacter = createSprite(width/2,height/2,32,32);
+  playerCharacter = createSprite(width/2+16,150,32,32);
   playerCharacter.addAnimation("down",fyveDown);
   playerCharacter.addAnimation("up",fyveUp);
   playerCharacter.addAnimation("left",fyveLeft);
