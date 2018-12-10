@@ -21,6 +21,12 @@ var erethDialogue;
 var phorDialogue;
 var ceeseDialogue;
 
+var bookCaseDialogue;
+var cuteTeddyDialogue;
+var mitkerTheToadDialogue;
+var treeDialogue;
+var waxStatueDialogue;
+
 var juanitaRaw;
 var dudesRaw;
 var erethRaw;
@@ -32,6 +38,8 @@ var dudesArray = [];
 var erethArray = [];
 var phorArray = [];
 var ceeseArray = [];
+
+// NOTE : variables for object arrays moved to bottom so they don't take up so much room here
 
 /* ------------------------ DIALOGUECONSTRUCTOR --------------------------- */
 
@@ -54,6 +62,13 @@ function setupDialogue() {
   erethDialogue = new Dialogue(erethArray,0);
   phorDialogue = new Dialogue(phorArray,0);
   ceeseDialogue = new Dialogue(ceeseArray,0);
+
+  bookCaseDialogue = new Dialogue(bookCaseArray,0);
+  cuteTeddyDialogue = new Dialogue (cuteTeddyArray,0);
+  mitkerTheToadDialogue = new Dialogue(mitkerTheToadArray,0);
+  treeDialogue = new Dialogue(treeArray,0);
+  waxStatueDialogue = new Dialogue(waxStatueArray,0);
+
 }
 
 /* -------------------------- DISPLAY FUNCTION ----------------------------- */
@@ -148,3 +163,13 @@ Dialogue.prototype.detectSpeaker = function() {
       currentSpeaker = ceesePortrait;
     }
   }
+
+  var bookCaseArray = [
+    "It's an old bookcase.",
+    "Ereth has vandalized at least half of these books with doodles.",
+    "You spent many hours hanging out in the lobby way back when, reading quietly."
+  ];
+  var cuteTeddyArray = [];
+  var mitkerTheToadArray = [];
+  var treeArray = [];
+  var waxStatueArray = [];

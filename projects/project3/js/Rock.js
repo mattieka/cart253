@@ -17,10 +17,13 @@ var rockText =
     "stop hitting rocks!!"
   ];
 
+
 /* ------------------------------ SETUP ROCK --------------------------------- */
 
 function setupExtras() {
-  
+  bookCase = createSprite(width-64,450);
+  bookCase.addImage("assets/images/extras/bookCase.png");
+
 }
 
 function setupRock() {

@@ -133,6 +133,12 @@ function checkCollisions() {
   playerCharacter.collide(ereth.sprite,ereth.collision.bind(ereth));
   playerCharacter.collide(phor.sprite,phor.collision.bind(phor));
   playerCharacter.collide(ceese.sprite,ceese.collision.bind(ceese));
+
+  playerCharacter.collide(bookCase.sprite,bookCase.collision.bind(bookCase));
+  playerCharacter.collide(cuteTeddy.sprite,cuteTeddy.collision.bind(cuteTeddy));
+  playerCharacter.collide(mitkerTheToad.sprite,mitkerTheToad.collision.bind(mitkerTheToad));
+  playerCharacter.collide(tree.sprite,tree.collision.bind(tree));
+  playerCharacter.collide(waxStatue.sprite,waxStatue.collision.bind(waxStatue));
 }
 
 /* ------------------------- TALKSWITCH CHECK ---------------------------- */
@@ -143,6 +149,12 @@ function checkTalkSwitch() {
   ereth.showDialogue();
   phor.showDialogue();
   ceese.showDialogue();
+
+  bookCase.showDialogue();
+  cuteTeddy.showDialogue();
+  mitkerTheToad.showDialogue();
+  tree.showDialogue();
+  waxStatue.showDialogue();
 }
 
 /* -------------------------- WALL COLLIDE TEXT ----------------------------- */

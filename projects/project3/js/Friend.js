@@ -11,6 +11,13 @@ var erethAnimation;
 var phorAnimation;
 var ceeseAnimation;
 
+//variables for interactable objects
+var bookCase;
+var cuteTeddy;
+var mitkerTheToad;
+var tree;
+var waxStatue;
+
 //variables for each character's dialogue portrait
 var juanitaPortrait;
 var dudesPortrait;
@@ -25,6 +32,15 @@ var dudes;
 var ereth;
 var phor;
 var ceese;
+
+//variables for interactable objects' images
+var bookCaseSprite;
+var cuteTeddySprite;
+var mitkerTheToadSprite;
+var treeSprite;
+var waxStatueSprite;
+
+
 var talkSwitch;
 
 var friendsTalkedTo = 0;
@@ -32,6 +48,10 @@ var interactCounter;
 
 /* ------------------------- FRIEND CONSTRUCTOR ---------------------------- */
 // function that adds a new friend object and loads the appropriate sprite
+/* NOTE: i realized later that the Friend object should just be called something
+like "interactable" because it has all the same parameters as a non-character sprite.
+Decided not to change the name because I'd have to do a lot of retroactive correcting.
+*/
 function Friend(x,y,friendImage,talkSwitch,dialogueLink) {
   this.x = x;
   this.y = y;
@@ -69,6 +89,12 @@ function setupFriend() {
   ereth = new Friend (600,400,erethAnimation,"off",erethDialogue);
   phor = new Friend (200,350,phorAnimation,"off",phorDialogue);
   ceese = new Friend(width/2,height/2,ceeseAnimation,"off",ceeseDialogue);
+
+  bookCase = new Friend(width-48,425,bookCaseSprite,"off",bookCaseDialogue);
+  cuteTeddy = new Friend(640,190,cuteTeddySprite,"off",cuteTeddyDialogue);
+  mitkerTheToad = new Friend(120,160,mitkerTheToadSprite,"off",mitkerTheToadDialogue);
+  tree = new Friend(490,116,treeSprite,"off",treeDialogue);
+  waxStatue = new Friend (120,420,waxStatueSprite,"off",waxStatueDialogue);
 }
 
 /* ------------------------- FRIEND COLLISION ---------------------------- */
@@ -78,6 +104,7 @@ Friend.prototype.collision = function() {
   // console.log(this)
   this.talkSwitch = "on";
   this.interactCounter = this.interactCounter + 1;
+
   // console.log(this.talkSwitch);
   // console.log(this.dialogueLink);
 }
@@ -100,14 +127,20 @@ Friend.prototype.showDialogue = function() {
   //console.log(this.talkSwitch,this.dialogueLink.currentText,this.dialogueLink.dialogueArray);
   if (this.talkSwitch === "on" && this.dialogueLink.currentText < this.dialogueLink.dialogueArray.length) {
     speed = 0;
+    if (this === juanita|| this === dudes|| this === ereth|| this === phor|| this === ceese) {
+      this.dialogueLink.jsonDisplay();
+    } else {
+      this.dialogueLink.display();
+    }
 
-    //this.dialogueLink.display();
-    this.dialogueLink.jsonDisplay();
+
     //console.log(this.dialogueLink,this.dialogueLink.currentText)
   } else if (this.talkSwitch === "on" && this.dialogueLink.currentText >= this.dialogueLink.dialogueArray.length) {
     if (this.interactCounter === 1) {
-      friendsTalkedTo = friendsTalkedTo + 1;
-      console.log(friendsTalkedTo)
+      if (this === juanita|| this === dudes|| this === ereth|| this === phor|| this === ceese) {
+        friendsTalkedTo = friendsTalkedTo + 1;
+        console.log(friendsTalkedTo)
+      }
     }
     console.log("done dialogue: "+friendsTalkedTo);
     console.log("interact counter: "+this.interactCounter)
@@ -138,6 +171,12 @@ function allCheckDepth() {
   ereth.checkDepth();
   phor.checkDepth();
   ceese.checkDepth();
+
+  bookCase.checkDepth();
+  cuteTeddy.checkDepth();
+  mitkerTheToad.checkDepth();
+  tree.checkDepth();
+  waxStatue.checkDepth();
 }
 
 /* ------------------------------ BOUNDING BOX RESET  --------------------------------- */
@@ -149,6 +188,10 @@ function setSpriteBoundingBoxes() {
   phor.sprite.setCollider("rectangle",0,16,32,32);
   ceese.sprite.setCollider("rectangle",0,16,32,32);
 
+  bookCase.sprite.setCollider("rectangle",0,16,32,80);
+  cuteTeddy.sprite.setCollider("rectangle",0,8,32,16);
+  mitkerTheToad.sprite.setCollider("rectangle",0,8,32,16);
+  waxStatue.sprite.setCollider("rectangle",0,8,32,32);
 }
 
 /* ------------------------------ ANIMATION PRELOAD --------------------------------- */
@@ -159,6 +202,12 @@ function preloadAnimations() {
   erethAnimation = loadAnimation("assets/images/sprites/erethIdle/ereth_0.png","assets/images/sprites/erethIdle/ereth_8.png");
   phorAnimation = loadAnimation("assets/images/sprites/phorIdle/phor_00.png","assets/images/sprites/phorIdle/phor_18.png");
   ceeseAnimation = loadAnimation("assets/images/sprites/ceeseIdle/ceese_00.png","assets/images/sprites/ceeseIdle/ceese_11.png");
+
+  bookCaseSprite = loadImage("assets/images/extras/bookCase.png");
+  cuteTeddySprite = loadImage("assets/images/extras/cuteTeddy.png");
+  mitkerTheToadSprite = loadImage("assets/images/extras/mitkerTheToad.png");
+  treeSprite = loadImage("assets/images/extras/tree.png");
+  waxStatueSprite = loadImage("assets/images/extras/waxStatue.png");
 }
 
 /* ------------------------------ PORTRAIT PRELOAD --------------------------------- */

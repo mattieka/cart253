@@ -97,6 +97,11 @@ function keyPressed(){
   ereth.keyPressed();
   phor.keyPressed();
   ceese.keyPressed();
+  bookCase.keyPressed();
+  cuteTeddy.keyPressed();
+  mitkerTheToad.keyPressed();
+  tree.keyPressed();
+  waxStatue.keyPressed();
 }
 
 function checkForTextBoxPosition() {
