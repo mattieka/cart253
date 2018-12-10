@@ -20,13 +20,14 @@ var rock1;
 var textBox;
 var gameState =  "intro";
 var introString;
+var backgroundImage;
 
 
 /* ---------------------------- P R E L O A D ------------------------------- */
 // Description of preload
 
 function preload() {
-
+  preloadBackground();
   preloadDialogue();
   preloadPortraits();
   preloadAnimations();
@@ -41,8 +42,8 @@ function preload() {
 function setup() {
   createCanvas(800,512);
   setupCharacter();
-  setupRock();
-  setupPond();
+  //setupRock();
+  //setupPond();
   setupDialogue();
   setupFriend();
   updateTextBoxDimensions();
@@ -60,6 +61,7 @@ function draw() {
   if (gameState === "intro") {
     intro();
   } else if (gameState === "game") {
+    image(backgroundImage,0,0);
     drawSprites();
     runCharacter();
     allCheckDepth();
@@ -81,6 +83,10 @@ function grid() {
       line(0,y,width,y);
     }
   }
+}
+
+function preloadBackground() {
+  backgroundImage = loadImage("assets/images/background.png");
 }
 
 //KEY PRESSED

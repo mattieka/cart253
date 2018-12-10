@@ -124,7 +124,7 @@ Friend.prototype.showDialogue = function() {
 
 Friend.prototype.checkDepth = function() {
   var distance = dist(this.x,this.y,playerCharacter.position.x,playerCharacter.position.y);
-  if (distance < 48 && playerCharacter.position.y > this.y) {
+  if (distance <= 60 && playerCharacter.position.y > this.y) {
     this.sprite.depth = 1;
   } else {
     this.sprite.depth = 3;

@@ -79,30 +79,34 @@ function handleInput() {
 
 function playerMove() {
   //collision with wall
+  // commented out because i don't need it anymore.
   //left wall
-  if (playerCharacter.position.x <= 0) {
-    wallCollideText();
-    playerCharacter.position.x = playerCharacter.width/2;
-    playerCharacterVX = 0;
-  //right wall
-  } else if (playerCharacter.position.x >= width) {
-      wallCollideText();
-      playerCharacter.position.x = width - playerCharacter.width/2;
-      playerCharacterVX = 0;
-  //top wall
-  } else if (playerCharacter.position.y >=height) {
-      wallCollideText();
-      playerCharacter.position.y = height - playerCharacter.height/2;
-      playerCharacterVY = 0;
-  //bottom wall
-  } else if (playerCharacter.position.y <= 0) {
-      wallCollideText();
-      playerCharacter.position.y = playerCharacter.height/2;
-      playerCharacterVY = 0;
-  }
+//   if (playerCharacter.position.x <= 32) {
+//     wallCollideText();
+//     playerCharacter.position.x = playerCharacter.width/2;
+//     playerCharacterVX = 0;
+//   //right wall
+// } else if (playerCharacter.position.x >= width - 32) {
+//       wallCollideText();
+//       playerCharacter.position.x = width - playerCharacter.width/2;
+//       playerCharacterVX = 0;
+//   //top wall
+// } else if (playerCharacter.position.y >= height - 32) {
+//       wallCollideText();
+//       playerCharacter.position.y = height - playerCharacter.height/2;
+//       playerCharacterVY = 0;
+//   //bottom wall
+// } else if (playerCharacter.position.y <= 32) {
+//       wallCollideText();
+//       playerCharacter.position.y = playerCharacter.height;
+//       playerCharacterVY = 0;
+//   }
   //update position
   playerCharacter.position.x = playerCharacter.position.x + playerCharacterVX;
   playerCharacter.position.y = playerCharacter.position.y + playerCharacterVY;
+
+  playerCharacter.position.x = constrain(playerCharacter.position.x,56,width-56);
+  playerCharacter.position.y = constrain(playerCharacter.position.y,112,height-64);
 
   if (playerCharacterVX > 0 || playerCharacterVY > 0 || playerCharacterVX < 0 || playerCharacterVY < 0) {
     playerCharacter.animation.play()
@@ -122,8 +126,8 @@ function playerMove() {
 // }
 /* ---------------------------- COLLISION CHECK ------------------------------ */
 function checkCollisions() {
-  playerCharacter.collide(rocks,rockCollision);
-  playerCharacter.collide(ponds,pondCollision);
+  //playerCharacter.collide(rocks,rockCollision);
+  //playerCharacter.collide(ponds,pondCollision);
   playerCharacter.collide(juanita.sprite,juanita.collision.bind(juanita));
   playerCharacter.collide(dudes.sprite,dudes.collision.bind(dudes));
   playerCharacter.collide(ereth.sprite,ereth.collision.bind(ereth));
@@ -157,15 +161,6 @@ function preloadWalkAnimations() {
   fyveLeft = loadAnimation("assets/images/sprites/walkSprites/left/fyveLeft_0.png","assets/images/sprites/walkSprites/left/fyveLeft_3.png");
   fyveRight = loadAnimation("assets/images/sprites/walkSprites/right/fyveRight_0.png","assets/images/sprites/walkSprites/right/fyveRight_3.png");
   fyveUp = loadAnimation("assets/images/sprites/walkSprites/up/fyveUp_0.png","assets/images/sprites/walkSprites/up/fyveUp_3.png");
-}
-
-/* ---------------------------- CHECK CHARACTER DEPTH ------------------------------ */
-function checkDepth() {
-  if (playerCharacter.position.y > juanita.y) {
-    juanita.sprite.depth = 1;
-  } if (playerCharacter.position.y > dudes.y) {
-    dudes.sprite.depth = 1;
-  }
 }
 
 /* ---------------------------- RUN CHARACTER ------------------------------ */
