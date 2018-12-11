@@ -1,12 +1,8 @@
 /*****************
 
 Grid-based movement and interactions with other objects.
-An attempt at dialogue was made
 
 Uses p5.play library
-
-NOTE: when you collide with the wall the text flashes a lot so if youre
-sensitive to flashing lights please be careful!!!!!
 
 By Mattie KA
 
@@ -14,17 +10,28 @@ By Mattie KA
 
 /* -------------------------- V A R I A B L E S ----------------------------- */
 
+// variable for the grid size
 var gridSize = 16;
+
+// player character variable
 var playerCharacter;
-var rock1;
+//var rock1;
+
+// text box variable
 var textBox;
+
+// game state variable; initialized at "intro"
 var gameState =  "intro";
+
+// variable containing string containing the text for the intro and outro
 var introString;
+
+// variable for the background image
 var backgroundImage;
 
 
 /* ---------------------------- P R E L O A D ------------------------------- */
-// Description of preload
+// preloads background, dialogue, character portraits, animations, and other images
 
 function preload() {
   preloadBackground();
@@ -37,8 +44,8 @@ function preload() {
 
 /* ------------------------------ S E T U P --------------------------------- */
 
-// Description of setup
-
+// sets up canvas size, dialogue, friends, updates text box dimensions, and
+// sets custom sprite bounding boxes (colliders)
 function setup() {
   createCanvas(800,512);
   setupCharacter();
@@ -52,12 +59,15 @@ function setup() {
 
 
 /* ------------------------------- D R A W ---------------------------------- */
-// Description of draw()
 
 function draw() {
   background(70);
+// enables grid
   grid();
 
+// if game is in intro state, run intro
+// if game is in game state, run game
+// if game is in outro state, run ending
   if (gameState === "intro") {
     intro();
   } else if (gameState === "game") {
@@ -74,6 +84,7 @@ function draw() {
 
 /* -------------------------- F U N C T I O N S ---------------------------- */
 
+/* -------------------------- GRID ----------------------------- */
 //DRAW GRID
 function grid() {
   for (var x = 0; x < width; x = x + width/50) {
@@ -86,10 +97,13 @@ function grid() {
   }
 }
 
+/* -------------------------- PRELOAD BACKGROUND ----------------------------- */
+
 function preloadBackground() {
   backgroundImage = loadImage("assets/images/background.png");
 }
 
+/* -------------------------- CHARACTER KEY PRESSED FUNCTIONS ----------------------------- */
 //KEY PRESSED
 function keyPressed(){
   juanita.keyPressed();
@@ -104,6 +118,9 @@ function keyPressed(){
   waxStatue.keyPressed();
 }
 
+/* -------------------------- CHECK FOR TEXT POSITION ----------------------------- */
+// if the player is on the top half of the screen, display text box on the bottom.
+// if the player is on the bottom half of the screen, display text box on the top.
 function checkForTextBoxPosition() {
   if (playerCharacter.position.y > height/2) {
     textBoxY = 0;
@@ -114,6 +131,8 @@ function checkForTextBoxPosition() {
   }
 }
 
+/* -------------------------- INTRO FUNCTION ----------------------------- */
+// shows text for intro, changes gamestate, displays instructions
 function intro() {
   background(0);
   textSettings();
@@ -129,12 +148,20 @@ function intro() {
   }
 }
 
+/* -------------------------- CHECKED TALKED ----------------------------- */
+//checks how many characters the player has interacted with. once all five
+//characters have been spoken to, the game ends.
+
 function checkTalked() {
   if (friendsTalkedTo === 5) {
     gameState = "outro";
   }
 }
 
+/* -------------------------- OUTRO FUNCTION ----------------------------- */
+//displays ending text, lets player start over if they so choose.
+//resets dialogue, friendsTalkedTo, and player position.
+//also sets game state back to intro
 function outro() {
   background(0);
   textSettings();
@@ -146,6 +173,10 @@ function outro() {
     gameState = "intro";
     friendsTalkedTo = 0;
     resetDialogue();
+    playerCharacter.position.x = width/2+16;
+    playerCharacter.position.y = 150;
     console.log(gameState);
   }
 }
+
+/* -------------------------- END ----------------------------- */

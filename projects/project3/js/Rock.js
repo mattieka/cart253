@@ -1,15 +1,9 @@
 /* -------------------------- EXTRA OBJECTS ----------------------------- */
 
 //all functions pertaining to the rocks
+//used during testing, no longer being used
 
 /* ---------------------------- VARIABLE -------------------------------- */
-
-var aRock;
-var bookCase;
-var cuteTeddy;
-var mitkerTheToad;
-var tree;
-var waxStatue;
 
 var rockText =
   [
@@ -20,11 +14,6 @@ var rockText =
 
 /* ------------------------------ SETUP ROCK --------------------------------- */
 
-function setupExtras() {
-  bookCase = createSprite(width-64,450);
-  bookCase.addImage("assets/images/extras/bookCase.png");
-
-}
 
 function setupRock() {
   rocks = new Group();

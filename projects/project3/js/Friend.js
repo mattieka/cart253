@@ -1,6 +1,6 @@
 /* -------------------------- FRIEND OBJECT ----------------------------- */
 
-//all functions pertaining to the characters that are available to interact with
+//all functions pertaining to the characters/objects that are available to interact with
 
 /* ---------------------------- VARIABLES -------------------------------- */
 
@@ -40,9 +40,8 @@ var mitkerTheToadSprite;
 var treeSprite;
 var waxStatueSprite;
 
-
+// dialogue mechanics variables
 var talkSwitch;
-
 var friendsTalkedTo = 0;
 var interactCounter;
 
@@ -53,6 +52,14 @@ like "interactable" because it has all the same parameters as a non-character sp
 Decided not to change the name because I'd have to do a lot of retroactive correcting.
 */
 function Friend(x,y,friendImage,talkSwitch,dialogueLink) {
+  /* friends all have...
+  - an x and y position,
+  - an image associated with them,
+  - a "talkswitch" that disables player movement during an interaction
+  - a dialogue link which corresponds to the character's dialogue
+  - and an interact counter to keep track of how many times the player collided
+    with a friend.
+  */
   this.x = x;
   this.y = y;
   this.friendImage = friendImage;
@@ -60,14 +67,16 @@ function Friend(x,y,friendImage,talkSwitch,dialogueLink) {
   this.dialogueLink = dialogueLink;
   this.interactCounter = 0;
 
+  // when a new friend is created, it is given a sprite based on the image it
+  // is associated to, then its position is snapped to the grid. sprite depth
+  // determines the order sprites are drawn in.
   this.sprite = createSprite(this.x,this.y);
   this.sprite.addAnimation("label",this.friendImage);
   this.sprite.position.x = round(this.sprite.position.x/gridSize)*gridSize;
   this.sprite.position.y = round(this.sprite.position.y/gridSize)*gridSize;
-  this.sprite.debug = true;
+  //this.sprite.debug = true; (this function lets me see colliders)
   this.sprite.depth = 3;
   //console.log(this.sprite.depth)
-
 
   //set animation speeds
   if (this.friendImage === juanitaAnimation || this.friendImage === phorAnimation) {
@@ -110,11 +119,11 @@ Friend.prototype.collision = function() {
 }
 
 /* ------------------------- DIALOGUE KEYPRESS  ---------------------------- */
-//allows player to press the spacebar to get to the next dialogue box
+//allows player to press the spacebar to get to the next dialogue box. increases
+// the current text variable by one so that the next line of dialogue displayes.
 
 Friend.prototype.keyPressed = function() {
   if (this.talkSwitch === "on") {
-
       if (this.dialogueLink.currentText <= this.dialogueLink.dialogueArray.length && keyCode === 32) {
         this.dialogueLink.currentText = this.dialogueLink.currentText + 1;
     }
@@ -131,10 +140,12 @@ Friend.prototype.showDialogue = function() {
       this.dialogueLink.jsonDisplay();
     } else {
       this.dialogueLink.display();
-    }
-
+    } // essentially what the above does is check if the player is interacting with
+      // an object or a character, and changes the display method accordingly.
 
     //console.log(this.dialogueLink,this.dialogueLink.currentText)
+    // increases friendsTalkedTo only if you've spoken to a character (as opposed
+    // to say, a book case)
   } else if (this.talkSwitch === "on" && this.dialogueLink.currentText >= this.dialogueLink.dialogueArray.length) {
     if (this.interactCounter === 1) {
       if (this === juanita|| this === dudes|| this === ereth|| this === phor|| this === ceese) {
@@ -144,7 +155,9 @@ Friend.prototype.showDialogue = function() {
     }
     console.log("done dialogue: "+friendsTalkedTo);
     console.log("interact counter: "+this.interactCounter)
+    // switch off talkswitch
     this.talkSwitch = "off";
+    // reset player movement speed
     speed = 3;
     //this.dialogueLink.currentText = 0;
   }
@@ -155,6 +168,11 @@ Friend.prototype.showDialogue = function() {
 
 /* ------------------------------ CHECK DEPTH --------------------------------- */
 
+
+// checks depth of each object or character as the player approaches.
+// once the player is within 60 pixels, the sprite depth changes so that the
+// player is drawn over the friend when it is below it, and behind the friend
+// when above.
 Friend.prototype.checkDepth = function() {
   var distance = dist(this.x,this.y,playerCharacter.position.x,playerCharacter.position.y);
   if (distance <= 60 && playerCharacter.position.y > this.y) {
@@ -181,6 +199,7 @@ function allCheckDepth() {
 
 /* ------------------------------ BOUNDING BOX RESET  --------------------------------- */
 
+// set more specific binding boxes
 function setSpriteBoundingBoxes() {
   juanita.sprite.setCollider("rectangle",0,16,32,16);
   dudes.sprite.setCollider("rectangle",0,16,32,32);
@@ -220,3 +239,5 @@ function preloadPortraits() {
   fyvePortrait = loadImage("assets/images/sprites/portraits/fyvePortrait.png");
   ceesePortrait = loadImage("assets/images/sprites/portraits/ceesePortrait.png");
 }
+
+/* ------------------------------ END --------------------------------- */

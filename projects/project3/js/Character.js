@@ -1,10 +1,14 @@
-/* -------------------------- CHARACTER OBJECT ----------------------------- */
+/* -------------------------- PLAYER CHARACTER  ----------------------------- */
 
 //all functions pertaining to the player character
+
+/* -------------------------- VARIABLES ----------------------------- */
 
 var speed = 3;
 var playerCharacterVX;
 var playerCharacterVY;
+
+//animation variables
 var fyveLeft;
 var fyveDown;
 var fyveUp;
@@ -12,6 +16,7 @@ var fyveRight;
 
 /* ------------------------------ SETUP --------------------------------- */
 
+// sets up player animations, depth, collider, position
 function setupCharacter() {
   playerCharacter = createSprite(width/2+16,150,32,32);
   playerCharacter.addAnimation("down",fyveDown);
@@ -19,13 +24,13 @@ function setupCharacter() {
   playerCharacter.addAnimation("left",fyveLeft);
   playerCharacter.addAnimation("right",fyveRight);
   playerCharacter.setCollider("rectangle",0,16,32,32)
-  playerCharacter.debug = true;
+  //playerCharacter.debug = true;
   playerCharacter.depth = 2;
   console.log(playerCharacter.depth);
 }
 
 /* ---------------------------- CONSTRUCTOR -------------------------------- */
-
+//no longer needed
 // function Character(x,y,w,h,speed,vx,vy) {
 //   this.x = x;
 //   this.y = y;
@@ -37,7 +42,8 @@ function setupCharacter() {
 // }
 
 /* ---------------------------- HANDLE INPUT ------------------------------- */
-
+// arrow key directional movement; also changes animation based on what
+// direction the player is moving.
 function handleInput() {
   if(keyIsDown(UP_ARROW)) {
     playerCharacterVY = -speed;
@@ -101,17 +107,20 @@ function playerMove() {
 //       playerCharacter.position.y = playerCharacter.height;
 //       playerCharacterVY = 0;
 //   }
+
   //update position
   playerCharacter.position.x = playerCharacter.position.x + playerCharacterVX;
   playerCharacter.position.y = playerCharacter.position.y + playerCharacterVY;
 
+  //prevent player from walking through walls
   playerCharacter.position.x = constrain(playerCharacter.position.x,56,width-56);
   playerCharacter.position.y = constrain(playerCharacter.position.y,112,height-64);
 
+  //play animation while player is moving
   if (playerCharacterVX > 0 || playerCharacterVY > 0 || playerCharacterVX < 0 || playerCharacterVY < 0) {
     playerCharacter.animation.play()
   } else {
-    //stops animation
+    //stops animation when player isnt moving, sets animation to frame 0.
     playerCharacter.animation.playing = false;
     playerCharacter.animation.goToFrame(0);
   }
@@ -158,7 +167,7 @@ function checkTalkSwitch() {
 }
 
 /* -------------------------- WALL COLLIDE TEXT ----------------------------- */
-
+//i dont use this anymore
 function wallCollideText() {
   textAlign(CENTER);
   textSize(50);
@@ -176,6 +185,7 @@ function preloadWalkAnimations() {
 }
 
 /* ---------------------------- RUN CHARACTER ------------------------------ */
+
 function runCharacter() {
   handleInput();
   playerMove();
@@ -183,3 +193,5 @@ function runCharacter() {
   checkCollisions();
   checkTalkSwitch();
 }
+
+/* -------------------------- END ----------------------------- */

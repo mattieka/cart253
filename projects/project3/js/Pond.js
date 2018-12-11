@@ -1,6 +1,7 @@
 /* -------------------------- POND OBJECT ----------------------------- */
 
 //all functions pertaining to the ponds
+//used during initial testing; no longer being used
 
 /* ---------------------------- VARIABLE -------------------------------- */
 
