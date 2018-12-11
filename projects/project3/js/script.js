@@ -1,7 +1,6 @@
 /*****************
 
 Grid-based movement and interactions with other objects.
-
 Uses p5.play library
 
 By Mattie KA
